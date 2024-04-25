@@ -1,0 +1,165 @@
+```
+404.html 
+```
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Liara | Application Error</title>
+  <link rel="stylesheet" href="./style.css">
+
+<style type="text/css" media="all">
+	@import url('../../fonts/fontyekan.css');
+
+*, *::after, *::before {
+  box-sizing: border-box;
+}
+
+html {
+  height: 100%;
+  background: linear-gradient(109.67deg, #192123 0%, #0C1013 100%);
+  font-family: Yekan Bakh, Arial, "Helvetica Neue", Helvetica, sans-serif;
+}
+
+body {
+color: #fff;
+  height: 100%;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.head {
+  display: block;
+  position: relative;
+  width: 200px;
+  margin: 10% auto 0;
+}
+.head::after {
+  content: '';
+  width: 20px;
+  height: 20px;
+  background: #000;
+  position: absolute;
+  top: 30px;
+  left: 25px;
+  border-radius: 50%;
+  box-shadow: 125px 0 0 #000;
+  animation: eye 10s infinite;
+}
+
+.eyes {
+  position: relative;
+  display: inline-block;
+  background: #fff;
+  width: 75px;
+  height: 80px;
+  border-radius: 50% 50% 50% 50%/45px 45px 45% 45%;
+  transform: rotate(45deg);
+}
+.eyes::after {
+  content: '';
+  position: absolute;
+  border-bottom: 2px solid #fff;
+  width: 70px;
+  height: 50px;
+  left: 0px;
+  bottom: -10px;
+  border-radius: 50%;
+}
+.eyes::before {
+  bottom: auto;
+  top: -100px;
+  transform: rotate(45deg);
+  left: 0;
+}
+.eyes:nth-of-type(2) {
+  float: right;
+  transform: rotate(-45deg);
+}
+.eyes:nth-of-type(2)::after {
+  left: 5px;
+}
+.eyes:nth-of-type(3) {
+  display: none;
+}
+
+@keyframes eye {
+  0% ,30% , 55%, 90% , 100% {
+    transform: translate(0, 0);
+  }
+  10%, 25% {
+    transform: translate(0, 20px);
+  }
+  65% {
+    transform: translate(-20px, 0);
+  }
+  80% {
+    transform: translate(20px, 0);
+  }
+}
+
+
+.error-code {
+  text-align: center;
+  font-size: 72px;
+  font-weight: bold;
+  margin-top: 100px;
+  color: white;
+}
+.content {
+  direction: rtl;
+  color: white;
+  max-width: 540px;
+  margin: 20px auto;
+  line-height: 2em;
+  flex: 2;
+}
+.btn {  
+  background: linear-gradient(92deg, #87FCC4 0%, #28C1F5 98.77%);
+
+  color: #181818;
+  text-decoration: none;
+  display: inline-block;
+  border: 1px solid #5AE0DC;
+  padding: 2px 24px;
+  border-radius: 12px;
+  margin: 32px 0 12px;
+}
+.btn:hover {
+  color: #181818;
+  background: linear-gradient(92deg, #87FCC4 0%, #28C1F5 98.77%);
+}
+.text-center {
+  text-align: center;
+}
+.code {
+  display: inline-block;
+  background-color: #2e3240;
+  padding: 0px 6px;
+  border-radius: 6px;
+  letter-spacing: 1px;
+  vertical-align: middle;
+}
+
+.ps-2 {
+	padding-left: 2rem;
+}
+</style>
+</head>
+<body>
+  <div class="head">
+    <div class="eyes"></div>
+    <div class="eyes"></div>
+    <div class="error-code">404</div>
+  </div>
+  <div class="content ps-2">
+    <ul>
+      <li>این صفحه وجود ندارد ، آدرس شما اشتباه است.</li>
+      <li>یا احتمال دارد که صفحه از دسترس خارج شده یا شما اجازه ورود ندارید و شبکه خود را چک کنیپ.</li>
+    </ul>
+    <div class="text-center">
+      <a href="#https://raminxz.github.io" class="btn-outline">بازگشت به صفحه نخست</a>
+    </div
