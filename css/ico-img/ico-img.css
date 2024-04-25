@@ -1,0 +1,183 @@
+:root {
+    ---05-r:0.5rem;
+    ---1-r: 1rem;
+    ---2-r: 2rem;
+    ---3-r: 3rem;
+    ---4-r: 4rem;
+    ---5-r: 5rem;
+    ---6-r: 6rem;
+    ---7-r: 7rem;
+}
+
+[class*="ico-"]::before {
+    display: inline-block;
+    margin: 0 !important;
+    padding: 0 !important;
+    box-sizing: border-box !important;
+    /* ------ */
+    content: " ";
+    display: inline-block;
+    width: var(--ico-x-y-icon);
+    height: var(--ico-x-y-icon);
+    background-size: cover;
+    position: relative;
+    left: 0%;
+    top: 10px;
+}
+
+.ico-xm::before {
+    --ico-x-y-icon: var(---05-r);
+}
+
+.ico-sm::before {
+    --ico-x-y-icon: var(---1-r);
+}
+
+.ico-md::before {
+    --ico-x-y-icon: var(---2-r);
+}
+
+.ico-lg::before {
+    --ico-x-y-icon: var(---3-r);
+}
+
+.ico-xl::before {
+    --ico-x-y-icon: var(---4-r);
+}
+
+.ico-xxl::before {
+    --ico-x-y-icon: var(---5-r);
+}
+
+.i-Arrow::before {
+    background-image: url('Arrow.png');
+}
+
+.i-Back::before {
+    background-image: url('Back.png');
+
+}
+
+.i-Bin-Windows::before {
+    background-image: url('Bin Windows.png');
+}
+
+.i-Browse-Folder::before {
+    background-image: url('Browse Folder.png');
+}
+
+.i-Circle::before {
+    background-image: url('Circle.png');
+}
+
+.i-Circled-Play::before {
+    background-image: url('Circled Play.png');
+}
+
+.i-Close-Window::before {
+    background-image: url('Close Window.png');
+}
+
+.i-Code-Folder::before {
+    background-image: url('Code Folder.png');
+}
+
+.i-Copy-To-Folder::before {
+    background-image: url('Copy To Folder.png');
+}
+
+.i-Discord::before {
+    background-image: url('Discord.png');
+}
+
+.i-Downloads-Folder::before {
+    background-image: url('Downloads Folder.png');
+}
+
+.i-Error::before {
+    background-image: url('Error.png');
+}
+
+.i-Favorite-Folder::before {
+    background-image: url('Favorite Folder.png');
+}
+
+.i-File-Explorer-New::before {
+    background-image: url('File Explorer New.png');
+}
+
+.i-File-Explorer::before {
+    background-image: url('File Explorer.png');
+}
+
+.i-File::before {
+    background-image: url('File.png');
+}
+
+.i-Folder::before {
+    background-image: url('Folder.png');
+}
+
+.i-Group-Folder::before {
+    background-image: url('Group Folder.png');
+}
+
+.i-ico-img::before {
+    background-image: url('ico-img.css');
+}
+
+.i-Link-Folder::before {
+    background-image: url('Link Folder.png');
+}
+
+.i-Male-User::before {
+    background-image: url('Male User.png');
+}
+
+.i-Matt-Paper::before {
+    background-image: url('Matt Paper.png');
+}
+
+.i-Microsoft-Paint::before {
+    background-image: url('Microsoft Paint.png');
+}
+
+.i-Microsoft-Store::before {
+    background-image: url('Microsoft Store.png');
+}
+
+.i-News::before {
+    background-image: url('News.png');
+}
+
+.i-Play::before {
+    background-image: url('Play.png');
+}
+
+.i-User-Folder::before {
+    background-image: url('User Folder.png');
+}
+
+.i-Virtual-Machine::before {
+    background-image: url('Virtual Machine.png');
+}
+
+.i-Visual-Studio-Code-2019::before {
+    background-image: url('Visual Studio Code 2019.png');
+}
+
+.i-Wi-Fi::before {
+    background-image: url('Wi-Fi Good.png');
+}
+
+.i-windows::before {
+    background-image: url('windows.png');
+}
+
+.i-Workstation::before {
+    background-image: url('Workstation.png');
+}
+
+.i-android::before {
+background-image: url('Android os.png');
+}
