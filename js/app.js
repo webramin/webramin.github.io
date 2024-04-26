@@ -153,3 +153,20 @@ $(".palet").each(function(){
 var colorCode = $(this).text();
 $(this).parent().css("background-color", colorCode);
 });
+// ست کردن تم بالا در موبایل 
+function updateThemeColor() {
+  const themeMode = document.documentElement.getAttribute('data-bs-theme');
+  const metaThemeColor = document.querySelector('meta[name="theme-color"]');
+
+  if (themeMode === 'dark') {
+    metaThemeColor.setAttribute('content', '#000000'); // تنظیم رنگ تم تاریک
+  } else {
+    metaThemeColor.setAttribute('content', '#ffffff'); // تنظیم رنگ تم روشن
+  }
+}
+
+// اجرای تابع هنگام تغییر تم
+document.documentElement.addEventListener('data-bs-theme-change', updateThemeColor);
+
+// اجرای تابع هنگام بارگذاری صفحه
+window.addEventListener('load', updateThemeColor);
