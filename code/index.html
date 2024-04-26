@@ -1,78 +1,89 @@
 <!DOCTYPE html>
-<html lang="fa">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ویبرامین - توسعه‌دهنده و طراح وب</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/core@1.0.0-beta16/dist/css/tabler.min.css">
-    <style>
-        body {
-            direction: rtl;
-            font-family: 'Vazir', sans-serif;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fullscreen Toggle</title>
+  <style>
+    #fullscreen-toggle {
+      position: fixed;
+      top: 10px;
+      right: 10px;
+      z-index: 9999;
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #333;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+    }
+
+    .fullscreen {
+      width: 100%;
+      height: 100%;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 9998;
+      background-color: #fff;
+      overflow: auto;
+      /* Hide browser's UI elements */
+      -webkit-fullscreen {
+        width: 100%;
+        height: 100%;
+      }
+      -moz-fullscreen {
+        width: 100%;
+        height: 100%;
+      }
+      -ms-fullscreen {
+        width: 100%;
+        height: 100%;
+      }
+      -o-fullscreen {
+        width: 100%;
+        height: 100%;
+      }
+      fullscreen {
+        width: 100%;
+        height: 100%;
+      }
+    }
+  </style>
 </head>
 <body>
-    <div class="page">
-        <div class="page-wrapper">
-            <div class="container-xl">
-                <div class="page-header d-print-none">
-                    <div class="row align-items-center">
-                        <div class="col">
-                            <h1 class="page-title">
-                                به خوش‌آمدید به دنیای دیجیتال ویبرامین
-                            </h1>
-                            <div class="page-pretitle">
-                                سفر به عرصه خلاقیت و نوآوری
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="page-body">
-                <div class="container-xl">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <h2>به عنوان یک توسعه‌دهنده و طراح وب مشتاق، من شما را به دنیای جذاب ویبرامین دعوت می‌کنم.</h2>
-                            <p>در اینجا، ترکیبی منحصربه‌فرد از تکنولوژی پیشرفته، هنر و تلاش بی‌وقفه برای تعالی دیجیتال را خواهید یافت.</p>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <h3>درباره من</h3>
-                            <p>من ویبرامین هستم، یک حرفه‌ای باتجربه که عشق عمیقی به وب دارم. با سال‌ها تجربه، مهارت‌های خود را در ساخت راه‌حل‌های دیجیتال زیبا و کارآمد تقویت کرده‌ام.</p>
-                            <p>از وب‌سایت‌های زیبا و واکنش‌گرا تا برنامه‌های وب تعاملی، من به چالش تبدیل ایده‌ها به واقعیت می‌پردازم. تعهد راسخ من به کیفیت و توجه به جزئیات، تضمین می‌کند که هر پروژه‌ای که انجام می‌دهم، انتظارات مشتریان را فراتر ببرد.</p>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <h3>خدمات من</h3>
-                            <div class="list-group">
-                                <div class="list-group-item">توسعه وب: ساخت وب‌سایت‌ها و برنامه‌های وب سفارشی و با قابلیت‌های پیشرفته با استفاده از جدیدترین تکنولوژی‌ها.</div>
-                                <div class="list-group-item">طراحی رابط کاربری/تجربه کاربری: طراحی رابط‌های کاربری ساده و جذاب که تجربه دیجیتالی را بهبود می‌بخشند.</div>
-                                <div class="list-group-item">طراحی واکنش‌گرا: اطمینان از بهینه‌سازی حضور دیجیتال شما برای نمایش روان در تمام دستگاه‌ها.</div>
-                                <div class="list-group-item">راه‌حل‌های تجارت الکترونیک: توسعه پلتفرم‌های تجارت الکترونیک امن و مقیاس‌پذیر برای کسب‌وکار آنلاین شما.</div>
-                                <div class="list-group-item">برندسازی و هویت: کمک به ایجاد حضور برند قدرتمند و به‌یادماندنی در فضای دیجیتال.</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <h3>کاوش در نمونه‌کارهای من</h3>
-                            <p>به پرتفولیوی من سر بزنید تا شاهد تجلی مهارت‌های خلاقانه و فنی من باشید. از وب‌سایت‌های شرکتی زیبا تا پرتفولیوهای شخصی جذاب، هر پروژه توانایی من در تحقق بخشیدن به رویای دیجیتالی شما را به نمایش می‌گذارد.</p>
-                            <a href="https://webramin.github.io/portfolio" class="btn btn-primary">مشاهده پرتفولیو</a>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <h3>ارتباط با من</h3>
-                            <p>آماده‌اید تا به ماجراجویی دیجیتالی بعدی خود پا بگذارید؟ من در هر مرحله همراه و یاریگر شما خواهم بود. به من تماس بگیرید و بگذارید درباره نحوه کمک به شما برای دستیابی به اهدافتان صحبت کنیم.</p>
-                            <a href="https://webramin.github.io/contact" class="btn btn-primary">تماس با من</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+  <button id="fullscreen-toggle">Toggle Fullscreen</button>
+
+  <script>
+    const fullscreenToggle = document.getElementById('fullscreen-toggle');
+    const body = document.body;
+
+    fullscreenToggle.addEventListener('click', () => {
+      body.classList.toggle('fullscreen');
+      if (body.classList.contains('fullscreen')) {
+        if (body.requestFullscreen) {
+          body.requestFullscreen({ navigationUI: 'hide' });
+        } else if (body.webkitRequestFullscreen) {
+          body.webkitRequestFullscreen({ navigationUI: 'hide' });
+        } else if (body.mozRequestFullScreen) {
+          body.mozRequestFullScreen();
+        } else if (body.msRequestFullscreen) {
+          body.msRequestFullscreen({ navigationUI: 'hide' });
+        }
+        fullscreenToggle.textContent = 'Exit Fullscreen';
+      } else {
+        if (document.exitFullscreen) {
+          document.exitFullscreen();
+        } else if (document.webkitExitFullscreen) {
+          document.webkitExitFullscreen();
+        } else if (document.mozCancelFullScreen) {
+          document.mozCancelFullScreen();
+        } else if (document.msExitFullscreen) {
+          document.msExitFullscreen();
+        }
+        fullscreenToggle.textContent = 'Toggle Fullscreen';
+      }
+    });
+  </script>
 </body>
 </html>
