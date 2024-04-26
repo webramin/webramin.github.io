@@ -1,4 +1,4 @@
-$(document).ready(function() {
+
     var navblur = function () {
         const navbarCollapsible = document.body.querySelector('#mainNav');
         if (!navbarCollapsible) {
@@ -19,37 +19,6 @@ $(document).ready(function() {
             rootMargin: '0px 0px -40%',
         });
     };
-});
-
-// اضافه کردن کلاس هنگام ورود
-$(window).scroll(function () { 
-    $('.add-scroll').each(function(){
-        var pos = $(this).offset().top;
-        var winTop = $(window).scrollTop();
-        if (pos < winTop + 900) {
-            $(this).addClass('active')
-        }
-    });
-});
-
-// دکمه اسکرول به بالا
-$(window).on('scroll', function() {
-   var scrollTop = $(this).scrollTop();
-
-   if (scrollTop > 100) {
-    $('#btnTop').addClass('active');
-   } else {
-    $('#btnTop').removeClass('active');
-   }
-});
-
-$('#btnTop').click(function (e) { 
-    $('html,body').animate({
-        scrollTop: 0
-    },60);
-    $('#btnTop').animate({
-
-    })
 });
 
 // اضافه کرودن نام سایت در اول کار
@@ -148,7 +117,38 @@ document.getElementById('entryTime').value = formattedTime;
 document.getElementById('Time').innerText = formattedTime;
 sendEntryTime(formattedTime);
 }
+$(document).ready(function() {
+    // اضافه کردن کلاس هنگام ورود
+$(window).scroll(function () { 
+    $('.add-scroll').each(function(){
+        var pos = $(this).offset().top;
+        var winTop = $(window).scrollTop();
+        if (pos < winTop + 900) {
+            $(this).addClass('active')
+        }
+    });
+});
 
+// دکمه اسکرول به بالا
+$(window).on('scroll', function() {
+   var scrollTop = $(this).scrollTop();
+
+   if (scrollTop > 100) {
+    $('#btnTop').addClass('active');
+   } else {
+    $('#btnTop').removeClass('active');
+   }
+});
+
+$('#btnTop').click(function (e) { 
+    $('html,body').animate({
+        scrollTop: 0
+    },60);
+    $('#btnTop').animate({
+
+    })
+});
+    
 $(".palet").each(function(){
 var colorCode = $(this).text();
 $(this).parent().css("background-color", colorCode);
