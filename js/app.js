@@ -1,4 +1,4 @@
-window.addEventListener('DOMContentLoaded', event => {
+$(document).ready(function() {
     var navblur = function () {
         const navbarCollapsible = document.body.querySelector('#mainNav');
         if (!navbarCollapsible) {
@@ -153,20 +153,21 @@ $(".palet").each(function(){
 var colorCode = $(this).text();
 $(this).parent().css("background-color", colorCode);
 });
-// ست کردن تم بالا در موبایل 
-function updateThemeColor() {
-  var themeMode = $('html').attr('data-bs-theme');
-  var metaThemeColor = $('meta[name="theme-color"]');
 
-  if (themeMode === 'dark') {
-    metaThemeColor.attr('content', '#000000'); // تنظیم رنگ تم تاریک
-  } else {
-    metaThemeColor.attr('content', '#ffffff'); // تنظیم رنگ تم روشن
+  function updateThemeColor() {
+    var themeMode = $('html').attr('data-bs-theme');
+    var metaThemeColor = $('meta[name="theme-color"]');
+
+    if (themeMode === 'dark') {
+      metaThemeColor.attr('content', '#000000'); // تنظیم رنگ تم تاریک
+    } else {
+      metaThemeColor.attr('content', '#ffffff'); // تنظیم رنگ تم روشن
+    }
   }
-}
 
-// اجرای تابع هنگام تغییر تم
-$(document.documentElement).on('data-bs-theme-change', updateThemeColor);
+  // اجرای تابع هنگام بارگذاری صفحه
+  updateThemeColor();
 
-// اجرای تابع هنگام بارگذاری صفحه
-$(window).on('load', updateThemeColor);
+  // اجرای تابع هنگام تغییر تم
+  $(document.documentElement).on('data-bs-theme-change', updateThemeColor);
+});
