@@ -1,32 +1,50 @@
 [
   {
-    "title": "کشف آینده هوش مصنوعی با آزمایشگاه های Perplexity",
+    "title": 
     "description": "آخرین پیشرفت‌های هوش مصنوعی و یادگیری ماشینی را در آزمایشگاه‌های Perplexity کشف کنید. از پردازش زبان طبیعی تا بینایی کامپیوتری، تیم ما مرزهای امکان‌پذیر را گسترش می‌دهد",
     "imageUrl": "https://example.com/image1.jpg",
     "url": "https://labs.perplexity.ai/"
   },
+
+  [
   {
-    "title": "Post 2",
-    "description": "This is the description for Post 2",
-    "imageUrl": "https://example.com/image2.jpg",
-    "url": "https://example.com/post2"
+    "id": 1,
+    "title": "کشف آینده هوش مصنوعی با آزمایشگاه های Perplexity",
+    "description": "آخرین پیشرفت‌های هوش مصنوعی و یادگیری ماشینی را در آزمایشگاه‌های Perplexity کشف کنید. از پردازش زبان طبیعی تا بینایی کامپیوتری، تیم ما مرزهای امکان‌پذیر را گسترش می‌دهد",
+    "image": "https://example.com/image1.jpg",
+    "link": "https://labs.perplexity.ai/",
+    "tags": "ai, text-ai, GPT-4"
   },
   {
-    "title": "Post 3",
-    "description": "This is the description for Post 3",
-    "imageUrl": "https://example.com/image3.jpg",
-    "url": "https://example.com/post3"
+    "id": 2,
+    "title": "عنوان پست دوم",
+    "description": "توضیحات مربوط به پست دوم. این پست در مورد موضوع دیگری است.",
+    "image": "https://example.com/image2.jpg",
+    "link": "https://example.com/post2",
+    "tags": "jQuery, bootstrap"
   },
   {
-    "title": "Post 4",
-    "description": "This is the description for Post 4",
-    "imageUrl": "https://example.com/image4.jpg",
-    "url": "https://example.com/post4"
+    "id": 3,
+    "title": "عنوان پست سوم",
+    "description": "توضیحات مربوط به پست سوم. این پست در مورد موضوع دیگری است.",
+    "image": "https://example.com/image3.jpg",
+    "link": "https://example.com/post3",
+    "tags": "html, css"
   },
   {
-    "title": "Post 5",
-    "description": "This is the description for Post 5",
-    "imageUrl": "https://example.com/image5.jpg",
-    "url": "https://example.com/post5"
+    "id": 4,
+    "title": "عنوان پست چهارم",
+    "description": "توضیحات مربوط به پست چهارم. این پست در مورد موضوع دیگری است.",
+    "image": "https://example.com/image4.jpg",
+    "link": "https://example.com/post4",
+    "tags": "js, jQuery"
+  },
+  {
+    "id": 5,
+    "title": "عنوان پست پنجم",
+    "description": "توضیحات مربوط به پست پنجم. این پست در مورد موضوع دیگری است.",
+    "image": "https://example.com/image5.jpg",
+    "link": "https://example.com/post5",
+    "tags": "bootstrap"
   }
-]
+  ]
