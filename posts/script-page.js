@@ -5,13 +5,21 @@ let posts = [];
 let filteredPosts = [];
 
 // بارگیری پست‌ها از فایل JSON
-$.getJSON('./data/posts.json', function(data) {
-  posts = data;
-  filteredPosts = posts;
-  totalPages = Math.ceil(filteredPosts.length / postsPerPage);
-  displayPosts(currentPage);
-  displayPageNumbers();
-});
+const posts = require('./data/posts.js');
+
+// بارگیری پست‌ها از فایل JavaScript
+filteredPosts = posts;
+totalPages = Math.ceil(filteredPosts.length / postsPerPage);
+displayPosts(currentPage);
+displayPageNumbers();
+//-------
+//$.getJSON('./data/posts.json', function(data) {
+//  posts = data;
+//  filteredPosts = posts;
+//  totalPages = Math.ceil(filteredPosts.length / postsPerPage);
+//  displayPosts(currentPage);
+//  displayPageNumbers();
+//});
 
 // نمایش پست‌ها در صفحه
 function displayPosts(page) {
