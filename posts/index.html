@@ -1,30 +1,40 @@
 <!DOCTYPE html>
-<html lang="fa">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>پست ها</title>
+  <title>پست‌های وبلاگ</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-  <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <div class="container my-5">
-    <h1 class="text-center mb-4">فهرست پست‌ها</h1>
-    <div class="input-group mb-4">
-      <input type="text" class="form-control" id="search-input" placeholder="جستجو...">
-      <div class="input-group-append">
-        <button class="btn btn-primary" id="search-btn">جستجو</button>
-      </div>
-    </div>
-    <div id="posts-container"></div>
-    <div class="d-flex justify-content-center mt-4">
-      <button class="btn btn-primary mr-2" id="prev-btn">قبلی</button>
-      <div id="page-numbers"></div>
-      <button class="btn btn-primary ml-2" id="next-btn">بعدی</button>
-    </div>
+    <h1 class="text-center mb-5">پست‌های وبلاگ</h1>
+    <div id="posts-container" class="row"></div>
   </div>
 
   <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-  <script src="script-page.js"></script>
+  <script>
+    $.ajax({
+      url: './data/posts.yml',
+      dataType: 'text',
+      success: function(data) {
+        const posts = jsyaml.load(data);
+        posts.forEach(post => {
+          const postElement = $('<div>').addClass('col-md-4 mb-4');
+          const cardElement = $('<div>').addClass('card h-100');
+          const imgElement = $('<img>').addClass('card-img-top').attr('src', post.image).attr('alt', post.title);
+          const cardBodyElement = $('<div>').addClass('card-body');
+          const titleElement = $('<h5>').addClass('card-title').text(post.title);
+          const descriptionElement = $('<p>').addClass('card-text').text(post.description);
+          const linkElement = $('<a>').addClass('btn btn-primary').attr('href', post.link).text('بیشتر بخوانید');
+          cardBodyElement.append(titleElement, descriptionElement, linkElement);
+          cardElement.append(imgElement, cardBodyElement);
+          postElement.append(cardElement);
+          $('#posts-container').append(postElement);
+        });
+      }
+    });
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.1.0/js-yaml.min.js"></script>
 </body>
 </html>
