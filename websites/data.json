@@ -1,23 +1,32 @@
 [
-  { "id": "1",
-    "title": "",
-    "image": "",
-    "description" : ""
-    "url" :""
+  {
+    "title": "کشف آینده هوش مصنوعی با آزمایشگاه های Perplexity",
+    "description": "آخرین پیشرفت‌های هوش مصنوعی و یادگیری ماشینی را در آزمایشگاه‌های Perplexity کشف کنید. از پردازش زبان طبیعی تا بینایی کامپیوتری، تیم ما مرزهای امکان‌پذیر را گسترش می‌دهد",
+    "imageUrl": "https://example.com/image1.jpg",
+    "url": "https://labs.perplexity.ai/"
+  },
+  {
+    "title": "Post 2",
+    "description": "This is the description for Post 2",
+    "imageUrl": "https://example.com/image2.jpg",
+    "url": "https://example.com/post2"
+  },
+  {
+    "title": "Post 3",
+    "description": "This is the description for Post 3",
+    "imageUrl": "https://example.com/image3.jpg",
+    "url": "https://example.com/post3"
+  },
+  {
+    "title": "Post 4",
+    "description": "This is the description for Post 4",
+    "imageUrl": "https://example.com/image4.jpg",
+    "url": "https://example.com/post4"
+  },
+  {
+    "title": "Post 5",
+    "description": "This is the description for Post 5",
+    "imageUrl": "https://example.com/image5.jpg",
+    "url": "https://example.com/post5"
   }
 ]
-
-<div class="container">
-  <div class="row">
-    <div class="col-md-6 offset-md-3">
-      <div class="card">
-        <img src="image.jpg" class="card-img-top" alt="تصویر">
-        <div class="card-body">
-          <h5 class="card-title">کشف آینده هوش مصنوعی با آزمایشگاه های Perplexity</h5>
-          <p class="card-text">آخرین پیشرفت‌های هوش مصنوعی و یادگیری ماشینی را در آزمایشگاه‌های Perplexity کشف کنید. از پردازش زبان طبیعی تا بینایی کامپیوتری، تیم ما مرزهای امکان‌پذیر را گسترش می‌دهد.</p>
-          <a href="https://labs.perplexity.ai/" class="btn btn-primary">بیشتر بدانید</a>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
