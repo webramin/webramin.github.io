@@ -10,6 +10,7 @@ window.addEventListener('DOMContentLoaded', event => {
             navbarCollapsible.classList.add('nav-blur')
         }
     };
+    
     navblur();
     document.addEventListener('scroll', navblur);
     const mainNav = document.body.querySelector('#mainNav');
@@ -113,7 +114,9 @@ function showdate() {
             const year = today.getFullYear();
             return `${dayOfWeek} ${day} ${month} ${year}`;
     }
+
     document.getElementById('gregorianDate').innerText = showGregorianDate();
+
     function updateClock() {
         const now = new Date();
         let hours = now.getHours();
@@ -125,7 +128,9 @@ function showdate() {
         document.getElementById('clock').innerText = timeString;
         setTimeout(updateClock, 1000);
     }
+
     updateClock();
+
     function formatTime(date) {
         let hours = date.getHours();
         let minutes = date.getMinutes();
@@ -135,10 +140,19 @@ function showdate() {
         return hours + ':' + minutes + ':' + seconds;
     }
     function sendEntryTime(entryTime) {
-        // اینجا کد برای ارسال زمان به سرور یا API قرار می‌گیرد
-        fetch('https://formspree.io/f/mrgrllzz', {
-            method: 'POST', body: JSON.stringify({entryTim}), headers: {'Content-Type': 'application/json'}
+  fetch('https://formspree.io/f/mrgrllzz', {
+    method: 'POST',
+    body: JSON.stringify({ entryTime }),
+    headers: { 'Content-Type': 'application/json' }
+  })
+    .then(response => {
+      console.log('زمان ورود ارسال شد: ' + entryTime);
+    })
+    .catch(error => {
+      console.error('خطا در ارسال زمان ورود:', error);
     });
+}
+
 console.log('زمان ورود ارسال شد: ' + entryTime);
 }
 window.onload = function() {
