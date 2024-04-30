@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>document</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.rtl.min.css">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+  <style type="text/css" media="all">
+    .row {
+      transition: all .4s;
+    }
+  </style>
+</head>
+<body>
+  <div class="container my-5">
+    <h1 class="mb-4 text-center">پست های وبلاگ</h1>
+    <div class="input-group mb-3 justify-content-end">
+      <input type="text" class="form-control search-input" placeholder="جستجو...">
+    </div>
+    <div class="row" id="postContainer">
+      <!-- پست ها به صورت پویا اینجا بارگذاری می شوند -->
+    </div>
+    <div class="row">
+      <div class="col-12 d-flex justify-content-center">
+        <nav aria-label="صفحه بندی">
+          <ul class="pagination" id="pagination">
+            <!-- صفحه بندی به صورت پویا اینجا ایجاد می شود -->
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>
+  <script>
+const blogPosts = [
+  {
+    id: 1,
+    title: "کشف آینده هوش مصنوعی با آزمایشگاه های Perplexity",
+    description: "آخرین پیشرفت‌های هوش مصنوعی و یادگیری ماشینی را در آزمایشگاه‌های Perplexity کشف کنید. از پردازش زبان طبیعی تا بینایی کامپیوتری، تیم ما مرزهای امکان‌پذیر را گسترش می‌دهد",
+    image: "https://example.com/image1.jpg",
+    link: "https://labs.perplexity.ai/",
+    tags: "ai, text-ai, GPT-4, ai"
+  },
+  {
+    id: 2,
+    title: "عنوان پست دوم",
+    description: "توضیحات مربوط به پست دوم. این پست در مورد موضوع دیگری است.",
+    image: "https://example.com/image2.jpg",
+    link: "https://example.com/post2",
+    tags: "jQuery, bootstrap"
+  },
+  {
+    id: 3,
+    title: "پست سوم در مورد موضوع جدید",
+    description: "این پست در مورد موضوع جدیدی است که قبلا در پست‌های قبلی مطرح نشده است.",
+    image: "https://example.com/image3.jpg",
+    link: "https://example.com/post3",
+    tags: "css, html, javascript"
+  },
+  {
+    id: 4,
+    title: "چهارمین پست وبلاگ",
+    description: "این پست چهارمین پست وبلاگ است و در مورد موضوع دیگری است.",
+    image: "https://example.com/image4.jpg",
+    link: "https://example.com/post4",
+    tags: "react, angular, vue"
+  },
+  {
+    id: 5,
+    title: "پنجمین پست وبلاگ",
+    description: "این پست پنجمین پست وبلاگ است و در مورد موضوع دیگری است.",
+    image: "https://example.com/image5.jpg",
+    link: "https://example.com/post5",
+    tags: "php, laravel, symfony"
+  },
+  {
+    id: 6,
+    title: "ششمین پست وبلاگ",
+    description: "این پست ششمین پست وبلاگ است و در مورد موضوع دیگری است.",
+    image: "https://example.com/image6.jpg",
+    link: "https://example.com/post6",
+    tags: "python, django, flask"
+  },
+  {
+    id: 7,
+    title: "هفتمین پست وبلاگ",
+    description: "این پست هفتمین پست وبلاگ است و در مورد موضوع دیگری است.",
+    image: "https://example.com/image7.jpg",
+    link: "https://example.com/post7",
+    tags: "java, spring, android"
+  },
+  {
+    id: 8,
+    title: "هشتمین پست وبلاگ",
+    description: "این پست هشتمین پست وبلاگ است و در مورد موضوع دیگری است.",
+    image: "https://example.com/image8.jpg",
+    link: "https://example.com/post8",
+    tags: "ruby, rails, sinatra"
+  },
+  {
+    id: 9,
+    title: "نهمین پست وبلاگ",
+    description: "این پست نهمین پست وبلاگ است و در مورد موضوع دیگری است.",
+    image: "https://example.com/image9.jpg",
+    link: "https://example.com/post9",
+    tags: "swift, ios, xcode"
+  },
+  {
+    id: 10,
+    title: "دهمین پست وبلاگ",
+    description: "این پست دهمین پست وبلاگ است و در مورد موضوع دیگری است.",
+    image: "https://example.com/image10.jpg",
+    link: "https://example.com/post10",
+    tags: "kotlin, android, jetpack"
+  },
+  {
+    id: 11,
+    title: "یازدهمین پست وبلاگ",
+    description: "این پست یازدهمین پست وبلاگ است و در مورد موضوع دیگری است.",
+    image: "https://example.com/image11.jpg",
+    link: "https://example.com/post11",
+    tags: "csharp, dotnet, asp.net"
+  },
+  {
+    id: 12,
+    title: "دوازدهمین پست وبلاگ",
+    description: "این پست دوازدهمین پست وبلاگ است و در مورد موضوع دیگری است.",
+    image: "https://example.com/image12.jpg",
+    link: "https://example.com/post12",
+    tags: "go, gin, echo"
+  }
+];
+let currentPage = 1;
+const postsPerPage = 10;
+
+function loadPosts(page, filteredPosts = blogPosts) {
+  $('#postContainer').empty();
+  const startIndex = (page - 1) * postsPerPage;
+  const endIndex = startIndex + postsPerPage;
+  const postsToDisplay = filteredPosts.slice(startIndex, endIndex);
+
+  postsToDisplay.forEach(function(post) {
+    const tags = post.tags.split(',');
+  //  let tagButtons = '';
+  //  tags.forEach(function(tag) {
+  //    tagButtons += `<button class="btn btn-outline-primary tag-btn" data-tag="${tag.trim()}">${tag.trim()}</button>`;
+ //   });
+
+
+let tagButtons = '<div class="btn-group  flex-wrap">';
+tags.forEach(function(tag) {
+  tagButtons += `<button class="btn btn-sm btn-outline-primary tag-btn" data-tag="${tag.trim()}">${tag.trim()}</button>`;
+});
+
+tagButtons += '</div>';
+
+
+$('#postContainer').append(`
+  <div class="col-md-4 mb-4">
+    <div class="card">
+      <img src="${post.image}" class="card-img-top" alt="${post.title}">
+      <div class="card-body">
+        <h5 class="card-title">${post.title}</h5>
+        <p class="card-text">${post.description}</p>
+           <div class="row" >
+              <div class="col-6 col-sm-12 text-start">
+                ${tagButtons}
+              </div>
+              <div class="col-6 col-sm-12 text-end">
+                <a href="${post.link}" class="btn btn-primary">مشاهده بیشتر</a>
+              </div>
+            </div>
+      </div>
+    </div>
+  </div>
+`);
+  });
+
+  generatePagination(page, Math.ceil(filteredPosts.length / postsPerPage));
+}
+
+function generatePagination(currentPage, totalPages) {
+  $('#pagination').empty();
+  for (let i = 1; i <= totalPages; i++) {
+    $('#pagination').append(`
+      <li class="page-item ${i === currentPage ? 'active' : ''}">
+        <a class="page-link" href="#" data-page="${i}">${i}</a>
+      </li>
+    `);
+  }
+
+  $('.page-link').click(function(e) {
+    e.preventDefault();
+    currentPage = $(this).data('page');
+    loadPosts(currentPage);
+  });
+}
+
+$('.search-input').on('input', function() {
+  const searchTerm = $(this).val().toLowerCase();
+  let filteredPosts;
+  if (searchTerm.startsWith('#')) {
+    const tag = searchTerm.slice(1).trim();
+    filteredPosts = blogPosts.filter(post => post.tags.toLowerCase().includes(tag));
+  } else {
+    filteredPosts = blogPosts.filter(post =>
+      post.title.toLowerCase().includes(searchTerm) ||
+      post.description.toLowerCase().includes(searchTerm)
+     );
+  }
+  loadPosts(1, filteredPosts);
+});
+
+$('.tag-btn').click(function() {
+  const selectedTag = $(this).data('tag');
+  const filteredPosts = blogPosts.filter(post => post.tags.includes(selectedTag));
+  loadPosts(1, filteredPosts);
+  $('.tag-btn').removeClass('btn-primary').addClass('btn-outline-primary');
+  $(this).removeClass('btn-outline-primary').addClass('btn-primary');
+});
+
+loadPosts(currentPage);
+  </script>
+</body>
+</html>
