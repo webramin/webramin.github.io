@@ -28,15 +28,6 @@ window.onload = function() {
   document.getElementById('Time').innerText = formattedTime;
   sendEntryTime(formattedTime);
 };
-		// اجرای اسکریپت پس از بارگذاری کامل صفحه
-		 $(window).on('load', function() {
-		 //  $(".loader").addClass("hidden");
-		  });
-
-		// اجرای اسکریپت قبل از تخلیه صفحه
-		$(window).on('beforeunload', function() {
-			$(".loader").removeClass("hidden");
-		});
 $(".palet").each(function(){
   var colorCode = $(this).text();
   $(this).parent().css("background-color", colorCode);
