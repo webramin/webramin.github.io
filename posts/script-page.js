@@ -1,112 +1,78 @@
 let currentPage = 1;
 const postsPerPage = 10;
-let totalPages;
-let posts = [];
-let filteredPosts = [];
 
-// بارگیری پست‌ها از فایل JSON
-const posts = require('./data/posts.js');
-
-// بارگیری پست‌ها از فایل JavaScript
-filteredPosts = posts;
-totalPages = Math.ceil(filteredPosts.length / postsPerPage);
-displayPosts(currentPage);
-displayPageNumbers();
-//-------
-//$.getJSON('./data/posts.json', function(data) {
-//  posts = data;
-//  filteredPosts = posts;
-//  totalPages = Math.ceil(filteredPosts.length / postsPerPage);
-//  displayPosts(currentPage);
-//  displayPageNumbers();
-//});
-
-// نمایش پست‌ها در صفحه
-function displayPosts(page) {
+function loadPosts(page, filteredPosts = datapost) {
+  $('#postContainer').empty();
   const startIndex = (page - 1) * postsPerPage;
   const endIndex = startIndex + postsPerPage;
   const postsToDisplay = filteredPosts.slice(startIndex, endIndex);
 
-  $('#posts-container').empty();
   postsToDisplay.forEach(function(post) {
-    const tagElements = post.tags.split(',').map(function(tag) {
-      return `<button class="btn btn-sm btn-outline-primary mr-2">${tag.trim()}</button>`;
-    }).join('');
-
-    const postElement = `
-      <div class="card mb-3">
-        <div class="row no-gutters">
-          <div class="col-md-4">
-            <img src="${post.image}" class="card-img" alt="${post.title}">
-          </div>
-          <div class="col-md-8">
-            <div class="card-body">
-              <h5 class="card-title">${post.title}</h5>
-              <p class="card-text">${post.description}</p>
-              <div class="mb-2">${tagElements}</div>
-              <a href="${post.link}" class="btn btn-primary">مطالعه بیشتر</a>
-            </div>
+    const tags = post.tags.split(',');
+    let tagButtons = '';
+    tags.forEach(function(tag) {
+      tagButtons += `<button class="btn btn-outline-primary tag-btn" data-tag="${tag.trim()}">${tag.trim()}</button>`;
+    });
+    $('#postContainer').append(`
+      <div class="col-md-4 mb-4">
+        <div class="card">
+          <img src="${post.image}" class="card-img-top" alt="${post.title}">
+          <div class="card-body">
+            <h5 class="card-title toggle">${post.title}</h5>
+            <p class="card-text enl">${post.description}</p>
+            ${tagButtons}
           </div>
         </div>
       </div>
-    `;
-    $('#posts-container').append(postElement);
+    `);
+  });
+
+  generatePagination(page, Math.ceil(filteredPosts.length / postsPerPage));
+}
+
+function generatePagination(currentPage, totalPages) {
+  $('#pagination').empty();
+  for (let i = 1; i <= totalPages; i++) {
+    $('#pagination').append(`
+      <li class="page-item ${i === currentPage ? 'active' : ''}">
+        <a class="page-link" href="#" data-page="${i}">${i}</a>
+      </li>
+    `);
+  }
+
+  $('.page-link').click(function(e) {
+    e.preventDefault();
+    currentPage = $(this).data('page');
+    loadPosts(currentPage);
   });
 }
 
-// نمایش شماره صفحات
-function displayPageNumbers() {
-  $('#page-numbers').empty();
-
-  // نمایش حداکثر 5 شماره صفحه
-  let startPage = Math.max(currentPage - 2, 1);
-  let endPage = Math.min(startPage + 4, totalPages);
-
-  for (let i = startPage; i <= endPage; i++) {
-    const pageElement = `<button class="btn btn-outline-primary ${i === currentPage ? 'active' : ''}" onclick="goToPage(${i})">${i}</button>`;
-    $('#page-numbers').append(pageElement);
+$('.search-input').on('input', function() {
+  const searchTerm = $(this).val().toLowerCase();
+  let filteredPosts;
+  if (searchTerm.startsWith('#')) {
+    const tag = searchTerm.slice(1).trim();
+    filteredPosts = datapost.filter(post => post.tags.toLowerCase().includes(tag));
+  } else {
+    filteredPosts = datapost.filter(post =>
+      post.title.toLowerCase().includes(searchTerm) ||
+      post.description.toLowerCase().includes(searchTerm)
+    );
   }
-
-  // نمایش شماره صفحه اول و آخر
-  if (startPage > 1) {
-    $('#page-numbers').prepend(`<button class="btn btn-outline-primary" onclick="goToPage(1)">1</button>`);
-  }
-  if (endPage < totalPages) {
-    $('#page-numbers').append(`<button class="btn btn-outline-primary" onclick="goToPage(${totalPages})">${totalPages}</button>`);
-  }
-}
-
-// رفتن به صفحه مورد نظر
-function goToPage(page) {
-  currentPage = page;
-  displayPosts(currentPage);
-  displayPageNumbers();
-}
-
-// جستجو در پست‌ها
-$('#search-btn').click(function() {
-  const searchTerm = $('#search-input').val().toLowerCase();
-  filteredPosts = posts.filter(function(post) {
-    return post.title.toLowerCase().includes(searchTerm) ||
-           post.description.toLowerCase().includes(searchTerm) ||
-           post.tags.toLowerCase().includes(searchTerm);
-  });
-  totalPages = Math.ceil(filteredPosts.length / postsPerPage);
-  currentPage = 1;
-  displayPosts(currentPage);
-  displayPageNumbers();
+  loadPosts(1, filteredPosts);
 });
 
-// رفتن به صفحه قبلی
-$('#prev-btn').click(function() {
-  if (currentPage > 1) {
-    goToPage(currentPage - 1);
-  }
+$('.tag-btn').click(function() {
+  const selectedTag = $(this).data('tag');
+  const filteredPosts = datapost.filter(post => post.tags.includes(selectedTag));
+  loadPosts(1, filteredPosts);
+  $('.tag-btn').removeClass('btn-primary').addClass('btn-outline-primary');
+  $(this).removeClass('btn-outline-primary').addClass('btn-primary');
 });
 
-// رفتن به صفحه بعدی
-$('#next-btn').click(function() {
-  if (currentPage < totalPages) {
-    goToPage(currentPage + 1);
-  }
+$('.toggle').click(function() {
+  $(this).toggleClass('text-primary');
+  $(this).next('.enl').toggleClass('d-none');
 });
+
+loadPosts(currentPage);
