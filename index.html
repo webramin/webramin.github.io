@@ -342,6 +342,15 @@
     <script src="./js/send.js"></script>
     <script>
         AOS.init();
+	    		// اجرای اسکریپت پس از بارگذاری کامل صفحه
+		 $(window).on('load', function() {
+		 //  $(".loader").addClass("hidden");
+		  });
+
+		// اجرای اسکریپت قبل از تخلیه صفحه
+		$(window).on('beforeunload', function() {
+			$(".loader").removeClass("hidden");
+		});
     </script>
 </body>
 
