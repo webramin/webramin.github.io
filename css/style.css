@@ -177,4 +177,51 @@ html[data-bs-theme=dark] .nav-link:hover {
     opacity: 1;
     right: 0 !important;
     transition: all .4s;
+    }
+
+.loader {
+	position: fixed;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100vw;
+	height: 100vh;
+	backdrop-filter: blur(4px);
+}
+
+.loader span {
+border-radius: 26px;
+display: block;
+width: 10px;
+height: 20px;
+background-color: transparent;
+margin: 0 5px;
+	animation: load 1.5s infinite ease;
+	transition-duration: .1s;
+}
+
+		.loader span:nth-child(2) {
+			animation-delay: 0.2s;
+		}
+
+		.loader span:nth-child(3) {
+			animation-delay: 0.4s;
+		}
+
+		.loader.hidden {
+			display: none;
+		}
+
+@keyframes load {
+			0%, 100% {
+				height: 50px;
+				background: #FFB700;
+opacity: .5;
+			}
+			50% {
+				height: 100px;
+				background: #FFB700;
+				box-shadow: 0 0 10px #FFA300;
+opacity: 1;
+			}
 }
