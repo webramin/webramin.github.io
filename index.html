@@ -281,7 +281,7 @@
         
         <footer class="container-fluid pt-5 rtl d-print-none">
             <div class="row">
-                <div class="col-12 col-sm-6 col-md-2 text-sm-end text-center mb-3 rtl" data-aos="fade-down" >
+                <div class="col-12 col-sm-6 col-md-2 text-sm-end text-center mb-3 rtl" >
                     <h5>دسترسی سریع</h5>
                     <ul class="nav flex-column text-end pe-2">
                         <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">خانه</a></li>
@@ -326,7 +326,7 @@
                     </a>
                 </button>
 
-            <div class="text-center" data-aos="fade-down">
+            <div class="text-center">
                 <p class="hr-text py-5 my-5" style="font-size: 4px;font: menu;">
                     .تمامی محتوا این سایت متعلق به وبرامین میباشد و هرگونه کپی برداری از آن غیر مجاز و بدون رضایت ماست
                 </p>
@@ -338,21 +338,9 @@
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="./js/bootstrap.bundle.js"></script>
     <script src="./js/color-modes.js"></script>
-    <script src="./js/app-on.js"></script>
+    <script src="./js/app.js"></script>
     <script src="./js/popper.min.js"></script>
-    <script src="./js/send.js"></script>
-    <script>
-$(window).on('load', function() {
-  $(".loader-my").addClass("hidden");
-});
-
-$(window).on('beforeunload', function() {
-  $(".loader-my").removeClass("hidden");
-});
-	    
-        AOS.init();
-	
-    </script>
-</body>
+<!--     <script src="./js/send.js"></script> -->
+    </body>
 
 </html>
