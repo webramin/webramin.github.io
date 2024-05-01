@@ -194,6 +194,9 @@ html[data-bs-theme=dark] .nav-link:hover {
 }
 
 .Preloader span {
+/* 	پنهان کردن لودر سایت */
+			display: none;
+	
 border-radius: 26px;
 display: block;
 width: 10px;
