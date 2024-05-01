@@ -197,6 +197,6 @@ const datapost = [
     description: "این پست بیست و پنجمین پست وبلاگ است و در مورد موضوع دیگری است.",
     image: "https://example.com/image25.jpg",
     link: "https://example.com/post25",
-    tags: "groovy, grails, ratpack"
+    tags: "groovy, grails, ratpack,cxc"
   }
 ];
