@@ -184,11 +184,11 @@ function updateClock() {
 updateClock();
 
 $(window).on('load', function() {
-  $(".loader-my").addClass("hidden");
+  $(".Preloader").addClass("hidden");
 });
 
 $(window).on('beforeunload', function() {
-  $(".loader-my").removeClass("hidden");
+  $(".Preloader").removeClass("hidden");
 });
 	  
 	
