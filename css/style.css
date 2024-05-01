@@ -198,7 +198,7 @@ html[data-bs-theme=dark] .nav-link:hover {
 			display: none;
 	
 border-radius: 26px;
-display: block;
+/* display: block; */
 width: 10px;
 height: 20px;
 background-color: transparent;
