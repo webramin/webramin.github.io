@@ -2,7 +2,7 @@
 <html lang="fa">
 
 <head>
-    <title>پست ها</title>
+    <title>وبسایت ها</title>
     <!-- Meta -->
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -81,13 +81,13 @@
                                 <a class="nav-link" aria-current="page" href="https://webramin.github.io/">
                                     <i class="bi pe-2 bi-house"></i> خانه</a>
                             </li>
-                            <li class="nav-item active">
-                                <a class="nav-link active" href="https://webramin.github.io/posts/">
+                            <li class="nav-item">
+                                <a class="nav-link" href="https://webramin.github.io/posts/">
                                     <i class="bi pe-2 bi-inbox"></i> پست ها
                                 </a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="https://webramin.github.io/websites/"><i class="bi pe-2 bi-speedometer2"></i>
+                            <li class="nav-item active">
+                                <a class="nav-link active" href="https://webramin.github.io/websites/"><i class="bi pe-2 bi-speedometer2"></i>
                                         پشنهاد سایت
                                     </a>
                             </li>
@@ -184,16 +184,30 @@
 <div class="px-2 page-wrapper">
             <div class="container-xxl">
                 <div class="page-header d-print-none">
-                    
+                    <h3 class="">
+			 وبسایت های عالی برای هر کار   
+		    </h3>
+			<p>بیشتر وب سایت ها معرفی هوش مصنوعی یا برای طراحی گرافیک است</p>
                 </div>
             </div>
             <div class="page-body">
-		    
-            <div class="container">
-              <input type="text" class="cearch-input" />
-                <div class="row" id="postContainer"></div>
-              <div class="pagination"></div>
-	    </div>
+            <div class="container my-5">
+    <div class="input-group mb-3 justify-content-end">
+      <input type="text" class="form-control search-input" placeholder="جستجو...">
+    </div>
+    <div class="row" id="postContainer">
+      <!-- پست ها به صورت پویا اینجا بارگذاری می شوند -->
+    </div>
+    <div class="row">
+      <div class="col-12 d-flex justify-content-center">
+        <nav aria-label="صفحه بندی">
+          <ul class="pagination" id="pagination">
+            <!-- صفحه بندی به صورت پویا اینجا ایجاد می شود -->
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>
 	</div>
             </div>
             </div>
