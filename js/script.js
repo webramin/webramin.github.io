@@ -9,23 +9,23 @@ function formatTime(date) {
   return hours + ':' + minutes + ':' + seconds;
 }
 
-function sendEntryTime(entryTime) {
-  fetch('https://formspree.io/f/mrgrllzz', {
-    method: 'POST',
-    body: JSON.stringify({ entryTime }),
-    headers: { 'Content-Type': 'application/json' }
-  })
-    .then(response => {
-      console.log('زمان ورود ارسال شد: ' + entryTime);
-    })
-    .catch(error => {
-      console.error('خطا در ارسال زمان ورود:', error);
-    });
-}
+// function sendEntryTime(entryTime) {
+//   fetch('https://formspree.io/f/mrgrllzz', {
+//     method: 'POST',
+//     body: JSON.stringify({ entryTime }),
+//     headers: { 'Content-Type': 'application/json' }
+//   })
+//     .then(response => {
+//       console.log('زمان ورود ارسال شد: ' + entryTime);
+//     })
+    // .catch(error => {
+    //   console.error('خطا در ارسال زمان ورود:', error);
+    // });
+// }
 
 window.onload = function() {
   const entryTime = new Date();
-  const formattedTime = formatTime(entryTime);
+  // const formattedTime = formatTime(entryTime);
   document.getElementById('entryTime').value = formattedTime;
   document.getElementById('Time').innerText = formattedTime;
   sendEntryTime(formattedTime);
