@@ -202,3 +202,8 @@ function displayPostsFromJSON() {
     </ul>
   `);
 }
+
+
+    function goBack() {
+      window.history.back();
+    }
