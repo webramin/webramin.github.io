@@ -193,10 +193,7 @@ $(window).on('beforeunload', function() {
 	  
 // ---------
 
-
 function displayPostsFromJSON() {
-  // فرض می کنیم که داده های JSON در متغیر "postData" ذخیره شده است
-
   // پیدا کردن المان با آی دی "naw-post-ul"
   const $navPostUl = $("#naw-post-ul");
 
@@ -217,7 +214,6 @@ function displayPostsFromJSON() {
     </ul>
   `);
 }
-
 
     function goBack() {
       window.history.back();
