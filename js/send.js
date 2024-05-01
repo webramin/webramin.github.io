@@ -89,7 +89,7 @@ $(document).ready(function() {
 
     // ارسال اطلاعات به آدرس مورد نظر
     $.ajax({
-      url: "https://formspree.io/f/mnqleknz",
+      url: "https://",
       type: "POST",
       data: {
         date: persianDate,
