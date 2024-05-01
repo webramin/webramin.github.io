@@ -22,7 +22,7 @@
 html {
   height: 100%;
   background: linear-gradient(109.67deg, #192123 0%, #0C1013 100%);
-  font-family: Yekan Bakh, Arial, "Helvetica Neue", Helvetica, sans-serif;
+  font-family: iransans;
 }
 
 body {
@@ -120,9 +120,9 @@ color: #fff;
   line-height: 2em;
   flex: 2;
 }
-.btn {  
-  background: linear-gradient(92deg, #87FCC4 0%, #28C1F5 98.77%);
-
+.btn-back {  
+/*   background: linear-gradient(92deg, #87FCC4 0%, #28C1F5 98.77%); */
+  background: linear-gradient(92deg, #FFBF00 0%, #4A33E8 98.77%);
   color: #181818;
   text-decoration: none;
   display: inline-block;
@@ -131,13 +131,12 @@ color: #fff;
   border-radius: 12px;
   margin: 32px 0 12px;
 }
-.btn:hover {
+.btn-back:hover {
   color: #181818;
   background: linear-gradient(92deg, #87FCC4 0%, #28C1F5 98.77%);
+  background: linear-gradient(to right, #FFBF00 0%, #4A33E8 98.77%);
 }
-.text-center {
-  text-align: center;
-}
+	
 .code {
   display: inline-block;
   background-color: #2e3240;
@@ -164,7 +163,7 @@ color: #fff;
       <li class="ir-b">یا احتمال دارد که صفحه از دسترس خارج شده یا شما اجازه ورود ندارید و شبکه خود را چک کنید.</li>
     </ul>
     <div class="text-center">
-      <button onclick="goBack()" class="btn">بازگشت به صفحه نخست </button>
+      <button onclick="goBack()" class="btn-back">بازگشت به صفحه نخست </button>
     </div
   </div>
 
