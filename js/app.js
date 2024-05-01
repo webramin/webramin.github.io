@@ -1,3 +1,5 @@
+AOS.init();
+
 function formatTime(date) {
   let hours = date.getHours();
   let minutes = date.getMinutes();
@@ -180,3 +182,13 @@ function updateClock() {
   setTimeout(updateClock, 1000);
 }
 updateClock();
+
+$(window).on('load', function() {
+  $(".loader-my").addClass("hidden");
+});
+
+$(window).on('beforeunload', function() {
+  $(".loader-my").removeClass("hidden");
+});
+	  
+	
