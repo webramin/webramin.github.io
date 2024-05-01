@@ -64,7 +64,7 @@
 		<span></span>
 		<span></span>
 		<span></span>
-        </div>
+	</div>
         
     <div class="page">
     	<header>
@@ -342,16 +342,16 @@
     <script src="./js/popper.min.js"></script>
     <script src="./js/send.js"></script>
     <script>
-        AOS.init();
-	    		// اجرای اسکریپت پس از بارگذاری کامل صفحه
-		 $(window).on('load', function() {
-		  $(".loader").addClass("hidden");
-		  });
+$(window).on('load', function() {
+  $(".loader-my").addClass("hidden");
+});
 
-		// اجرای اسکریپت قبل از تخلیه صفحه
-		$(window).on('beforeunload', function() {
-			$(".loader").removeClass("hidden");
-		});
+$(window).on('beforeunload', function() {
+  $(".loader-my").removeClass("hidden");
+});
+	    
+        AOS.init();
+	
     </script>
 </body>
 
