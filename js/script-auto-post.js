@@ -50,11 +50,18 @@ function generatePagination(currentPage, totalPages) {
       </li>
     `);
   }
-
+			function scrollToTop() {
+				window.scrollTo({
+					top: 150,
+					behavior: 'smooth'
+				});
+      }
+  
   $('.page-link').click(function(e) {
     e.preventDefault();
     currentPage = $(this).data('page');
     loadPosts(currentPage);
+    scrollToTop();
   });
 }
 
