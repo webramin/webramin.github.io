@@ -3,12 +3,6 @@
   <head>
     <title>خطای 404</title>
     <!-- Meta -->
-<!DOCTYPE html>
-<html lang="fa">
-
-<head>
-    <title>خانه</title>
-    <!-- Meta -->
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -46,20 +40,6 @@
   box-sizing: border-box;
 }
 
-html {
-  height: 100%;
-  background: linear-gradient(109.67deg, #192123 0%, #0C1013 100%);
-  font-family: iransans;
-}
-
-body {
-color: #fff;
-  height: 100%;
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
 
 .head {
   display: block;
@@ -131,7 +111,10 @@ color: #fff;
   }
 }
 
-
+.bg-404{
+background: linear-gradient(109.67deg, #192123 0%, #0C1013 100%);
+}
+	
 .error-code {
   text-align: center;
   font-size: 72px;
@@ -313,11 +296,10 @@ color: #fff;
         </header>
 
         <main>
-		<div class="page" dir="rtl">
-	    		<div class="px-2 page-wrapper">
-		    		<div class="container-xl">			    
-		    		
-  <div class="head">
+		<div class="page">
+	    		<div class="px-2 page-wrapper mt-5">
+		    		<div class="container-xl bg-404 mt-5">
+  <div class="head rounded-3 bg-404" style="box-shadow: -3px -3px 11px var(--web-dark);">
     <div class="eyes"></div>
     <div class="eyes"></div>
     <div class="error-code">404</div>
