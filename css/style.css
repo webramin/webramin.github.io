@@ -136,7 +136,7 @@ html[data-bs-theme=dark] .d-dark-none {
     bottom: -150px;
     right: 0;
     margin: 0 2rem 2rem;
-    z-index: 99999;
+    z-index: 9999;
     opacity: 0.5;
     background: var(--web-body-color);
     padding: 1em;
@@ -179,7 +179,7 @@ html[data-bs-theme=dark] .nav-link:hover {
     transition: all .4s;
     }
 
-.loader {
+.loader-my {
 	position: fixed;
 	display: flex;
 	justify-content: center;
@@ -187,9 +187,13 @@ html[data-bs-theme=dark] .nav-link:hover {
 	width: 100vw;
 	height: 100vh;
 	backdrop-filter: blur(4px);
+	top: 0;
+	z-index: 9999;
+	transition: all 1s;
+	opacity: 1;
 }
 
-.loader span {
+.loader-my span {
 border-radius: 26px;
 display: block;
 width: 10px;
@@ -200,16 +204,17 @@ margin: 0 5px;
 	transition-duration: .1s;
 }
 
-		.loader span:nth-child(2) {
+		.loader-my span:nth-child(2) {
 			animation-delay: 0.2s;
 		}
 
-		.loader span:nth-child(3) {
+		.loader-my span:nth-child(3) {
 			animation-delay: 0.4s;
 		}
 
-		.loader.hidden {
+		.loader-my.hidden {
 			display: none;
+			opacity: 0;
 		}
 
 @keyframes load {
