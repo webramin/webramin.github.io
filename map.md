@@ -8,6 +8,7 @@
 
 ## دیگر صفحات
 - [404 Error](https://webramin.github.io/404)
+- [تماس با مدیریت](https://webramin.github.io/contact)
 
 ## توضیحات
 - **خانه**: این صفحه اصلی وبسایت است که در آدرس `https://webramin.github.io/` قرار دارد.
