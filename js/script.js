@@ -9,26 +9,9 @@ function formatTime(date) {
   return hours + ':' + minutes + ':' + seconds;
 }
 
-// function sendEntryTime(entryTime) {
-//   fetch('https://formspree.io/f/mrgrllzz', {
-//     method: 'POST',
-//     body: JSON.stringify({ entryTime }),
-//     headers: { 'Content-Type': 'application/json' }
-//   })
-//     .then(response => {
-//       console.log('زمان ورود ارسال شد: ' + entryTime);
-//     })
-    // .catch(error => {
-    //   console.error('خطا در ارسال زمان ورود:', error);
-    // });
-// }
 
 window.onload = function() {
-  const entryTime = new Date();
-  // const formattedTime = formatTime(entryTime);
-  document.getElementById('entryTime').value = formattedTime;
-  document.getElementById('Time').innerText = formattedTime;
-  sendEntryTime(formattedTime);
+  document.getElementById('Time').innerText = formatTime;
 };
 $(".palet").each(function(){
   var colorCode = $(this).text();
@@ -194,10 +177,8 @@ $(window).on('beforeunload', function() {
 // ---------
 
 function displayPostsFromJSON() {
-  // پیدا کردن المان با آی دی "naw-post-ul"
   const $navPostUl = $("#naw-post-ul");
 
-  // ساخت محتوای HTML برای نمایش 5 پست اول
   let postHtml = "";
   $.each(datapost.slice(0, 5), function(index, post) {
     postHtml += `
@@ -207,7 +188,7 @@ function displayPostsFromJSON() {
     `;
   });
 
-  // قرار دادن محتوای HTML در المان با آی دی "naw-post-ul"
+  
   $navPostUl.html(`
     <ul class="nav flex-column text-end pe-2" id="naw-post-ul">
       ${postHtml}
