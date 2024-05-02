@@ -50,20 +50,29 @@ function generatePagination(currentPage, totalPages) {
       </li>
     `);
   }
-			function scrollToTop() {
-				window.scrollTo({
-					top: 150,
-					behavior: 'smooth'
-				});
-      }
-  
-  $('.page-link').click(function(e) {
-    e.preventDefault();
-    currentPage = $(this).data('page');
-    loadPosts(currentPage);
-    scrollToTop();
-  });
+	// تابع برای اسکرول به بالا
+function scrollToTop() {
+  $('html, body').animate({
+    scrollTop: 0
+  }, 500); // 500 میلی‌ثانیه برای انیمیشن اسکرول
 }
+
+$('.page-link').click(function(e) {
+  e.preventDefault();
+  currentPage = $(this).data('page');
+  loadPosts(currentPage);
+
+  // اجرای تابع اسکرول به بالا
+  scrollToTop();
+});
+
+//   $('.page-link').click(function(e) {
+//     e.preventDefault();
+//     currentPage = $(this).data('page');
+//     loadPosts(currentPage);
+//     scrollToTop();
+//   });
+// }
 
 $('.search-input').on('input', function() {
   const searchTerm = $(this).val().toLowerCase();
