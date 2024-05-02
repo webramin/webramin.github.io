@@ -10,6 +10,12 @@
 - [404 Error](https://webramin.github.io/404)
 - [تماس با مدیریت](https://webramin.github.io/contact)
 
+## تعداد صفحات
+` ۱۴ صحفه ` که شامل
+|لینک  | عنوان |ردیف|
+|---|---|---|
+|[webramin.github.io](https://webramin.github.io)|[خانه](https://github.com/webramin/webramin.github.io/edit/min/index.html)|1|
+|[./posts](https://webramin.github.io/posts)|[پست ها](https://github.com/webramin/webramin.github.io/edit/min/posts/index.html)|2|
 ## توضیحات
 - **خانه**: این صفحه اصلی وبسایت است که در آدرس `https://webramin.github.io/` قرار دارد. این صفحه معرفی کلی وبسایت و محتوای آن را ارائه می دهد.
 - **مقالات**: این صفحه لیست مقالات وبسایت را نمایش می دهد و در آدرس `https://webramin.github.io/posts` قرار دارد. در این صفحه مقالات مختلف در زمینه های مرتبط با وب و برنامه نویسی منتشر می شود.
