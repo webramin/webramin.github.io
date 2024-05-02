@@ -129,27 +129,26 @@ $(document).ready(function() {
   $(window).on('beforeunload', function() {
     $(".Preloader").removeClass("hidden");
   });
-
-  // پست‌های جدید را از JSON نمایش می‌دهد
+//پنج پست‌های جدید را از JSON نمایش می‌دهد
   function displayPostsFromJSON() {
-    const $navPostUl = $("#naw-post-ul");
+  const $navPostUl = $("#naw-post-ul");
 
-    let postHtml = "";
-    $.each(datapost.slice(0, 5), function(index, post) {
-      postHtml += `
-        <li class="nav-item mb-2">
-          <a href="${post.link}" class="nav-link p-0 text-body-secondary">${post.title}</a>
-        </li>
-      `;
-    });
+  let postHtml = "";
+  $.each(datapost, function(index, post) {
+    postHtml += `
+      <li class="nav-item mb-2">
+        <a href="${post.link}" class="nav-link p-0 text-body-secondary" target="_blank">${post.title}</a>
+      </li>
+    `;
+  });
 
-    $navPostUl.html(`
-      <ul class="nav flex-column text-end pe-2" id="naw-post-ul">
-        ${postHtml}
-      </ul>
-    `);
-  }
-
+  $navPostUl.html(`
+    <ul class="nav flex-column text-end pe-2" id="naw-post-ul">
+      ${postHtml}
+    </ul>
+  `);
+}
+  
   // به صفحه قبلی بازمی‌گردد
   function goBack() {
     window.history.back();
