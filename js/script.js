@@ -9,10 +9,11 @@ function formatTime(date) {
   return hours + ':' + minutes + ':' + seconds;
 }
 
-
 window.onload = function() {
-  document.getElementById('Time').innerText = formatTime;
+  const timeElement = document.getElementById('Time');
+  timeElement.innerText = formatTime(new Date());
 };
+
 $(".palet").each(function(){
   var colorCode = $(this).text();
   $(this).parent().css("background-color", colorCode);
