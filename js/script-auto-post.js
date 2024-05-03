@@ -50,7 +50,7 @@
 
 			function scrollToTop() {
 				window.scrollTo({
-					top: 150, // اسکرول به بالا
+					top: 150,
 					behavior: 'smooth'
 				});
 			}
@@ -59,7 +59,7 @@
 				e.preventDefault();
 				currentPage = $(this).data('page');
 				loadPosts(currentPage);
-				scrollToTop(); // اضافه کردن این خط
+				scrollToTop();
 			});
 		}
 
