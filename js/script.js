@@ -203,7 +203,7 @@ updateClock();
     $.each(lastFivePosts, function(index, post) {
       var listItem = $("<li>")
         .addClass("nav-item mb-2")
-        .append($("<a>")
+        .append($("<a target='_blank'>")
           .addClass("nav-link p-0 text-body-secondary")
           .attr("href", post.link)
           .text(post.title)
