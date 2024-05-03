@@ -4,7 +4,9 @@
 			$('#postContainer').empty();
 			const startIndex = (page - 1) * postsPerPage;
 			const endIndex = startIndex + postsPerPage;
-			const postsToDisplay = filteredPosts.slice(startIndex, endIndex);
+		     // const postsToDisplay = filteredPosts.slice(startIndex, endIndex);
+			const postsToDisplay = filteredPosts.slice().reverse().slice(startIndex, endIndex);
+			
 			postsToDisplay.forEach(function(post) {
 				const tags = post.tags.split(',');
 				let tagButtons = '<div class="btn-group flex-wrap">';
