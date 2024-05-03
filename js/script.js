@@ -167,35 +167,35 @@ function updateClock() {
 }
 updateClock();
 
-$(window).on('load', function() {
-  $(".Preloader").addClass("hidden");
-});
+ $(window).on('load', function() {
+   $(".Preloader").addClass("hidden");
+ });
 
-$(window).on('beforeunload', function() {
- // $(".Preloader").removeClass("hidden");
+ $(window).on('beforeunload', function() {
+  $(".Preloader").removeClass("hidden");
 });
 	  
 // ---------
 
-function displayPostsFromJSON() {
-  const $navPostUl = $("#naw-post-ul");
+// function displayPostsFromJSON() {
+//   const $navPostUl = $("#naw-post-ul");
 
-  let postHtml = "";
-  $.each(datapost.slice(0, 5), function(index, post) {
-    postHtml += `
-      <li class="nav-item mb-2">
-        <a href="${post.link}" class="nav-link p-0 text-body-secondary">${post.title}</a>
-      </li>
-    `;
-  });
+//   let postHtml = "";
+//   $.each(datapost.slice(0, 5), function(index, post) {
+//     postHtml += `
+//       <li class="nav-item mb-2">
+//         <a href="${post.link}" class="nav-link p-0 text-body-secondary">${post.title}</a>
+//       </li>
+//     `;
+//   });
 
   
-  $navPostUl.html(`
-    <ul class="nav flex-column text-end pe-2" id="naw-post-ul">
-      ${postHtml}
-    </ul>
-  `);
-}
+//   $navPostUl.html(`
+//     <ul class="nav flex-column text-end pe-2" id="naw-post-ul">
+//       ${postHtml}
+ //    </ul>
+ //  `);
+// }
 
 
     var navPostUl = $("#nav-post-ul");
