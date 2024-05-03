@@ -173,7 +173,8 @@ $(window).on('load', function() {
 });
 
 $(window).on('beforeunload', function() {
-  $(".Preloader").removeClass("hidden");
+ // $(".Preloader").removeClass("hidden");
+  $(".Preloader").addClass("hidden");
 });
 
 
