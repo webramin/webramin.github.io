@@ -181,7 +181,7 @@ html[data-bs-theme=dark] .nav-link:hover {
 
 .Preloader {
 	position: fixed;
-	display: flex;
+	/* display: flex; */
 	justify-content: center;
 	align-items: center;
 	width: 100vw;
@@ -190,7 +190,7 @@ html[data-bs-theme=dark] .nav-link:hover {
 	top: 0;
 	z-index: 9999;
 	transition: all 1s;
-	opacity: 1;
+	opacity: 1;	display: none;
 }
 
 .Preloader span {
