@@ -230,3 +230,17 @@ margin: 0 5px;
 		opacity: 1;
 	}
 }
+pre {
+box-shadow: 0 0 10px var(--web-gray-900);
+}
+.nt {
+    color: var(--web-azure);
+}
+
+.ns {
+    color: var(--web-pink);
+}
+
+.s {
+    color: var(--web-gray-300);
+}
