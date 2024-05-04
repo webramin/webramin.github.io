@@ -1,48 +1,166 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Loading Example</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Colorful Code</title>
   <style>
-    #loading-container {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(255, 255, 255, 0.8);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      z-index: 9999;
+    pre {
+      padding: 1rem;
+      background: #1e1e1e;
+      color: #d4d4d4;
+      border-radius: 4px;
+      font-family: monospace;
+      font-size: 14px;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      position: relative;
+      overflow: hidden;
     }
 
-    #loading-spinner {
-      border: 4px solid #f3f3f3;
-      border-top: 4px solid #3498db;
-      border-radius: 50%;
-      width: 30px;
-      height: 30px;
-      animation: spin 2s linear infinite;
+    .token.comment,
+    .token.prolog,
+    .token.doctype,
+    .token.cdata {
+      color: #6a9955;
     }
 
-    @keyframes spin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
+    .token.punctuation {
+      color: #d4d4d4;
+    }
+
+    .token.property,
+    .token.tag,
+    .token.boolean,
+    .token.number,
+    .token.constant,
+    .token.symbol,
+    .token.deleted {
+      color: #ce9178;
+    }
+
+    .token.selector,
+    .token.attr-name,
+    .token.string,
+    .token.char,
+    .token.builtin,
+    .token.inserted {
+      color: #ce9178;
+    }
+
+    .token.operator,
+    .token.entity,
+    .token.url,
+    .language-css .token.string,
+    .style .token.string {
+      color: #d4d4d4;
+    }
+
+    .token.atrule,
+    .token.attr-value,
+    .token.keyword {
+      color: #c586c0;
+    }
+
+    .token.function {
+      color: #dcdcaa;
+    }
+
+    .token.regex,
+    .token.important,
+    .token.variable {
+      color: #d16969;
+    }
+
+    .token.important,
+    .token.bold {
+      font-weight: bold;
+    }
+
+    .token.italic {
+      font-style: italic;
     }
   </style>
 </head>
 <body>
-  <div id="loading-container">
-    <div id="loading-spinner"></div>
-  </div>
+  <pre><code class="language-html">&lt;div&gt;
+  &lt;h1&gt;Hello, World!&lt;/h1&gt;
+  &lt;p&gt;This is an HTML example.&lt;/p&gt;
+&lt;/div&gt;</code></pre>
+
+  <pre><code class="language-css">
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+h1 {
+  color: #333;
+}
+</code></pre>
+
+  <pre><code class="language-javascript">
+document.querySelector("#top > div.page > main > div.container")
+</code></pre>
 
   <script>
-    window.addEventListener('load', function() {
-      var loadingContainer = document.getElementById('loading-container');
-      loadingContainer.style.display = 'none';
-    });
-  </script>
+    // Find all <code> elements inside <pre>
+    const codeTags = document.querySelectorAll('pre code');
 
-  <!-- Your page content goes here -->
+    // Loop through each <code> element and apply syntax highlighting
+    codeTags.forEach(codeTag => {
+      const text = codeTag.textContent;
+      const highlightedText = highlightSyntax(text, codeTag.classList[1]);
+      codeTag.innerHTML = highlightedText;
+    });
+
+    function highlightSyntax(text, language) {
+      // Define regular expressions for syntax highlighting
+      const languageRules = {
+        'html': [
+          [/<(\w+)>/g, '<span class="token tag"><span class="token punctuation">&lt;</span>$1<span class="token punctuation">&gt;</span></span>'],
+          [/&lt;\/(\w+)&gt;/g, '<span class="token tag"><span class="token punctuation">&lt;/</span>$1<span class="token punctuation">&gt;</span></span>'],
+          [/(\w+)=/g, '<span class="token attr-name">$1</span>='],
+          [/"(.*?)"/g, '<span class="token attr-value">"$1"</span>']
+        ],
+        'css': [
+          [/(\w+)\s*\{/g, '<span class="token selector">$1</span> {'],
+          [/(\w+)\s*:/g, '<span class="token property">$1</span>:'],
+          [/\s*\}/g, '}']
+        ],
+        'javascript': [
+          [/\b(function|var|let|const|if|else|for|while|do|return|new|true|false|null|undefined)\b/g, '<span class="token keyword">$1</span>'],
+          [/\b(console|document|window)\b/g, '<span class="token function">$1</span>'],
+          [/\b(\d+)\b/g, '<span class="token number">$1</span>'],
+          [/\b(\w+)$$/g, '<span class="token function">$1</span>('],
+          [/\b(\w+)\b/g, '<span class="token variable">$1</span>'],
+          [/\"/g, '<span class="token string">"'],
+          [/\'/g, '<span class="token string">\''],
+          [/\`/g, '<span class="token string">`'],
+          [/\{/g, '<span class="token punctuation">{'],
+          [/\}/g, '<span class="token punctuation">}'],
+          [/$$/g, '<span class="token punctuation">('],
+          [/$$/g, '<span class="token punctuation">)'],
+          [/$$/g, '<span class="token punctuation">['],
+          [/$$/g, '<span class="token punctuation">]'],
+          [/\./g, '<span class="token punctuation">.</span>'],
+          [/\,/g, '<span class="token punctuation">,</span>'],
+          [/\;/g, '<span class="token punctuation">;</span>'],
+          [/\:/g, '<span class="token punctuation">:</span>'],
+          [/\=/g, '<span class="token punctuation">=</span>']
+        ]
+      };
+
+      let highlightedText = text;
+      if (languageRules[language]) {
+        languageRules[language].forEach(rule => {
+          highlightedText = highlightedText.replace(rule[0], rule[1]);
+        });
+      }
+
+      return highlightedText;
+    }
+  </script>
 </body>
 </html>
