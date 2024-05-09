@@ -167,52 +167,14 @@ function updateClock() {
 }
 updateClock();
 
- $(window).on('load', function() {
-   $(".Preloader").addClass("hidden");
- });
-
- $(window).on('beforeunload', function() {
-  $(".Preloader").removeClass("hidden");
+$(window).on('load', function() {
+  $(".Preloader").addClass("hidden");
 });
-	  
-// ---------
 
-// function displayPostsFromJSON() {
-//   const $navPostUl = $("#naw-post-ul");
+$(window).on('beforeunload', function() {
+ $(".Preloader").removeClass("hidden");
+});
 
-//   let postHtml = "";
-//   $.each(datapost.slice(0, 5), function(index, post) {
-//     postHtml += `
-//       <li class="nav-item mb-2">
-//         <a href="${post.link}" class="nav-link p-0 text-body-secondary">${post.title}</a>
-//       </li>
-//     `;
-//   });
-
-  
-//   $navPostUl.html(`
-//     <ul class="nav flex-column text-end pe-2" id="naw-post-ul">
-//       ${postHtml}
- //    </ul>
- //  `);
-// }
-
-
-    var navPostUl = $("#nav-post-ul");
-    var lastFivePosts = datapost.slice(-5);
-    $.each(lastFivePosts, function(index, post) {
-      var listItem = $("<li>")
-        .addClass("nav-item mb-2")
-        .append($("<a target='_blank'>")
-          .addClass("nav-link p-0 text-body-secondary")
-          .attr("href", post.link)
-          .text(post.title)
-        );
-      navPostUl.append(listItem);
-    });
-
-
-
-    function goBack() {
-      window.history.back();
-    }
+function goBack() {
+	window.history.back();
+}
