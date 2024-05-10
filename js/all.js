@@ -29,3 +29,7 @@ document.body.appendChild(script);
 var postList = document.createElement('script');
 postList.src = 'https://webramin.github.io/js/post-list.js';
 document.body.appendChild(postList);
+
+var data = document.createElement('script');
+data.src = 'https://webramin.github.io/post/data.js';
+document.body.appendChild(data);
