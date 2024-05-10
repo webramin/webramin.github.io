@@ -1,4 +1,4 @@
-// <script src="https://webramin.github.io/js/all-js.js"></script>
+// <script src="https://webramin.github.io/js/all.js"></script>
 
 // Load AOS
 var aos = document.createElement('script');
