@@ -1,7 +1,7 @@
 $(document).ready(function() {
   var navPostUl = $("#nav-post-ul");
 
-  const lastFivePosts = datapost.slice(0, 5);
+  const lastFivePosts = data.posts.slice(0, 5);
   $.each(lastFivePosts, function(index, post) {
     var listItem = $("<li>")
       .addClass("nav-item mb-2")
