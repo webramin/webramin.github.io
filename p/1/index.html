@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gradient Field with Management Modal</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .gradient-field {
+  height: 200px;
+  background: linear-gradient(to right, #ff6b6b, #ffa500, #ffff00, #00ff00, #00ffff, #0000ff, #8b00ff);
+}
+
+.gradient-preview {
+  height: 100px;
+  background: linear-gradient(to right, #ff6b6b, #ffa500, #ffff00, #00ff00, #00ffff, #0000ff, #8b00ff);
+  margin-bottom: 1rem;
+}
+  </style> 
+</head>
+<body>
+  <div class="container my-5">
+    <h1 class="text-center mb-4">Gradient Field with Management Modal</h1>
+    <div class="gradient-field" id="gradient-field"></div>
+    <button class="btn btn-primary mt-3" data-toggle="modal" data-target="#gradientModal">Manage Gradient</button>
+  </div>
+
+  <div class="modal fade" id="gradientModal" tabindex="-1" role="dialog" aria-labelledby="gradientModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="gradientModalLabel">Gradient Management</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="gradient-preview" id="gradient-preview"></div>
+          <div class="form-group">
+            <label for="gradient-css">CSS Code:</label>
+            <textarea class="form-control" id="gradient-css" rows="3" readonly></textarea>
+            <button class="btn btn-secondary btn-sm mt-2" onclick="copyToClipboard()">Copy CSS</button>
+          </div>
+          <div class="form-group">
+            <label for="gradient-palette">Gradient Palette:</label>
+            <select class="form-control" id="gradient-palette">
+              <!-- Gradient palette options will be dynamically added here -->
+            </select>
+            <button class="btn btn-danger btn-sm mt-2" onclick="deleteGradient()">Delete Palette</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script>
+    const gradientField = document.getElementById('gradient-field');
+const gradientPreview = document.getElementById('gradient-preview');
+const gradientCssInput = document.getElementById('gradient-css');
+const gradientPaletteSelect = document.getElementById('gradient-palette');
+
+// Load gradient palettes from a data source (e.g., an API or a local file)
+const gradientPalettes = [
+  { id: 1, name: 'Default', css: 'linear-gradient(to right, #ff6b6b, #ffa500, #ffff00, #00ff00, #00ffff, #0000ff, #8b00ff)' },
+  { id: 2, name: 'Pastel', css: 'linear-gradient(to right, #ffc0cb, #f8b7d8, #e6a9f9, #cda4ff, #b29dff, #9c96ff, #8f93ff)' },
+  { id: 3, name: 'Vibrant', css: 'linear-gradient(to right, #ff0000, #ff7f00, #ffff00, #00ff00, #00ffff, #0000ff, #8b00ff)' },
+];
+
+// Load gradient palettes into the select dropdown
+gradientPalettes.forEach(palette => {
+  const option = document.createElement('option');
+  option.value = palette.id;
+  option.text = palette.name;
+  gradientPaletteSelect.add(option);
+});
+
+// Set the initial gradient
+setGradient(gradientPalettes[0].css);
+
+// Function to set the gradient
+function setGradient(css) {
+  gradientField.style.background = css;
+  gradientPreview.style.background = css;
+  gradientCssInput.value = css;
+}
+
+// Function to copy the CSS code to the clipboard
+function copyToClipboard() {
+  gradientCssInput.select();
+  document.execCommand('copy');
+  alert('CSS code copied to clipboard!');
+}
+
+// Function to delete the gradient palette
+function deleteGradient() {
+  const selectedIndex = gradientPaletteSelect.selectedIndex;
+  if (selectedIndex > 0) {
+    gradientPaletteSelect.remove(selectedIndex);
+    setGradient(gradientPalettes[0].css);
+  } else {
+    alert('Cannot delete the default gradient palette.');
+  }
+}
+  </script>
+</body>
+</html>
