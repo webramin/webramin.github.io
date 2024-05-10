@@ -26,6 +26,8 @@
 										${tagButtons}
 									</div>
 									<div class="col-6 col-sm-12 text-end">
+	                                                                         <i class="bi bi-calendar"></i> ${post.date}
+           
 										<a href="${post.link}" class="btn btn-primary">مشاهده بیشتر</a>
 									</div>
 								</div>
