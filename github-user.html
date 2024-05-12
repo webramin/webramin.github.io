@@ -4,6 +4,12 @@
   <title>GitHub User Profile</title>
 </head>
 <body>
+  <form id="github-form">
+    <label for="username">GitHub Username:</label>
+    <input type="text" id="username" name="username" required>
+    <button type="submit">Get Profile</button>
+  </form>
+
   <div id="github-profile"></div>
 
   <script>
@@ -56,7 +62,11 @@
       }
     }
 
-    displayGitHubProfile('webramin');
+    document.getElementById('github-form').addEventListener('submit', (event) => {
+      event.preventDefault();
+      const username = document.getElementById('username').value;
+      displayGitHubProfile(username);
+    });
   </script>
 </body>
 </html>
