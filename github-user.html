@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>GitHub User Profile</title>
+</head>
+<body>
+  <div id="github-profile"></div>
+
+  <script>
+    async function getGitHubUserData(username) {
+      try {
+        const response = await fetch(`https://api.github.com/users/${username}`);
+        const userData = await response.json();
+
+        const topLanguagesResponse = await fetch(`https://github-readme-stats.vercel.app/api/top-langs/?username=${username}&title_color=79ff97&icon_color=63a2ff&text_color=ffffff&bg_color=151515&hide=css%2Chtml&layout=compact`);
+        const topLanguagesData = await topLanguagesResponse.text();
+
+        return {
+          name: userData.name,
+          username: userData.login,
+          avatar: userData.avatar_url,
+          bio: userData.bio,
+          followers: userData.followers,
+          following: userData.following,
+          publicRepos: userData.public_repos,
+          publicGists: userData.public_gists,
+          location: userData.location,
+          createdAt: userData.created_at,
+          updatedAt: userData.updated_at,
+          topLanguages: topLanguagesData
+        };
+      } catch (error) {
+        console.error('Error fetching GitHub user data:', error);
+        throw error;
+      }
+    }
+
+    async function displayGitHubProfile(username) {
+      try {
+        const userData = await getGitHubUserData(username);
+
+        const profileContainer = document.getElementById('github-profile');
+        profileContainer.innerHTML = `
+          <img src="${userData.avatar}" alt="${userData.username}'s avatar" width="100">
+          <h2>${userData.name} (@${userData.username})</h2>
+          <p>${userData.bio}</p>
+          <p>Followers: ${userData.followers} | Following: ${userData.following}</p>
+          <p>Public Repos: ${userData.publicRepos} | Public Gists: ${userData.publicGists}</p>
+          <p>Location: ${userData.location}</p>
+          <p>Joined: ${new Date(userData.createdAt).toLocaleDateString()}</p>
+          <h3>Top Languages:</h3>
+          <img src="${userData.topLanguages}" alt="${userData.username}'s top languages" width="100%">
+        `;
+      } catch (error) {
+        console.error('Error displaying GitHub profile:', error);
+      }
+    }
+
+    displayGitHubProfile('webramin');
+  </script>
+</body>
+</html>
