@@ -1,103 +1,71 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>webramin Dashboard</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <script src="https://public.tableau.com/javascripts/api/tableau-2.min.js"></script>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-    }
-    .navbar {
-      background-color: #333;
-      color: #fff;
-    }
-    .navbar-brand {
-      font-size: 24px;
-      font-weight: bold;
-    }
-    .dashboard-container {
-      margin-top: 20px;
-    }
-    .dashboard-container .tableau-viz {
-      width: 100%;
-      height: 600px;
-    }
-    .theme-toggle {
-      position: absolute;
-      top: 20px;
-      right: 20px;
-    }
-    .theme-toggle .btn {
-      font-size: 20px;
-      padding: 5px 10px;
-    }
-  </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Feedback Form</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/core@1.0.0-beta16/dist/css/tabler.min.css">
 </head>
 <body>
-  <nav class="navbar navbar-expand-lg">
-    <div class="container">
-      <a class="navbar-brand" href="#">
-        <img src="logo.png" alt="webramin" width="30" height="30" class="d-inline-block align-top">
-        webramin
-      </a>
-      <div class="navbar-nav ml-auto">
-        <a class="nav-link" href="#">Home</a>
-        <a class="nav-link" href="#">About</a>
-        <a class="nav-link" href="#">Services</a>
-        <a class="nav-link" href="#">Contact</a>
-<!--         حالت تغیز -->
-        <div class="dropdown">
-  <button class="btn btn-sm btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-    <i class="icon icon-sun"></i>
-  </button>
-  <ul class="dropdown-menu dropdown-menu-dark">
-    <li><a class="dropdown-item" href="#" id="themeToggleLight"><i class="icon icon-sun"></i> Light mode</a></li>
-    <li><a class="dropdown-item" href="#" id="themeToggleDark"><i class="icon icon-moon"></i> Dark mode</a></li>
-    <li><a class="dropdown-item" href="#" id="themeToggleAuto"><i class="icon icon-auto"></i> Auto mode</a></li>
-  </ul>
-</div>
-        
-      </div>
-    </div>
-  </nav>
-
-  <div class="container dashboard-container">
-    <div class="row">
-      <div class="col-12">
-
-        
-        <div class="tableau-viz" id="dashboardViz"></div>
+  <div class="page">
+    <div class="page-content">
+      <div class="container-tight py-4">
+        <div class="text-center mb-4">
+          <a href="#" class="navbar-brand navbar-brand-autodark"><img src="https://tabler.io/static/logo.svg" height="36" alt=""></a>
+        </div>
+        <form action="https://formspree.io/f/your-form-id" method="POST" enctype="multipart/form-data" class="card card-md">
+          <div class="card-body">
+            <h2 class="card-title text-center mb-4">Feedback Form</h2>
+            <div class="mb-3">
+              <label class="form-label">Name</label>
+              <input type="text" class="form-control" name="name" required>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Email</label>
+              <input type="email" class="form-control" name="email" required>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Feedback</label>
+              <textarea class="form-control" name="feedback" rows="3" required></textarea>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Upload Image</label>
+              <input type="file" class="form-control" name="image" accept="image/*" required>
+            </div>
+            <div class="form-footer">
+              <button type="submit" class="btn btn-primary w-100">Submit</button>
+            </div>
+          </div>
+        </form>
       </div>
     </div>
   </div>
 
-  <script src="https://kit.fontawesome.com/your-font-awesome-kit.js" crossorigin="anonymous"></script>
   <script>
-    var vizContainer = document.getElementById('dashboardViz');
-    var themeToggle = document.getElementById('themeToggle');
-    var themeIcon = themeToggle.querySelector('i');
-
-    var viz = new tableau.Viz(vizContainer, 'https://public.tableau.com/views/webramin_dashboard/Dashboard');
-
-    function setTheme() {
-      var currentHour = new Date().getHours();
-      if (currentHour >= 18 || currentHour < 6) {
-        viz.setUserPreferences({ colorScheme: 'dark' });
-        themeIcon.classList.remove('fa-sun');
-        themeIcon.classList.add('fa-moon');
-      } else {
-        viz.setUserPreferences({ colorScheme: 'light' });
-        themeIcon.classList.remove('fa-moon');
-        themeIcon.classList.add('fa-sun');
-      }
-    }
-
-    themeToggle.addEventListener('click', function() {
-      setTheme();
+    // Save the uploaded image to the user's device
+    document.querySelectorAll('input[type="file"]').forEach(function(input) {
+      input.addEventListener('change', function() {
+        var file = this.files[0];
+        var reader = new FileReader();
+        reader.onload = function(e) {
+          var img = new Image();
+          img.src = e.target.result;
+          img.onload = function() {
+            var canvas = document.createElement('canvas');
+            var ctx = canvas.getContext('2d');
+            canvas.width = img.width;
+            canvas.height = img.height;
+            ctx.drawImage(img, 0, 0);
+            var dataURL = canvas.toDataURL('image/jpeg', 0.7);
+            var link = document.createElement('a');
+            link.download = 'feedback-image.jpg';
+            link.href = dataURL;
+            link.click();
+          };
+        };
+        reader.readAsDataURL(file);
+      });
     });
-
-    setTheme();
   </script>
 </body>
 </html>
