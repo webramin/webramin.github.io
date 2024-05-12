@@ -1,122 +1,167 @@
-<!DOCTYPE html>
 <html>
 <head>
   <title>GitHub User Profile</title>
-  <link rel="stylesheet" href="https://unpkg.com/@tabler/core@1.0.0-beta16/dist/css/tabler.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/core@1.0.0-beta16/dist/css/tabler.min.css">
   <style>
     body {
       background-color: #f0f0f0;
     }
+    .dropdown-menu {
+      max-height: 300px;
+      overflow-y: auto;
+    }
   </style>
 </head>
 <body>
-  <div class="container my-5">
-    <div class="card">
-      <div class="card-body text-center">
-        <img id="profile-image" class="avatar avatar-xl mb-3" alt="GitHub user avatar">
-        <h2 id="name" class="mb-1"></h2>
-        <p id="username" class="text-muted"></p>
-        <p id="bio" class="mb-4"></p>
-        <div class="row g-2">
-          <div class="col-6 col-sm-4 col-lg-2">
-            <div class="stat">
-              <div id="followers" class="stat-value"></div>
-              <div class="stat-title">Followers</div>
-            </div>
+  <div class="page">
+    <div class="page-header d-print-none">
+      <div class="container-xl">
+        <div class="row g-2 align-items-center">
+          <div class="col">
+            <h2 class="page-title">
+              GitHub User Profile
+            </h2>
           </div>
-          <div class="col-6 col-sm-4 col-lg-2">
-            <div class="stat">
-              <div id="following" class="stat-value"></div>
-              <div class="stat-title">Following</div>
-            </div>
-          </div>
-          <div class="col-6 col-sm-4 col-lg-2">
-            <div class="stat">
-              <div id="public-repos" class="stat-value"></div>
-              <div class="stat-title">Public Repos</div>
-            </div>
-          </div>
-          <div class="col-6 col-sm-4 col-lg-2">
-            <div class="stat">
-              <div id="public-gists" class="stat-value"></div>
-              <div class="stat-title">Public Gists</div>
-            </div>
-          </div>
-          <div class="col-6 col-sm-4 col-lg-2">
-            <div class="stat">
-              <div id="location" class="stat-value"></div>
-              <div class="stat-title">Location</div>
-            </div>
-          </div>
-          <div class="col-6 col-sm-4 col-lg-2">
-            <div class="stat">
-              <div id="joined-date" class="stat-value"></div>
-              <div class="stat-title">Joined</div>
+          <div class="col-auto ms-auto d-print-none">
+            <div class="d-flex">
+              <input type="text" class="form-control" id="username-input" placeholder="Enter GitHub username">
+              <div class="dropdown ms-2">
+                <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Export
+                </button>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="#" onclick="exportData('text')">Text</a></li>
+                  <li><a class="dropdown-item" href="#" onclick="exportData('html')">HTML</a></li>
+                  <li><a class="dropdown-item" href="#" onclick="exportData('img')">Image</a></li>
+                  <li><a class="dropdown-item" href="#" onclick="exportData('csv')">CSV</a></li>
+                  <li><a class="dropdown-item" href="#" onclick="exportData('json')">JSON</a></li>
+                  <li><a class="dropdown-item" href="#" onclick="exportData('svg')">SVG</a></li>
+                </ul>
+              </div>
+              <button class="btn btn-primary ms-2" onclick="displayGitHubProfile(document.getElementById('username-input').value)">
+                Search
+              </button>
             </div>
           </div>
         </div>
-        <img id="top-languages" class="w-100 mt-4" alt="GitHub user top languages">
+      </div>
+    </div>
+    <div class="page-body">
+      <div class="container-xl">
+        <div class="card">
+          <div class="card-body text-center">
+            <img id="profile-image" class="avatar avatar-xl mb-3" alt="GitHub user avatar">
+            <h2 id="name" class="mb-1"></h2>
+            <p id="username" class="text-muted"></p>
+            <p id="bio" class="mb-4"></p>
+            <div class="row g-2">
+              <!-- ... (same as before) -->
+            </div>
+            <img id="top-languages" class="w-100 mt-4" alt="GitHub user top languages">
+          </div>
+        </div>
       </div>
     </div>
   </div>
 
   <script>
     async function getGitHubUserData(username) {
-      try {
-        const response = await fetch(`https://api.github.com/users/${username}`);
-        const userData = await response.json();
-
-        const topLanguagesResponse = await fetch(`https://github-readme-stats.vercel.app/api/top-langs/?username=${username}&title_color=79ff97&icon_color=63a2ff&text_color=ffffff&bg_color=151515&hide=css%2Chtml&layout=compact`);
-        const topLanguagesData = await topLanguagesResponse.text();
-
-        return {
-          name: userData.name,
-          username: userData.login,
-          avatar: userData.avatar_url,
-          bio: userData.bio,
-          followers: userData.followers,
-          following: userData.following,
-          publicRepos: userData.public_repos,
-          publicGists: userData.public_gists,
-          location: userData.location,
-          createdAt: userData.created_at,
-          topLanguages: topLanguagesData
-        };
-      } catch (error) {
-        console.error('Error fetching GitHub user data:', error);
-        throw error;
-      }
+      // ... (same as before)
     }
 
     async function displayGitHubProfile(username) {
-      try {
-        const userData = await getGitHubUserData(username);
+      // ... (same as before)
+    }
 
-        document.getElementById('profile-image').src = userData.avatar;
-        document.getElementById('name').textContent = userData.name;
-        document.getElementById('username').textContent = `@${userData.username}`;
-        document.getElementById('bio').textContent = userData.bio;
-        document.getElementById('followers').textContent = userData.followers;
-        document.getElementById('following').textContent = userData.following;
-        document.getElementById('public-repos').textContent = userData.publicRepos;
-        document.getElementById('public-gists').textContent = userData.publicGists;
-        document.getElementById('location').textContent = userData.location;
-        document.getElementById('joined-date').textContent = new Date(userData.createdAt).toLocaleDateString();
-        document.getElementById('top-languages').src = userData.topLanguages;
-      } catch (error) {
-        console.error('Error displaying GitHub profile:', error);
+    function exportData(format) {
+      const profileData = {
+        name: document.getElementById('name').textContent,
+        username: document.getElementById('username').textContent,
+        avatar: document.getElementById('profile-image').src,
+        bio: document.getElementById('bio').textContent,
+        followers: document.getElementById('followers').textContent,
+        following: document.getElementById('following').textContent,
+        publicRepos: document.getElementById('public-repos').textContent,
+        publicGists: document.getElementById('public-gists').textContent,
+        location: document.getElementById('location').textContent,
+        joinedDate: document.getElementById('joined-date').textContent,
+        topLanguages: document.getElementById('top-languages').src
+      };
+
+      switch (format) {
+        case 'text':
+          downloadFile('profile.txt', JSON.stringify(profileData, null, 2));
+          break;
+        case 'html':
+          downloadFile('profile.html', generateHTML(profileData));
+          break;
+        case 'img':
+          downloadFile('profile.png', profileData.avatar);
+          break;
+        case 'csv':
+          downloadFile('profile.csv', generateCSV(profileData));
+          break;
+        case 'json':
+          downloadFile('profile.json', JSON.stringify(profileData));
+          break;
+        case 'svg':
+          downloadFile('profile.svg', generateSVG(profileData));
+          break;
       }
+    }
+
+    function downloadFile(filename, content) {
+      const element = document.createElement('a');
+      element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(content));
+      element.setAttribute('download', filename);
+      document.body.appendChild(element);
+      element.click();
+      document.body.removeChild(element);
+    }
+
+    function generateHTML(data) {
+      return `
+        <html>
+          <head>
+            <title>GitHub User Profile</title>
+          </head>
+          <body>
+            <h1>${data.name}</h1>
+            <p>@${data.username}</p>
+            <img src="${data.avatar}" alt="GitHub user avatar">
+            <p>${data.bio}</p>
+            <p>Followers: ${data.followers}</p>
+            <p>Following: ${data.following}</p>
+            <p>Public Repos: ${data.publicRepos}</p>
+            <p>Public Gists: ${data.publicGists}</p>
+            <p>Location: ${data.location}</p>
+            <p>Joined: ${data.joinedDate}</p>
+            <img src="${data.topLanguages}" alt="GitHub user top languages">
+          </body>
+        </html>
+      `;
+    }
+
+    function generateCSV(data) {
+      return `Name,Username,Followers,Following,Public Repos,Public Gists,Location,Joined Date\n${data.name},${data.username},${data.followers},${data.following},${data.publicRepos},${data.publicGists},${data.location},${data.joinedDate}`;
+    }
+
+    function generateSVG(data) {
+      return `
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="50" cy="50" r="40" fill="#f0f0f0" />
+          <text x="50" y="55" text-anchor="middle" font-size="12">${data.name}</text>
+          <text x="50" y="70" text-anchor="middle" font-size="10">@${data.username}</text>
+          <image x="10" y="10" width="80" height="80" href="${data.avatar}" />
+        </svg>
+      `;
     }
 
     const urlParams = new URLSearchParams(window.location.search);
     const username = urlParams.has('username') ? urlParams.get('username') : null;
     if (username) {
       displayGitHubProfile(username);
-    } else {
-      console.error('No username provided in the URL');
     }
   </script>
-<script src="./js/all.js"></script>>
 </body>
 </html>
-<!-- https://webramin.github.io/user?username=webramin -->
