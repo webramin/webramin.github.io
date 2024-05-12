@@ -46,6 +46,18 @@
         <a class="nav-link" href="#">About</a>
         <a class="nav-link" href="#">Services</a>
         <a class="nav-link" href="#">Contact</a>
+<!--         حالت تغیز -->
+        <div class="dropdown">
+  <button class="btn btn-sm btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+    <i class="icon icon-sun"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-dark">
+    <li><a class="dropdown-item" href="#" id="themeToggleLight"><i class="icon icon-sun"></i> Light mode</a></li>
+    <li><a class="dropdown-item" href="#" id="themeToggleDark"><i class="icon icon-moon"></i> Dark mode</a></li>
+    <li><a class="dropdown-item" href="#" id="themeToggleAuto"><i class="icon icon-auto"></i> Auto mode</a></li>
+  </ul>
+</div>
+        
       </div>
     </div>
   </nav>
@@ -53,11 +65,8 @@
   <div class="container dashboard-container">
     <div class="row">
       <div class="col-12">
-        <div class="theme-toggle">
-          <button class="btn btn-light" id="themeToggle">
-            <i class="fas fa-sun"></i>
-          </button>
-        </div>
+
+        
         <div class="tableau-viz" id="dashboardViz"></div>
       </div>
     </div>
