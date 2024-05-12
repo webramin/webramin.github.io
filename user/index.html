@@ -2,51 +2,62 @@
 <html>
 <head>
   <title>GitHub User Profile</title>
+  <link rel="stylesheet" href="https://unpkg.com/@tabler/core@1.0.0-beta16/dist/css/tabler.min.css">
   <style>
     body {
-      font-family: Arial, sans-serif;
-      text-align: center;
       background-color: #f0f0f0;
-      padding: 20px;
-    }
-
-    .profile-container {
-      background-color: white;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-      padding: 20px;
-      max-width: 600px;
-      margin: 0 auto;
-    }
-
-    .profile-image {
-      border-radius: 50%;
-      width: 150px;
-      height: 150px;
-      object-fit: cover;
-      margin-bottom: 20px;
-    }
-
-    h2 {
-      margin-bottom: 10px;
-    }
-
-    p {
-      margin-bottom: 5px;
     }
   </style>
 </head>
 <body>
-  <div class="profile-container">
-    <img id="profile-image" class="profile-image" alt="GitHub user avatar">
-    <h2 id="name"></h2>
-    <p id="username"></p>
-    <p id="bio"></p>
-    <p>Followers: <span id="followers"></span> | Following: <span id="following"></span></p>
-    <p>Public Repos: <span id="public-repos"></span> | Public Gists: <span id="public-gists"></span></p>
-    <p>Location: <span id="location"></span></p>
-    <p>Joined: <span id="joined-date"></span></p>
-    <img id="top-languages" alt="GitHub user top languages" width="100%">
+  <div class="container my-5">
+    <div class="card">
+      <div class="card-body text-center">
+        <img id="profile-image" class="avatar avatar-xl mb-3" alt="GitHub user avatar">
+        <h2 id="name" class="mb-1"></h2>
+        <p id="username" class="text-muted"></p>
+        <p id="bio" class="mb-4"></p>
+        <div class="row g-2">
+          <div class="col-6 col-sm-4 col-lg-2">
+            <div class="stat">
+              <div id="followers" class="stat-value"></div>
+              <div class="stat-title">Followers</div>
+            </div>
+          </div>
+          <div class="col-6 col-sm-4 col-lg-2">
+            <div class="stat">
+              <div id="following" class="stat-value"></div>
+              <div class="stat-title">Following</div>
+            </div>
+          </div>
+          <div class="col-6 col-sm-4 col-lg-2">
+            <div class="stat">
+              <div id="public-repos" class="stat-value"></div>
+              <div class="stat-title">Public Repos</div>
+            </div>
+          </div>
+          <div class="col-6 col-sm-4 col-lg-2">
+            <div class="stat">
+              <div id="public-gists" class="stat-value"></div>
+              <div class="stat-title">Public Gists</div>
+            </div>
+          </div>
+          <div class="col-6 col-sm-4 col-lg-2">
+            <div class="stat">
+              <div id="location" class="stat-value"></div>
+              <div class="stat-title">Location</div>
+            </div>
+          </div>
+          <div class="col-6 col-sm-4 col-lg-2">
+            <div class="stat">
+              <div id="joined-date" class="stat-value"></div>
+              <div class="stat-title">Joined</div>
+            </div>
+          </div>
+        </div>
+        <img id="top-languages" class="w-100 mt-4" alt="GitHub user top languages">
+      </div>
+    </div>
   </div>
 
   <script>
@@ -97,8 +108,13 @@
       }
     }
 
-    const username = window.location.pathname.split('/').pop();
-    displayGitHubProfile(username);
+    const urlParams = new URLSearchParams(window.location.search);
+    const username = urlParams.get('username');
+    if (username) {
+      displayGitHubProfile(username);
+    } else {
+      console.error('No username provided in the URL');
+    }
   </script>
 </body>
 </html>
