@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>GitHub User Profile</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background-color: #f0f0f0;
+      padding: 20px;
+    }
+
+    .profile-container {
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .profile-image {
+      border-radius: 50%;
+      width: 150px;
+      height: 150px;
+      object-fit: cover;
+      margin-bottom: 20px;
+    }
+
+    h2 {
+      margin-bottom: 10px;
+    }
+
+    p {
+      margin-bottom: 5px;
+    }
+  </style>
+</head>
+<body>
+  <div class="profile-container">
+    <img id="profile-image" class="profile-image" alt="GitHub user avatar">
+    <h2 id="name"></h2>
+    <p id="username"></p>
+    <p id="bio"></p>
+    <p>Followers: <span id="followers"></span> | Following: <span id="following"></span></p>
+    <p>Public Repos: <span id="public-repos"></span> | Public Gists: <span id="public-gists"></span></p>
+    <p>Location: <span id="location"></span></p>
+    <p>Joined: <span id="joined-date"></span></p>
+    <img id="top-languages" alt="GitHub user top languages" width="100%">
+  </div>
+
+  <script>
+    async function getGitHubUserData(username) {
+      try {
+        const response = await fetch(`https://api.github.com/users/${username}`);
+        const userData = await response.json();
+
+        const topLanguagesResponse = await fetch(`https://github-readme-stats.vercel.app/api/top-langs/?username=${username}&title_color=79ff97&icon_color=63a2ff&text_color=ffffff&bg_color=151515&hide=css%2Chtml&layout=compact`);
+        const topLanguagesData = await topLanguagesResponse.text();
+
+        return {
+          name: userData.name,
+          username: userData.login,
+          avatar: userData.avatar_url,
+          bio: userData.bio,
+          followers: userData.followers,
+          following: userData.following,
+          publicRepos: userData.public_repos,
+          publicGists: userData.public_gists,
+          location: userData.location,
+          createdAt: userData.created_at,
+          topLanguages: topLanguagesData
+        };
+      } catch (error) {
+        console.error('Error fetching GitHub user data:', error);
+        throw error;
+      }
+    }
+
+    async function displayGitHubProfile(username) {
+      try {
+        const userData = await getGitHubUserData(username);
+
+        document.getElementById('profile-image').src = userData.avatar;
+        document.getElementById('name').textContent = userData.name;
+        document.getElementById('username').textContent = `@${userData.username}`;
+        document.getElementById('bio').textContent = userData.bio;
+        document.getElementById('followers').textContent = userData.followers;
+        document.getElementById('following').textContent = userData.following;
+        document.getElementById('public-repos').textContent = userData.publicRepos;
+        document.getElementById('public-gists').textContent = userData.publicGists;
+        document.getElementById('location').textContent = userData.location;
+        document.getElementById('joined-date').textContent = new Date(userData.createdAt).toLocaleDateString();
+        document.getElementById('top-languages').src = userData.topLanguages;
+      } catch (error) {
+        console.error('Error displaying GitHub profile:', error);
+      }
+    }
+
+    const username = window.location.pathname.split('/').pop();
+    displayGitHubProfile(username);
+  </script>
+</body>
+</html>
