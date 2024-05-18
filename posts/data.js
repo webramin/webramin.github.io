@@ -1,13 +1,14 @@
 const datapost = [
   {
     id: 1,
-    title: "کشف آینده هوش مصنوعی با آزمایشگاه های Perplexity",
-    description: "آخرین پیشرفت‌های هوش مصنوعی و یادگیری ماشینی را در آزمایشگاه‌های Perplexity کشف کنید. از پردازش زبان طبیعی تا بینایی کامپیوتری، تیم ما مرزهای امکان‌پذیر را گسترش می‌دهد",
+    title: "پروژه پنجاه",
+    description: "در این پروژه چندین صفحه با زبان های مختلف برنامه فراند اند نوشته شده و پروژه ها شامل ابزارهای ویرایش متن و ماشین حساب مولد و ... هستند",
     image: "link img",
-    link: "https://labs.perplexity.ai/",
-    tags: "ai, text-ai, GPT-4, site",
-    date: "1403/02/21"
-  },
+    link: "https://webramin.github.io/p/project-fifty/",
+    tags: "Html,css, JavaScript,bootstrap, jQuery,json ",
+    date: "1403/02/29"
+  } 
+  /*
   {
     id: 2,
     title: "عنوان پست دوم",
@@ -223,5 +224,5 @@ const datapost = [
     link: "https://example.com/post25",
     tags: "groovy, grails, ratpack,cxc",
     date: "1403/02/20"
-  }
+  }*/
 ];
