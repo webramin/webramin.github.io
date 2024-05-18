@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="fa" >
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>50 پروژه</title>
+  <link rel="stylesheet" href="https://webramin.github.io/css/web.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons@1.39.1/iconfont/tabler-icons.min.css">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+<body data-bs-theme="dark">
+  <div class="container my-5">
+    <h1 class="text-center mb-5" dir="auto">50 پروژه من</h1>
+    <div id="projects-container" class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 row-cols-xxl-5 g-4"></div>
+    <div id="pagination-container" class="d-flex justify-content-center my-4"></div>
+    <hr class="my-2" />
+
+<p class="text-end  mt-5" dir="auto">
+این پروژه یک مجموعه از 50 پروژه مختلف است که در طول 50 روز ساخته شده‌اند. این پروژه‌ها شامل انواع مختلفی از برنامه‌های وب و ابزارهای آنلاین هستند که به صورت کارت‌های تصویری در یک وب‌سایت نمایش داده می‌شوند.
+</p>
+<p class="text-end  mt-2" dir="auto">
+هر کارت شامل اطلاعاتی مانند عنوان پروژه، توضیحات مختصر، تصویر پروژه و لینک‌های مربوط به آن (مشاهده، دانلود و گیت‌هاب) است. این پروژه‌ها در زمینه‌های مختلفی مانند رزومه آنلاین، وبلاگ شخصی، فرم‌های ثبت‌نام، بازی‌های آنلاین، ابزارهای محاسباتی، ویرایشگرها، ژنراتورهای مختلف و انواع نمودارها هستند.
+</p>
+<p class="text-end  mt-2 " dir="auto">
+برای نمایش پروژه‌ها از یک سیستم صفحه‌بندی استفاده شده است که به کاربر امکان مشاهده پروژه‌ها در صفحات مختلف را می‌دهد. تعداد پروژه‌های نمایش داده شده در هر صفحه بر اساس عرض صفحه مرورگر کاربر تنظیم می‌شود.
+</p>
+<p class="text-end  mt-2" dir="auto">
+در صورتی که داده‌های پروژه‌ها در دسترس نباشند، یک پیام مناسب به کاربر نمایش داده می‌شود. همچنین، در صورتی که تصویر پروژه‌ای در دسترس نباشد، یک تصویر جایگزین نمایش داده می‌شود.
+</p>
+<p class="text-end  mt-2" dir="auto">
+این پروژه می‌تواند به عنوان یک منبع آموزشی و الهام‌بخش برای توسعه‌دهندگان وب مورد استفاده قرار گیرد و به آن‌ها کمک کند تا ایده‌های جدیدی برای پروژه‌های خود پیدا کنند.
+</p>
+  </div>
+  <script>
+    let projectsPerPage;
+
+    $.getJSON('projects.json', function(data) {
+      const windowWidth = $(window).width();
+      if (windowWidth >= 1400) {
+        projectsPerPage = 20;
+      } else if (windowWidth >= 1200) {
+        projectsPerPage = 16;
+      } else if (windowWidth >= 992) {
+        projectsPerPage = 12;
+      } else if (windowWidth >= 768) {
+        projectsPerPage = 8;
+      } else {
+        projectsPerPage = 6;
+      }
+
+      const totalPages = Math.ceil(data.length / projectsPerPage);
+      createPagination(totalPages, $('#pagination-container'), 1, data);
+      displayProjects(data.slice(data.length - projectsPerPage, data.length), $('#projects-container'));
+    })
+    .fail(function() {
+      $('#projects-container').html('<p class="text-center text-muted">متأسفانه داده های پروژه ها در حال حاضر در دسترس نیستند.</p>');
+    });
+
+    function displayProjects(projects, container) {
+      container.empty();
+      projects.forEach(function(project) {
+        container.append(`
+          <div class="col">
+            <div class="card">
+              <img src="${project.image}" class="card-img-top" style="height:20%;"  alt="${project.title}">
+              <div class="card-body text-muted text-end">
+                <h5 class="card-title">${project.title}</h5>
+                <p class="card-text">${project.description}</p>
+                <div class="btn-group">
+                  <a href="${project.link}" class="btn btn-primary" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom" title="مشاهده پروژه">
+                    <i class="ti ti-eye"></i>
+                  </a>
+                  <a href="${project.download}" class="btn btn-primary" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom" title="دانلود پروژه">
+                    <i class="ti ti-download"></i>
+                  </a>
+                  <a href="${project.github}" class="btn btn-primary" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom" title="مشاهده در گیت‌هاب">
+                    <i class="ti ti-brand-github"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        `);
+      });
+
+      const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+      tooltipTriggerList.forEach(function(tooltipTriggerEl) {
+        new bootstrap.Tooltip(tooltipTriggerEl);
+      });
+
+      $(document).ready(function(){
+        $("img").each(function(){
+          if($(this).attr("src") === "") {
+            $(this).attr("src", "https://raw.githubusercontent.com/raminxz/raminxz.github.io/main/img/errorimg.png");
+          }
+        });
+
+        $("img").on("error", function(){
+          $(this).attr("src", "https://raw.githubusercontent.com/raminxz/raminxz.github.io/main/img/errorimg.png");
+        });
+      });
+    }
+
+    function createPagination(totalPages, container, currentPage, data) {
+      container.empty();
+      for (let i = 1; i <= totalPages; i++) {
+        container.append(`
+          <button class="btn btn-primary mx-1 page-btn" data-page="${i}">${i}</button>
+        `);
+      }
+
+      container.find('.page-btn').click(function() {
+        const page = $(this).data('page');
+        const startIndex = (page - 1) * projectsPerPage;
+        const endIndex = startIndex + projectsPerPage - 1;
+        displayProjects(data.slice(startIndex, endIndex + 1), $('#projects-container'));
+        $('html, body').animate({ scrollTop: 0 }, 'slow');
+      });
+    }
+  </script>
+</body>
+</html>
