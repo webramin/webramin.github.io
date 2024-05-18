@@ -11,10 +11,10 @@ const datapost = [
   /*
   {
     id: 2,
-    title: "عنوان پست دوم",
-    description: "توضیحات مربوط به پست دوم. این پست در مورد موضوع دیگری است.",
+    title: " آموزش css",
+    description: "آموزش کامل  تگ های css به صورت فشرده و خلاصه.",
     image: "https://example.com/image2.jpg",
-    link: "https://example.com/post2",
+    link: "https://webramin.github.io/p/css-training/",
     tags: "jQuery, bootstrap",
     date: "1403/02/20"
   },
