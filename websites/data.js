@@ -1,13 +1,4 @@
 const datapost = [
-  // {
-  //   id: 2,
-  //   title: " نام پست بعد",
-  //   description: " توضیحات ",
-  //   image: "https://example.com/image1.jpg",
-  //   link: "https://labs.perplexity.ai/",
-  //   tags: "تگ ها , tag "
-  // },
-  
   {
     id: 1,
     title: "کشف آینده هوش مصنوعی با آزمایشگاه های Perplexity",
@@ -15,5 +6,13 @@ const datapost = [
     image: "https://example.com/image1.jpg",
     link: "https://labs.perplexity.ai/",
     tags: "ai, text-ai, GPT-4, site"
+  },
+  {
+    "id": 2,
+    "title": "Vondy",
+    "description": "ونی یک پلتفرم است که مجموعه ای از ابزارهای هوش مصنوعی را برای کمک به انجام وظایف مختلف مانند نوشتن مقالات جذاب، تولید برنامه های تناسب اندام، ترجمه زبان ها و موارد دیگر ارائه می دهد. این پلتفرم یک مرکز یکپارچه برای ابزارهای هوش مصنوعی فراهم می کند که مدیریت و استفاده از قابلیت های هوش مصنوعی را آسان تر می سازد.",
+    "image": "",
+    "link": "https://www.vondy.com/",
+    "tags": "AI, Productivity, Writing, Translation, Fitness"
   }
 ]
