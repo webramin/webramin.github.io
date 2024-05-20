@@ -14,5 +14,17 @@ const datapost = [
     "image": "",
     "link": "https://www.vondy.com/",
     "tags": "AI, Productivity, Writing, Translation, Fitness"
+  },
+  
+{
+    "id": 3,
+    "title": "chat imsys",
+    "description": "یک هوش مصنوعی را برای کمک به انجام وظایف مختلف مانند نوشتن مقالات جذاب، تولید برنامه های تناسب اندام.",
+    "image": "",
+    "link": "https://chat.lmsys.org/",
+    "tags": "AI, Cloud 3, text-ai",
+    "data": "1403/02/30"
   }
+ 
+  
 ]
