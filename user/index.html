@@ -1,7 +1,9 @@
 <html>
 <head>
   <title>GitHub User Profile</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/core@1.0.0-beta16/dist/css/tabler.min.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
   <style>
     body {
       background-color: #f0f0f0;
@@ -38,7 +40,7 @@
                   <li><a class="dropdown-item" href="#" onclick="exportData('svg')">SVG</a></li>
                 </ul>
               </div>
-              <button class="btn btn-primary ms-2" onclick="displayGitHubProfile(document.getElementById('username-input').value)">
+              <button class="btn btn-primary ms-2" onclick="displayGitHubProfile()">
                 Search
               </button>
             </div>
@@ -54,9 +56,7 @@
             <h2 id="name" class="mb-1"></h2>
             <p id="username" class="text-muted"></p>
             <p id="bio" class="mb-4"></p>
-            <div class="row g-2">
-              <!-- ... (same as before) -->
-            </div>
+            <div class="row g-2" id="repositories"></div>
             <img id="top-languages" class="w-100 mt-4" alt="GitHub user top languages">
           </div>
         </div>
@@ -65,27 +65,108 @@
   </div>
 
   <script>
-    async function getGitHubUserData(username) {
-      // ... (same as before)
+    function getGitHubUserData(username) {
+      return $.ajax({
+        url: `https://api.github.com/users/${username}`,
+        method: 'GET'
+      }).then(userData => {
+        return $.ajax({
+          url: `https://api.github.com/users/${username}/repos`,
+          method: 'GET'
+        }).then(reposData => {
+          return {
+            name: userData.name,
+            username: userData.login,
+            avatar: userData.avatar_url,
+            bio: userData.bio,
+            followers: userData.followers,
+            following: userData.following,
+            publicRepos: userData.public_repos,
+            publicGists: userData.public_gists,
+            location: userData.location,
+            joinedDate: new Date(userData.created_at).toLocaleDateString(),
+            topLanguages: generateTopLanguagesImage(reposData),
+            repositories: reposData.map(repo => ({
+              name: repo.name,
+              url: repo.html_url
+            }))
+          };
+        });
+      });
     }
 
-    async function displayGitHubProfile(username) {
-      // ... (same as before)
+    function displayGitHubProfile() {
+      const username = $('#username-input').val();
+      getGitHubUserData(username).then(userData => {
+        $('#profile-image').attr('src', userData.avatar);
+        $('#name').text(userData.name);
+        $('#username').text(`@${userData.username}`);
+        $('#bio').text(userData.bio);
+        $('#followers').text(userData.followers);
+        $('#following').text(userData.following);
+        $('#public-repos').text(userData.publicRepos);
+        $('#public-gists').text(userData.publicGists);
+        $('#location').text(userData.location);
+        $('#joined-date').text(userData.joinedDate);
+        $('#top-languages').attr('src', userData.topLanguages);
+
+        const reposContainer = $('#repositories');
+        reposContainer.empty();
+        userData.repositories.forEach(repo => {
+          const repoElement = $('<div>').addClass('repo');
+          const repoLink = $('<a>').attr('href', repo.url).attr('target', '_blank').text(repo.name);
+          repoElement.append(repoLink);
+          reposContainer.append(repoElement);
+        });
+      }).catch(error => {
+        console.error('Error displaying GitHub profile:', error);
+        alert('Error fetching GitHub user data. Please try again later.');
+      });
+    }
+
+    function generateTopLanguagesImage(repos) {
+      const languages = {};
+      repos.forEach(repo => {
+        if (repo.language) {
+          languages[repo.language] = (languages[repo.language] || 0) + 1;
+        }
+      });
+      const sortedLanguages = Object.entries(languages)
+        .sort(([, a], [, b]) => b - a)
+        .slice(0, 5)
+        .map(([language]) => language);
+
+      const canvas = document.createElement('canvas');
+      const ctx = canvas.getContext('2d');
+      canvas.width = 400;
+      canvas.height = 200;
+
+      ctx.font = '16px Arial';
+      ctx.textAlign = 'center';
+      ctx.fillText('Top 5 Languages', canvas.width / 2, 30);
+
+      let y = 70;
+      for (const language of sortedLanguages) {
+        ctx.fillText(language, canvas.width / 2, y);
+        y += 30;
+      }
+
+      return canvas.toDataURL('image/png');
     }
 
     function exportData(format) {
       const profileData = {
-        name: document.getElementById('name').textContent,
-        username: document.getElementById('username').textContent,
-        avatar: document.getElementById('profile-image').src,
-        bio: document.getElementById('bio').textContent,
-        followers: document.getElementById('followers').textContent,
-        following: document.getElementById('following').textContent,
-        publicRepos: document.getElementById('public-repos').textContent,
-        publicGists: document.getElementById('public-gists').textContent,
-        location: document.getElementById('location').textContent,
-        joinedDate: document.getElementById('joined-date').textContent,
-        topLanguages: document.getElementById('top-languages').src
+        name: $('#name').text(),
+        username: $('#username').text(),
+        avatar: $('#profile-image').attr('src'),
+        bio: $('#bio').text(),
+        followers: $('#followers').text(),
+        following: $('#following').text(),
+        publicRepos: $('#public-repos').text(),
+        publicGists: $('#public-gists').text(),
+        location: $('#location').text(),
+        joinedDate: $('#joined-date').text(),
+        topLanguages: $('#top-languages').attr('src')
       };
 
       switch (format) {
@@ -157,11 +238,14 @@
       `;
     }
 
-    const urlParams = new URLSearchParams(window.location.search);
-    const username = urlParams.has('username') ? urlParams.get('username') : null;
-    if (username) {
-      displayGitHubProfile(username);
-    }
+    $(document).ready(function() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const username = urlParams.has('username') ? urlParams.get('username') : null;
+      if (username) {
+        $('#username-input').val(username);
+        displayGitHubProfile();
+      }
+    });
   </script>
 </body>
 </html>
