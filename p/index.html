@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="fa">
+
+<head>
+    <title>پست ها</title>
+    <!-- Meta -->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" id="" content="#000000">
+    <meta name="color-scheme" content="dark light" />
+    <meta name="msapplication-TileColor" content="#000000">
+    <meta name="msapplication-TileImage" content="https://webramin.storage.iran.liara.space/logo/ms-icon-144x144.png">
+    <!-- Logos -->
+    <link rel="apple-touch-icon" sizes="57x57" href="https://webramin.storage.iran.liara.space/logo/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="https://webramin.storage.iran.liara.space/logo/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="https://webramin.storage.iran.liara.space/logo/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="https://webramin.storage.iran.liara.space/logo/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="https://webramin.storage.iran.liara.space/logo/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="https://webramin.storage.iran.liara.space/logo/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="https://webramin.storage.iran.liara.space/logo/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="https://webramin.storage.iran.liara.space/logo/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="https://webramin.storage.iran.liara.space/logo/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192"  href="https://webramin.storage.iran.liara.space/logo/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://webramin.storage.iran.liara.space/logo/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="https://webramin.storage.iran.liara.space/logo/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://webramin.storage.iran.liara.space/logo/favicon-16x16.png">
+    <link rel="manifest" href="https://webramin.storage.iran.liara.space/logo/manifest.json">
+    <!-- style css -->
+    <link rel="stylesheet" href="https://webramin.github.io/css/style.css" type="text/css">
+    <link rel="stylesheet" type="text/css" href="https://webramin.github.io/css/web.css" media="all" />
+    <link rel="stylesheet" href="https://webramin.github.io/font/iransans/iran-sans.css">
+    <link rel="stylesheet" href="https://webramin.github.io/font/bootstrap/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://webramin.github.io/css/ico-img/ico-img.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://webramin.github.io/js/jquery-3.7.0.min.js"></script>
+    <input type="hidden" id="entryTime" name="time">
+</head>
+
+<body class="ir" id="top">
+    <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
+            <symbol id="check2" viewBox="0 0 16 16">
+                <path fill="#f59f00"
+                    d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z" />
+            </symbol>
+            <!-- #4263eb -->
+            <!-- #f59f00 -->
+            <!-- #667382 -->
+            <symbol id="circle-half" viewBox="0 0 16 16">
+                <path fill="#4263eb" d="M8 15A7 7 0 1 0 8 1v14zm0 1A8 8 0 1 1 8 0a8 8 0 0 1 0 16z" />
+            </symbol>
+            <symbol id="moon-stars-fill" viewBox="0 0 16 16">
+                <path fill="#4263eb"
+                    d="M6 .278a.768.768 0 0 1 .08.858 7.208 7.208 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277.527 0 1.04-.055 1.533-.16a.787.787 0 0 1 .81.316.733.733 0 0 1-.031.893A8.349 8.349 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.752.752 0 0 1 6 .278z" />
+                <path fill="#4263eb"
+                    d="M10.794 3.148a.217.217 0 0 1 .412 0l.387 1.162c.173.518.579.924 1.097 1.097l1.162.387a.217.217 0 0 1 0 .412l-1.162.387a1.734 1.734 0 0 0-1.097 1.097l-.387 1.162a.217.217 0 0 1-.412 0l-.387-1.162A1.734 1.734 0 0 0 9.31 6.593l-1.162-.387a.217.217 0 0 1 0-.412l1.162-.387a1.734 1.734 0 0 0 1.097-1.097l.387-1.162zM13.863.099a.145.145 0 0 1 .274 0l.258.774c.115.346.386.617.732.732l.774.258a.145.145 0 0 1 0 .274l-.774.258a1.156 1.156 0 0 0-.732.732l-.258.774a.145.145 0 0 1-.274 0l-.258-.774a1.156 1.156 0 0 0-.732-.732l-.774-.258a.145.145 0 0 1 0-.274l.774-.258c.346-.115.617-.386.732-.732L13.863.1z" />
+            </symbol>
+            <symbol id="sun-fill" viewBox="0 0 16 16">
+                <path fill="#f59f00"
+                    d="M8 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z" />
+            </symbol>
+        </svg>
+	<div class="Preloader">
+		<span></span>
+		<span></span>
+		<span></span>
+	</div>
+        
+    <div class="page">
+    	<header>
+            <nav class="navbar navbar-expand-md fixed-top d-print-none" id="mainNav" dir="rtl">
+                <div class="container-fluid">
+                    <a class="navbar-brand logo-xz pe-2" href="https://webramin.github.io">WEB RAMIN</a>
+                    <button class="navbar-toggler border border-warning" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                    <div class="collapse navbar-collapse" id="navbarScroll">
+
+                        <ul class="navbar-nav me-auto my-0 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
+                            <li class="nav-item">
+                                <a class="nav-link" aria-current="page" href="https://webramin.github.io/">
+                                    <i class="bi pe-2 bi-house"></i> خانه</a>
+                            </li>
+                            <li class="nav-item active">
+                                <a class="nav-link active" href="https://webramin.github.io/p/">
+                                    <i class="bi pe-2 bi-inbox"></i> پست ها
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="https://webramin.github.io/websites/"><i class="bi pe-2 bi-speedometer2"></i>
+                                        پشنهاد سایت
+                                    </a>
+                            </li>
+			    <li class="nav-item">
+                                <a class="nav-link" aria-current="page" href="https://webramin.github.io/other/">
+                                    <i class="bi pe-2 bi-box"></i>دیگر</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="bi pe-2 bi-code"></i>بازی و برنامه
+                                </a>
+                                <ul class="dropdown-menu ">
+                                    <div class="dropdown-menu-columns">
+                                        <div class="dropdown-menu-column">
+                                            <h3 class="h3 text-center dropdown-item-text"> <i class="ico-md  ico-end-2 i-android"></i> اندروید </h3>
+                                            <li><a href="https://webramin.github.io/apps/android-games.html" class="dropdown-item"> بازیها</a></li>
+                                            <li><a href="https://webramin.github.io/apps/android-apps.html" class="dropdown-item"> برنامه ها</a></li>
+                                        </div>
+                                        <div class="dropdown-menu-column">
+                                            <h3 class="h3 text-center dropdown-item-text"> <i class="ico-md i-windows ico-end-1"></i> ویندوز </h3>
+                                            <li><a href="https://webramin.github.io/apps/system-games.html" class="dropdown-item"> بازیها</a></li>
+                                            <li><a href="https://webramin.github.io/apps/system-apps.html" class="dropdown-item"> برنامه ها</a></li>
+                                        </div>
+                                    </div>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="pe-2 bi bi-moves"></i> فیلم و سریال
+                                </a>
+                                <ul class="dropdown-menu ">
+                                    <div class="dropdown-menu-columns">
+                                        <div class="dropdown-menu-column">
+                                            <li><a href="https://webramin.github.io/movies/foreign-movies.html" class="dropdown-item">فیلم خارجی</a></li>
+                                            <li><a href="https://webramin.github.io/movies/iranian-movies.html" class="dropdown-item">فیلم ایرانی</a></li>
+                                        </div>
+                                        <div class="dropdown-menu-column">
+                                            <li><a href="https://webramin.github.io/movies/foreign-series.html" class="dropdown-item">سریال خارجی</a></li>
+                                            <li><a href="https://webramin.github.io/movies/iranian-series.html" class="dropdown-item">سریال ایرانی</a></li>
+                                        </div>
+                                    </div>
+                                </ul>
+                            </li>
+
+                        </ul>
+                        <button class="btn py-2 dropdown-toggle d-flex align-items-center" id="bd-theme" type="button" aria-expanded="false" data-bs-toggle="dropdown" aria-label="Toggle theme (auto)">
+                                <svg class="bi my-1 theme-icon-active" width="1em" height="1em">
+                                    <use href="#circle-half"></use>
+                                </svg>
+                                <span class="visually-hidden" id="bd-theme-text">theme</span>
+                            </button>
+                        <ul class=" dropdown-menu  dropdown-menu-start shadow text-white" aria-labelledby="bd-theme-text">
+                            <li class="text">
+                                <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="light" aria-pressed="false">
+                                        <svg class="bi me-2 opacity-50 theme-icon" width="1em" height="1em">
+                                            <use href="#sun-fill"></use>
+                                        </svg>
+                                        پس زمینه روشن
+                                        <svg class="bi ms-auto d-none" width="1em" height="1em">
+                                            <use href="#check2"></use>
+                                        </svg>
+                                    </button>
+                            </li>
+                            <li class="text">
+                                <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="dark" aria-pressed="false">
+                                        <svg class="bi me-2 opacity-50 theme-icon" width="1em" height="1em">
+                                            <use href="#moon-stars-fill"></use>
+                                        </svg>
+                                        پس زمینه تاریک
+                                        <svg class="bi ms-auto d-none" width="1em" height="1em">
+                                            <use href="#check2"></use>
+                                        </svg>
+                                    </button>
+                            </li>
+                            <li class="text">
+                                <button type="button" class="dropdown-item d-flex align-items-center active" data-bs-theme-value="auto" aria-pressed="true">
+                                        <svg class="bi me-2 opacity-50 theme-icon" width="1em" height="1em">
+                                            <use href="#circle-half"></use>
+                                        </svg>
+                                        پیش فرض دستگاه شما
+                                        <svg class="bi ms-auto d-none" width="1em" height="1em">
+                                            <use href="#check2"></use>
+                                        </svg>
+                                    </button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </header>
+        <main>
+
+    <div class="page" dir="rtl">
+<div class="px-2 page-wrapper">
+            <div class="container-xxl">
+                <div class="page-header d-print-none">
+                    <h3 class="">
+			 پست ها
+		    </h3>
+			<p> برنامه ها اعلانات و معرفی چیز های جالب </p>
+                </div>
+            </div>
+            <div class="page-body">
+            <div class="container my-5">
+    <div class="input-group mb-3 justify-content-end">
+      <input type="text" class="form-control search-input" placeholder="جستجو...">
+    </div>
+    <div class="row" id="postContainer">
+      <!-- پست ها به صورت پویا اینجا بارگذاری می شوند -->
+    </div>
+    <div class="row">
+      <div class="col-12 d-flex justify-content-center">
+        <nav aria-label="صفحه بندی">
+          <ul class="pagination" id="pagination">
+            <!-- صفحه بندی به صورت پویا اینجا ایجاد می شود -->
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>
+	</div>
+            </div>
+            </div>
+
+<!-- start post --> 
+        </main>
+       <div id="sips" class="mt-2 d-print-none">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none">
+                    <path class="divider-fill"
+                        d="M66.709,62.141C63.674,62.141 62.115,50.388 60.619,37.105C62.048,29.579 63.814,24.051 66.352,24.051C69.374,24.051 71.362,33.025 73.031,44.299C71.577,51.437 70.374,62.141 66.709,62.141ZM41.114,57.818C40.604,57.416 40.051,57.19 39.441,57.19C33.91,57.19 32.305,76.639 28.938,82.663C30.102,85.32 31.71,87.871 33.333,87.871C36.993,87.87 39.088,73.872 41.114,57.818z"
+                        style="fill-opacity:0.3;"></path>
+                    <path class="divider-fill"
+                        d="M51.832,78.336C46.587,78.336 45.555,61.319 41.114,57.818C44.303,32.539 46.669,0 52.006,0C56.839,0 58.676,19.844 60.619,37.105C57.568,53.167 56.051,78.336 51.832,78.336ZM17.005,67.259C21.378,67.259 21.89,84.421 26.875,84.421C27.646,84.421 28.321,83.766 28.938,82.663C24.471,72.464 22.587,44.705 18.018,44.705C11.998,44.705 10.296,82.492 6.25,82.492C3.124,82.492 1.562,73.774 -0.001,61.416L-0.001,73.421C1.562,81.2 3.342,90.679 6.468,90.679C12.718,90.679 12.39,67.259 17.005,67.259ZM94.15,31.54C89.658,31.54 89.31,66.348 84.772,66.348C80.584,66.348 80.104,38.746 75.741,38.746C74.548,38.746 73.758,40.729 73.031,44.299C75.851,63.352 77.758,88.979 82.198,88.979C87.608,88.979 88.132,57.865 93.758,57.865C96.867,57.865 98.444,65.681 99.999,73.42L99.999,61.416C98.444,49.122 97.26,31.54 94.15,31.54z"
+                        style="fill-opacity:0.5;"></path>
+                    <path class="divider-fill"
+                        d="M82.198,88.979C77.757,88.979 75.851,63.353 73.031,44.299C71.577,51.437 70.374,62.141 66.709,62.141C63.674,62.141 62.115,50.388 60.619,37.105C57.568,53.167 56.05,78.336 51.832,78.336C46.587,78.336 45.555,61.319 41.113,57.818C39.088,73.871 36.862,87.87 33.202,87.87C31.578,87.87 30.102,85.32 28.938,82.662C28.321,83.766 27.645,84.42 26.875,84.42C21.89,84.42 21.378,67.259 17.005,67.259C12.39,67.259 12.674,90.634 6.424,90.634C3.298,90.634 1.562,81.199 -0.001,73.419L-0.001,100L99.999,100L99.999,73.42C98.444,65.681 96.867,57.865 93.758,57.865C88.132,57.865 87.608,88.979 82.198,88.979z">
+                    </path>
+                </svg>
+        </div>
+        
+        <div id="btnTop" class="d-print-none"><svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                    <path
+                        d="M10.586 3l-6.586 6.586a2 2 0 0 0 -.434 2.18l.068 .145a2 2 0 0 0 1.78 1.089h2.586v7a2 2 0 0 0 2 2h4l.15 -.005a2 2 0 0 0 1.85 -1.995l-.001 -7h2.587a2 2 0 0 0 1.414 -3.414l-6.586 -6.586a2 2 0 0 0 -2.828 0z"
+                        stroke-width="0" fill="currentColor"></path>
+                </svg></div>
+        <!-- footer -->
+        
+        <footer class="container-fluid pt-5 rtl d-print-none">
+            <div class="row">
+                <div class="col-12 col-sm-6 col-md-2 text-sm-end text-center mb-3 rtl" >
+                    <h5>دسترسی سریع</h5>
+                    <ul class="nav flex-column text-end pe-2">
+                        <li class="nav-item mb-2"><a href="https://webramin.github.io" class="nav-link p-0 text-body-secondary">خانه</a></li>
+                        <li class="nav-item mb-2"><a href="https://webramin.github.io/p" class="nav-link p-0 text-body-secondary">پست ها</a></li>
+                        <li class="nav-item mb-2"><a href="https://webramin.github.io/websites" class="nav-link p-0 text-body-secondary">پیشنهاد سایت</a></li>
+			<li class="nav-item mb-2"><a href="https://webramin.github.io/other" class="nav-link p-0 text-body-secondary">دیگر</a></li>
+                        <li class="nav-item mb-2"><a href="https://webramin.github.io/contact" class="nav-link p-0 text-body-secondary">فرم تماس</a></li>
+                        <li class="nav-item mb-2"><a href="https://webramin.github.io/apps/android-games.html" class="nav-link p-0 text-body-secondary">بازیها</a></li>
+                        <li class="nav-item mb-2"><a href="https://webramin.github.io/apps/android-apps.html" class="nav-link p-0 text-body-secondary">برنامه ها</a></li>
+                        <li class="nav-item mb-2"><a href="https://webramin.github.io/movies/iranian-movies.html" class="nav-link p-0 text-body-secondary">فیلم ایرانی</a></li>
+    			<li class="nav-item mb-2"><a href="https://webramin.github.io/movies/foreign-movies.html" class="nav-link p-0 text-body-secondary">فیلم خارجی</a></li>
+    			<li class="nav-item mb-2"><a href="https://webramin.github.io/movies/iranian-series.html" class="nav-link p-0 text-body-secondary">سریال ایرانی</a></li>
+    			<li class="nav-item mb-2"><a href="https://webramin.github.io/movies/foreign-series.html" class="nav-link p-0 text-body-secondary">سریال خارجی</a></li>
+                    </ul>
+                </div>
+                <div class="col-12 col-sm-6 col-md-2 text-sm-end text-center mb-3 rtl">
+                    <h5>پست های تازه</h5>
+                    <ul class="nav flex-column text-end pe-2" id="naw-post-ul">
+<!--                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">پست 1</a></li>
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">پست 2</a></li>
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">پست 3</a></li>
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">پست 4</a></li>
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">پست 5</a></li> -->
+                    </ul>
+                </div>
+                <div class="col-12 col-sm-6 col-md-4 text-sm-end text-center mb-3 rtl">
+                    <h5>ساعت و تاریخ امروز</h5>
+                    <ul class="nav flex-column text-end pe-2">
+                        <li class="nav-item mb-2" id="data-fa"></li>
+                        <li class="nav-item mb-2 text-end ">زمان ورود : <span id="Time">در حال بارگذاری...</span></li>
+                        <li class="nav-item mb-2 text-end ">ساعت : <span id="clock">در حال بارگذاری...</span></li>
+                        <li class="nav-item mb-2 text-end ">تاریخ امروز : <span id="persianDate">در حال بارگذاری...</span></li>
+                        <li class="nav-item mb-2 text-end ">تاریخ میلادی : <span id="gregorianDate">در حال بارگذاری...</span></li>
+                    </ul>
+                </div>
+                <div class="col-md-5 offset-md-3 mb-3 rtl">
+                    <img src="https://webramin.storage.iran.liara.space/logo/apple-icon-60x60.png" class="img-fluid rounded-2 d-dark-none" alt="logo dark">
+                    <img src="https://webramin.storage.iran.liara.space/logo/apple-icon-60x60.png" class="img-fluid rounded-2 d-light-none" alt="logo light">
+                </div>
+            </div>
+            <button class="btn btn-dark bg-github">
+                    <a href="https://github.com/webramin" class="" aria-disabled="true">
+                        <i class="bi bi-github text-light"></i>
+                    </a>
+                </button>
+
+            <div class="text-center">
+                <p class="hr-text py-5 my-5" style="font-size: 4px;font: menu;">
+                    .تمامی محتوا این سایت متعلق به وبرامین میباشد و هرگونه کپی برداری از آن غیر مجاز و بدون رضایت ماست
+                </p>
+                <p class="pe-5">«2023-2024»</p>
+            </div>
+        </footer>
+        
+    </div>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://webramin.github.io/js/bootstrap.bundle.js"></script>
+    <script src="https://webramin.github.io/js/color-modes.js"></script>
+    <script src="https://webramin.github.io/js/popper.min.js"></script>
+    <script src="https://webramin.github.io/js/script.js"></script>
+    <script src="https://webramin.github.io/p/data.js"></script>
+    <script src="https://webramin.github.io/js/script-auto-post.js"></script>
+<!--<script src="https://webramin.github.io/js/app-1.js"></script> -->
+</body>
+</html>
