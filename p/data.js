@@ -25,16 +25,16 @@ const datapost = [
     link: "https://webramin.github.io/p/responsive-web/",
     tags: "css, html, javascript",
     date: "1403/03/01"
-  }/*,
+  },
   {
     id: 4,
-    title: "چهارمین پست وبلاگ",
-    description: "این پست چهارمین پست وبلاگ است و در مورد موضوع دیگری است.",
+    title: "چندین پالت رنگی گرادیان",
+    description: "در این صحفه چند کد رنگی  و میتوان به صورت مستقم از ان استفاده کرد با استفاده از cdn link:css.",
     image: "https://example.com/image4.jpg",
-    link: "https://example.com/post4",
-    tags: "react, angular, vue",
-    date: "1403/02/20"
-  },
+    link: "webramin.github.io/p/palet/index.html",
+    tags: "css, rgb, color",
+    date: "1403/03/03"
+  }/*,
   {
     id: 5,
     title: "پنجمین پست وبلاگ",
