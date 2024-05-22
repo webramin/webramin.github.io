@@ -6,7 +6,7 @@ const datapost = [
     image: "https://example.com/image1.jpg",
     link: "https://labs.perplexity.ai/",
     tags: "ai, text-ai, GPT-4, site",
-    data:"1403/01/24"
+    date:"1403/01/24"
   },{
     id: 2,
     title: "Vondy",
@@ -14,7 +14,7 @@ const datapost = [
     image: "",
     link: "https://www.vondy.com/",
     tags: "AI, Productivity, Writing, Translation, Fitness",
-    data: "1403/02/10"
+    date: "1403/02/10"
   },{
     id: 3,
     title: "chat imsys",
@@ -22,7 +22,7 @@ const datapost = [
     image: "",
     link: "https://chat.lmsys.org/",
     tags: "AI, Cloud 3, text-ai",
-    data: "1403/02/30"
+    date: "1403/02/30"
   },{
     id: 4,
     title: "claude.ai",
@@ -30,6 +30,6 @@ const datapost = [
     image: "",
     link: "https://claude.ai/",
     tags: "AI, Cloud 3, text-ai",
-    data: "1403/03/02"
+    date: "1403/03/02"
   }
 ]
