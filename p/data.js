@@ -31,7 +31,7 @@ const datapost = [
     title: "چندین پالت رنگی گرادیان",
     description: "در این صحفه چند کد رنگی  و میتوان به صورت مستقم از ان استفاده کرد با استفاده از cdn link:css.",
     image: "https://example.com/image4.jpg",
-    link: "webramin.github.io/p/palet/index.html",
+    link: "https://webramin.github.io/p/palet/",
     tags: "css, rgb, color",
     date: "1403/03/03"
   }/*,
