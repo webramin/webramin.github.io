@@ -1,91 +1,152 @@
-<!-- این کد یک مثال از طراحی وب پاسخگو است که انواع اندازه های صفحه نمایش و نوع دستگاه های مربوطه را نشان می دهد -->
 <!DOCTYPE html>
 <html lang="fa">
 <head>
   <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>طراحی وب پاسخگو</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@1.35.0/iconfont/tabler-icons.min.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+  <title>اندازه های دستگاه</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+  <style>
+    .act-icon {
+      color: #007bff; /* رنگ پیش فرض آیکون فعال */
+    }
+
+    @media (max-width: 575.98px) {
+      .act-icon {
+        color: #28a745; /* رنگ آیکون فعال در X-Small */
+      }
+    }
+
+    @media (min-width: 576px) and (max-width: 767.98px) {
+      .act-icon {
+        color: #17a2b8; /* رنگ آیکون فعال در Small */
+      }
+    }
+
+    @media (min-width: 768px) and (max-width: 991.98px) {
+      .act-icon {
+        color: #ffc107; /* رنگ آیکون فعال در Medium */
+      }
+    }
+
+    @media (min-width: 992px) and (max-width: 1199.98px) {
+      .act-icon {
+        color: #dc3545; /* رنگ آیکون فعال در Large */
+      }
+    }
+
+    @media (min-width: 1200px) and (max-width: 1399.98px) {
+      .act-icon {
+        color: #6c757d; /* رنگ آیکون فعال در X-Large */
+      }
+    }
+
+    @media (min-width: 1400px) {
+      .act-icon {
+        color: #343a40; /* رنگ آیکون فعال در XX-Large */
+      }
+    }
+  </style>
 </head>
-<body data-bs-theme="dark">
-  <div class="container text-center mt-5">
-    <div class="row">
-      <div class="col d-md-none d-sm-flex justify-content-center flex-row-reverse">
-        <span class="tex-teal d-ininline-block"> : نمای فعلی </span>
-        <h1 class="p-3"> تلفن <i class="ti ti-device-mobile"></i></h1>
-      </div>
-      <div class="col d-sm-none d-xl-none d-xxl-none d-none d-md-flex justify-content-center flex-row-reverse ">
-        <span class="tex-cyan d-ininline-block"> : نمای فعلی </span>
-        <h1 class="p-3"> تبلت <i class="ti ti-device-tablet"></i></h1>
-      </div>
-      <div class="col d-xxl-none d-md-none d-sm-none d-none d-xl-flex justify-content-center flex-row-reverse">
-        <span class="tex-warning d-ininline-block"> : نمای فعلی </span>
-        <h1 class="p-3"> لپ تاب <i class="ti ti-device-laptop"></i></h1>
-      </div>
-      <div class="col d-xl-none d-md-none d-sm-none d-none d-xxl-flex justify-content-center flex-row-reverse">
-        <span class="tex-red d-ininline-block"> : نمای فعلی </span>
-        <h1 class="p-3">تلوزیون <i class="ti ti-device-tv"></i></h1>
-      </div>
+<body>
+  <div class="row">
+    <div class="col d-md-none d-sm-flex justify-content-center flex-row-reverse">
+      <span class="text-teal d-inline-block"> : نمای فعلی </span>
+      <h1 class="p-3"> تلفن <i class="bi bi-phone"></i></h1>
+    </div>
+    <div class="col d-sm-none d-xl-none d-xxl-none d-none d-md-flex justify-content-center flex-row-reverse">
+      <span class="text-cyan d-inline-block"> : نمای فعلی </span>
+      <h1 class="p-3"> تبلت <i class="bi bi-tablet"></i></h1>
+    </div>
+    <div class="col d-xxl-none d-md-none d-sm-none d-none d-xl-flex justify-content-center flex-row-reverse">
+      <span class="text-warning d-inline-block"> : نمای فعلی </span>
+      <h1 class="p-3"> لپ تاب <i class="bi bi-laptop"></i></h1>
+    </div>
+    <div class="col d-xl-none d-md-none d-sm-none d-none d-xxl-flex justify-content-center flex-row-reverse">
+      <span class="text-danger d-inline-block"> : نمای فعلی </span>
+      <h1 class="p-3">تلوزیون <i class="bi bi-tv"></i></h1>
     </div>
   </div>
-  <main class="container-xxl bd-gutter">
-    <div style="margin: 10% auto 0;">
-      <table class="table table-dark ">
-        <tbody>
-          <tr class="text-warning t-0 text-center">
-            <th class="border border-my-1">web</th>
-            <th class="border">name</th>
-            <th class="border">name class</th>
-            <th class="border">min-width</th>
-            <th class="border border-my-2">container</th>
-          </tr>
-          <tr class="text-primary text-center">
-            <td class="border"><i class="ti ti-device-mobile"></i></td>
-            <td class="t-b t-2">mobile</td>
-            <td class="border">(-xs) | X-Small</td>
-            <td class="border">min-width: 0px</td>
-            <td class="border">container: 480px</td>
-          </tr>
-          <tr class="text-primary text-center">
-            <td class="border"><i class="ti ti-device-tablet"></i></td>
-            <td class="border t-b t-2">tablet</td>
-            <td class="border">(-sm) | Small</td>
-            <td class="border">min-width: 576px</td>
-            <td class="border">container: 540px</td>
-          </tr>
-          <tr class="text-primary text-center">
-            <td class="border"><i class="ti ti-device-laptop"></i></td>
-            <td class="border">laptop</td>
-            <td class="border">(-md) | Medium</td>
-            <td class="border">min-width: 768px</td>
-            <td class="border">container: 720px</td>
-          </tr>
-          <tr class="text-primary text-center">
-            <td class="border"><i class="ti ti-device-desktop"></i></td>
-            <td class="border">desktop</td>
-            <td class="border">(-lg) | Large</td>
-            <td class="border">min-width: 992px</td>
-            <td class="border">container: 960px</td>
-          </tr>
-          <tr class="text-primary text-center">
-            <td class="border"><i class="ti ti-device-desktop"></i></td>
-            <td class="border t-b t-2">desktop</td>
-            <td class="border">(-xl) | X-Large</td>
-            <td class="border">min-width: 1200px</td>
-            <td class="border">container: 1140px</td>
-          </tr>
-          <tr class="text-primary text-center">
-            <td class="border border-my-3"><i class="ti ti-device-tv"></i></td>
-            <td class="border t-b t-2">tv</td>
-            <td class="border">(-xxl) | XX-Large</td>
-            <td class="border">min-width: 1400px</td>
-            <td class="border border-my-4">container: 1320px</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </main>
+
+  <table>
+    <tbody>
+      <tr class="text-warning t-0 text-center">
+        <th class="border border-my-1">وب</th>
+        <th class="border">نام</th>
+        <th class="border">کلاس نام</th>
+        <th class="border">حداقل عرض</th>
+        <th class="border border-my-2">کانتینر</th>
+      </tr>
+      <tr class="text-primary text-center">
+        <td class="border"><i class="bi bi-phone act-icon"></i></td>
+        <td class="t-b t-2">موبایل</td>
+        <td class="border">(-xs) | X-Small</td>
+        <td class="border">min-width: 0px</td>
+        <td class="border">container: 480px</td>
+      </tr>
+      <tr class="text-primary text-center">
+        <td class="border"><i class="bi bi-tablet act-icon"></i></td>
+        <td class="border t-b t-2">تبلت</td>
+        <td class="border">(-sm) | Small</td>
+        <td class="border">min-width: 576px</td>
+        <td class="border">container: 540px</td>
+      </tr>
+      <tr class="text-primary text-center">
+        <td class="border"><i class="bi bi-laptop act-icon"></i></td>
+        <td class="border">لپ تاپ</td>
+        <td class="border">(-md) | Medium</td>
+        <td class="border">min-width: 768px</td>
+        <td class="border">container: 720px</td>
+      </tr>
+      <tr class="text-primary text-center">
+        <td class="border"><i class="bi bi-pc-display act-icon"></i></td>
+        <td class="border">دسکتاپ</td>
+        <td class="border">(-lg) | Large</td>
+        <td class="border">min-width: 992px</td>
+        <td class="border">container: 960px</td>
+      </tr>
+      <tr class="text-primary text-center">
+        <td class="border"><i class="bi bi-pc-display act-icon"></i></td>
+        <td class="border t-b t-2">دسکتاپ</td>
+        <td class="border">(-xl) | X-Large</td>
+        <td class="border">min-width: 1200px</td>
+        <td class="border">container: 1140px</td>
+      </tr>
+      <tr class="text-primary text-center">
+        <td class="border border-my-3"><i class="bi bi-tv act-icon"></i></td>
+        <td class="border t-b t-2">تلویزیون</td>
+        <td class="border">(-xxl) | XX-Large</td>
+        <td class="border">min-width: 1400px</td>
+        <td class="border border-my-4">container: 1320px</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <script>
+    // دریافت تمام آیکون های فعال
+    const activeIcons = document.querySelectorAll('.act-icon');
+
+    // افزودن event listener به تغییر اندازه پنجره
+    window.addEventListener('resize', function() {
+      // دریافت عرض فعلی پنجره
+      const windowWidth = window.innerWidth;
+
+      // لوپ در آیکون های فعال و به روز رسانی رنگ آن ها بر اساس عرض پنجره
+      activeIcons.forEach(function(icon) {
+        if (windowWidth < 576) {
+          icon.style.color = '#28a745'; // رنگ آیکون فعال در X-Small
+        } else if (windowWidth >= 576 && windowWidth < 768) {
+          icon.style.color = '#17a2b8'; // رنگ آیکون فعال در Small
+        } else if (windowWidth >= 768 && windowWidth < 992) {
+          icon.style.color = '#ffc107'; // رنگ آیکون فعال در Medium
+        } else if (windowWidth >= 992 && windowWidth < 1200) {
+          icon.style.color = '#dc3545'; // رنگ آیکون فعال در Large
+        } else if (windowWidth >= 1200 && windowWidth < 1400) {
+          icon.style.color = '#6c757d'; // رنگ آیکون فعال در X-Large
+        } else {
+          icon.style.color = '#343a40'; // رنگ آیکون فعال در XX-Large
+        }
+      });
+    });
+  </script>
 </body>
 </html>
