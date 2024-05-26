@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ir">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مدیریت صفحات سایت</title>
+
+    <link rel="stylesheet" href="https://webramin.github.io/css/web.css">
+    <link rel="stylesheet" href="https://webramin.github.io/css/font/bootstrap/bootstrap.icons.css">
+    <link rel="stylesheet" href="https://webramin.github.io/css/font/iransans/iran-sans.css">
+</head>
+
+<body data-bs-theme="dark">
+    <div class="container">
+        <form class="my-5 text-end">
+            <div class="d-flex justify-content-end">
+                <div class="col-12 col-md-4">
+                    <input type="text" placeholder="جستوجو" class="form-control text-end">
+                </div>
+            </div>
+        </form>
+
+        <div class="d-flex flex-row-reverse">
+            <a href="#dall" class="btn btn-pill btn-primary mx-2">دانلود</a>
+            <a href="#dall" class="btn btn-pill btn-primary mx-2">ایجاد فایل</a>
+            <a href="#dall" class="btn btn-pill btn-primary mx-2">مشاهده صفحه اصلی</a>
+        </div>
+
+        <nav>
+            <ol class="breadcrumb breadcrumb-arrows">
+                <li class="breadcrumb-item"><a href="#">github</a></li>
+                <li class="breadcrumb-item"><a href="#">home</a></li>
+                <li class="breadcrumb-item active">home</li>
+            </ol>
+        </nav>
+
+        <div class="row">
+            <div class="col">
+                <table class="table text-center">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>عنوان صفحه</th>
+                            <th>عملکرد</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>خانه</td>
+                            <td>
+                                <div class="btn-group">
+                                    <div class="btn-group">
+                                        <a class="btn btn-success">مشاهده</a>
+                                        <button type="button" class="btn btn-success dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                            <span class="visually-hidden"></span>
+                                        </button>
+                                        <ul class="dropdown-menu">
+                                            <li class="dropdown-item">
+                                                <div class="input-group">
+                                                    <input class="form-control" value="url">
+                                                    <a href="#" class="btn"><i class="bi bi-copy"></i></a>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <a class="btn btn-github"><i class="bi bi-github"></i>مشاهده</a>
+                                    <a class="btn btn-primary">ویرایش</a>
+                                    <a class="btn btn-danger">حذف</a>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>پست ها</td>
+                            <td class="">
+                                <div class="btn-group">
+                                    <div class="btn-group">
+                                        <a class="btn btn-success">مشاهده</a>
+                                        <button type="button" class="btn btn-success dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                            <span class="visually-hidden"></span>
+                                        </button>
+                                        <ul class="dropdown-menu">
+                                            <li class="dropdown-item">
+                                                <div class="input-group">
+                                                    <input class="form-control" value="url">
+                                                    <a href="#" class="btn"><i class="bi bi-copy"></i></a>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <a class="btn btn-github"><i class="bi bi-github"></i>مشاهده</a>
+                                    <a class="btn btn-primary">ویرایش</a>
+                                    <a class="btn btn-danger">حذف</a>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://webramin.github.io/js/bootstrap.bundle.js"></script>
+</body>
+</html>
