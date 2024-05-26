@@ -179,17 +179,18 @@
         </header>
 
         <main>
-<div class="page mt-6" dir="rtl">
-	    <div class="px-2 page-wrapper mt-5">
+
+    <div class="page" dir="rtl">
+	    <div class="px-2 page-wrapper ">
 	    
 <!-- 	درخواست | شکایت -->
-	<div class="container py-5">
+	<div class="my-5">
 		<div class="container">
-			<h2 class="mb-3">ارسال درخواست</h2>
-			<form>
-				<div class="mb-3">
+			<h2 class="mb-3">تماس با ما</h2>
+			<form class="row">
+				<div class="col-sm-6 mb-3">
 					<label for="contact" class="form-label">شماره یا ایمیل</label>
-					<input type="text" class="form-control invalid" id="contact" name="contact">
+					<input type="text" class="form-control" id="contact" name="contact">
 					<div class="invalid-feedback">
 						لطفا شماره یا ایمیل خود را وارد کنید.
 					</div>
@@ -197,25 +198,26 @@
 						شماره یا ایمیل شما صحیح است.
 					</div>
 				</div>
-				<div class="mb-3">
+				<div class="col-sm-6 mb-3">
 					<label for="title" class="form-label">عنوان</label>
 					<select class="form-select" id="title" name="title">
-						<option value="none" hidden="">انتخاب کنید</option>
-						<option value="درخواست پروژه">درخواست پروژه</option>
-						<option value="گزارش">گزارش</option>
-						<option value="نظر">نظر</option>
-						<option value="سایر">سایر</option>
+						<option value="" hidden="">انتخاب کنید</option>
+						<option value="project">درخواست پروژه</option>
+						<option value="report">گزارش</option>
+						<option value="comment">نظر</option>
+						<option value="other">سایر</option>
 					</select>
 				</div>
-				<div class="mb-3">
-					<label for="subtitle" class="form-label">عنوان فرعی</label>
+				<div class="col-xl-3 mb-3">
+					<label for="subtitle" class="form-label">عنوان اصلی</label>
 					<input type="text" class="form-control" id="subtitle" name="subtitle">
 				</div>
-				<div class="mb-3">
+				<div class="mb-3 col-12">
 					<label for="description" class="form-label">توضیحات درخواست</label>
-					<textarea class="form-control" rows="8" id="description" name="description"></textarea>
+					<textarea rows="8" class="form-control" id="description" name="description" style="height: 140px;"></textarea>
 				</div>
-				<button type="submit" class="btn btn-primary">ارسال درخواست</button>
+				
+<button type="submit" class="btn btn-primary col-sm-3 mx-auto">ارسال پیام</button>
 				<div id="success-message" class="alert alert-success mt-3" style="display: none;">
 					درخواست شما با موفقیت ارسال شد.
 				</div>
@@ -231,7 +233,7 @@
 		</div>
 	    </div>
     </div>
-	</main>
+</main>
        <div id="sips" class="mt-2 d-print-none">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none">
                     <path class="divider-fill"
