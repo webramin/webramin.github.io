@@ -18,17 +18,15 @@ main {
     direction: ltr;
 }
 #mainNav {
-    transition: all 0.3s ease-in-out 0s, box-shadow 0.3s cubic-bezier(0.4, 0, 1, 1) 0s;
-    box-shadow: 0px -2px 2px 0px #0f0;
+    transition: all .5s ;
+	box-shadow: 0px 0px 0px 0px var(--web-gray-900);
 }
 
 .nav-blur {
-    backdrop-filter: blur(2px);
+    backdrop-filter: blur(6px);
     border-bottom: solid 1px var(--bs-bg-body);
-    /* background: #66666650; */
     background: rgba(255,255,255,0.5);
-
-    transition: all .4s;
+    transition: all .5s ;
     box-shadow: 0px 1px 5px 0px var(--web-gray-900) !important;
 }
 
