@@ -5,6 +5,11 @@
     background-position: center center;
     height: 100vh;
 }
+
+main {
+    margin-top: 4rem;
+}
+
 .rtl {
     direction: rtl;
 }
