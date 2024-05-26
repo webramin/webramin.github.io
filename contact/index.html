@@ -34,16 +34,6 @@
     <link rel="stylesheet" href="https://webramin.github.io/css/ico-img/ico-img.css">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <script src="https://webramin.github.io/js/jquery-3.7.0.min.js"></script>
-    <style>
-		.invalid {
-			border-color: #red;
-			background-color: #f2dede;
-		}
-		.valid {
-			border-color: #green;
-			background-color: #dff0df;
-		}
-	</style>
 </head>
 
 <body class="ir" id="top">
@@ -189,18 +179,17 @@
         </header>
 
         <main>
-
-    <div class="page mt-6" dir="rtl">
+<div class="page mt-6" dir="rtl">
 	    <div class="px-2 page-wrapper mt-5">
 	    
 <!-- 	درخواست | شکایت -->
-	<section class="container-fluid py-5 bg-white">
+	<div class="container py-5">
 		<div class="container">
 			<h2 class="mb-3">ارسال درخواست</h2>
 			<form>
 				<div class="mb-3">
 					<label for="contact" class="form-label">شماره یا ایمیل</label>
-					<input type="text" class="form-control" id="contact" name="contact">
+					<input type="text" class="form-control invalid" id="contact" name="contact">
 					<div class="invalid-feedback">
 						لطفا شماره یا ایمیل خود را وارد کنید.
 					</div>
@@ -211,11 +200,11 @@
 				<div class="mb-3">
 					<label for="title" class="form-label">عنوان</label>
 					<select class="form-select" id="title" name="title">
-						<option value="" hidden="">انتخاب کنید</option>
-						<option value="project">درخواست پروژه</option>
-						<option value="report">گزارش</option>
-						<option value="comment">نظر</option>
-						<option value="other">سایر</option>
+						<option value="none" hidden="">انتخاب کنید</option>
+						<option value="درخواست پروژه">درخواست پروژه</option>
+						<option value="گزارش">گزارش</option>
+						<option value="نظر">نظر</option>
+						<option value="سایر">سایر</option>
 					</select>
 				</div>
 				<div class="mb-3">
@@ -224,7 +213,7 @@
 				</div>
 				<div class="mb-3">
 					<label for="description" class="form-label">توضیحات درخواست</label>
-					<textarea class="form-control" id="description" name="description"></textarea>
+					<textarea class="form-control" rows="8" id="description" name="description"></textarea>
 				</div>
 				<button type="submit" class="btn btn-primary">ارسال درخواست</button>
 				<div id="success-message" class="alert alert-success mt-3" style="display: none;">
@@ -232,17 +221,17 @@
 				</div>
 			</form>
 		</div>
-	</section>
+	</div>
 		<div class="container">
 			<p class="mb-0">
 				تماس با من:
-				<a href="mailto:webramin.git@gmail.com?subject=موضوع%20ایمیل&body=محتوای%20ایمیل%0A%0Aسطر%20دوم%0A%0Aسطر%20سوم">برای ارسال ایمیل کلیک کنید</a>
-				<button type="meta"></button>
+				<a href="mailto:webramin.git@gmail.com?subject=موضوع%20ایمیل&amp;body=محتوای%20ایمیل%0A%0Aسطر%20دوم%0A%0Aسطر%20سوم" class="text-azure">برای ارسال ایمیل کلیک کنید</a>
+				
 			</p>
 		</div>
 	    </div>
-    </div
-            </main>
+    </div>
+	</main>
        <div id="sips" class="mt-2 d-print-none">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none">
                     <path class="divider-fill"
@@ -334,11 +323,11 @@
 			$('#contact').on('input', function() {
 				var contact = $(this).val();
 				if (contact.match(/^09\d{9,10}$/) || contact.match(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/)) {
-					$(this).addClass('valid');
-					$(this).removeClass('invalid');
+					$(this).addClass('bg-success-lt');
+					$(this).removeClass('bg-danger-lt');
 				} else {
-					$(this).addClass('invalid');
-					$(this).removeClass('valid');
+					$(this).addClass('bg-danger-lt');
+					$(this).removeClass('bg-success-lt');
 				}
 			});
 			$('form').on('submit',
