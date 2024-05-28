@@ -1,21 +1,21 @@
 
 datapost = [
   {
-    id: 4,
-    title: "4 متن کوتاه",
-    description: "متن کوتاه و بی معنی",
+    id: 1,
+    title: "داشبورد",
+    description: "این بخش مخصوص برای کاربران گیت هاب است که بتوانند راحت تر مخزن خود را کنترل کنند",
     image: "https://example.com/image1.jpg",
-    link: "https://www.example.com/article1",
-    tags: "متن, بی معنی, کوتاه"
+    link: "https://webramin.github.io/dashboard",
+    tags: ""
   },
    {
-    id: 3,
+    id: 2,
     title: "3 متن کوتاه",
     description: "متن کوتاه و بی معنی",
     image: "https://example.com/image1.jpg",
     link: "https://www.example.com/article2",
     tags: "متن, بی معنی, کوتاه"
-  },
+  }/*,
    {
     id: 2,
     title: "2 متن کوتاه",
@@ -31,5 +31,5 @@ datapost = [
     image: "https://example.com/image1.jpg",
     link: "https://www.example.com/article4",
     tags: "متن, بی معنی, کوتاه"
-  }
+  }*/
 ]
