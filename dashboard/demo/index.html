@@ -55,6 +55,10 @@
         <div class="d-flex d-print-none flex-row-reverse mb-3">
             <a href="#" class="btn btn-pill btn-primary mx-2" data-bs-toggle="modal" data-bs-target="#pagesModal">مدیریت آیتم‌ها</a>
             <a href="#" class="btn btn-pill btn-primary mx-2" data-bs-toggle="modal" data-bs-target="#addPageModal">افزودن آیتم</a>
+            <!--new--><a href="#" class="btn btn-pill btn-primary mx-2" id="toggleLinkTarget">
+            <i class="bi bi-box-arrow-up-right"></i>
+             باز شدن لینک‌ها در برگه جدید
+            </a>
         </div>
         <nav class="mb-3 d-print-none">
             <ol class="breadcrumb breadcrumb-arrows">
@@ -177,8 +181,27 @@ $(document).ready(function() {
     // بارگذاری داده‌ها در جدول و مودال مدیریت آیتم‌ها
     loadDataInTable();
     loadPagesInModal();
-});
+    
+    // new 203 متغیر برای نگهداری وضعیت لینک‌ها
+    let openInNewTab = false;
 
+    // تابع برای فعال/غیرفعال کردن target="_blank" در لینک‌ها
+    function toggleLinkTarget() {
+        if (openInNewTab) {
+            $('a').attr('target', '_blank');
+            $('#toggleLinkTarget').html('<i class="bi bi-box-arrow-up-right"></i> باز شدن لینک‌ها در برگه جدید');
+        } else {
+            $('a').removeAttr('target');
+            $('#toggleLinkTarget').html('<i class="bi bi-box-arrow-in-up-right"></i> باز شدن لینک‌ها در همین صفحه');
+        }
+        openInNewTab = !openInNewTab;
+    }
+    // رویداد کلیک بر روی دکمه
+    $('#toggleLinkTarget').click(toggleLinkTarget);
+
+    // اجرای تابع برای تنظیم اولیه لینک‌ها
+    toggleLinkTarget();
+});
 // افزودن صفحه جدید
 function addPage() {
     const $modal = $('#addPageModal');
