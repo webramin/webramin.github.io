@@ -45,7 +45,11 @@
                 </div>
             </div>
         </form>
-
+<div class="d-flex d-print-none flex-row-reverse mb-3"><!--new--><button class="btn btn-pill btn-primary mx-2" id="toggleLinkTarget">
+            <i class="bi bi-box-arrow-up-right"></i>
+             باز شدن لینک‌ها در برگه جدید
+            </button>
+            </div>
         <div class="d-flex d-print-none flex-row-reverse mb-3">
             <a href="https://github.com/webramin/webramin.github.io/archive/refs/heads/min.zip" class="btn btn-pill btn-primary mx-2">دانلود</a>
             <a href="https://github.com/webramin/webramin.github.io/new/min" class="btn btn-pill btn-primary mx-2">ایجاد فایل</a>
@@ -54,12 +58,7 @@
         </div>
         <div class="d-flex d-print-none flex-row-reverse mb-3">
             <a href="#" class="btn btn-pill btn-primary mx-2" data-bs-toggle="modal" data-bs-target="#pagesModal">مدیریت آیتم‌ها</a>
-            <a href="#" class="btn btn-pill btn-primary mx-2" data-bs-toggle="modal" data-bs-target="#addPageModal">افزودن آیتم</a>
-            <!--new--><button class="btn btn-pill btn-primary mx-2" id="toggleLinkTarget">
-            <i class="bi bi-box-arrow-up-right"></i>
-             باز شدن لینک‌ها در برگه جدید
-            </button>
-                
+            <a href="#" class="btn btn-pill btn-primary mx-2" data-bs-toggle="modal" data-bs-target="#addPageModal">افزودن آیتم</a>    
         </div>
         <nav class="mb-3 d-print-none">
             <ol class="breadcrumb breadcrumb-arrows">
@@ -190,10 +189,10 @@ $(document).ready(function() {
     function toggleLinkTarget() {
         if (openInNewTab) {
             $('a').attr('target', '_blank');
-            $('#toggleLinkTarget').html('<i class="bi bi-box-arrow-up-right"></i> باز شدن لینک‌ها در برگه جدید');
+            $('#toggleLinkTarget').html('<i class="bi bi-box-arrow-up-right"></i> در برگه جدید');
         } else {
             $('a').removeAttr('target');
-            $('#toggleLinkTarget').html('<i class="bi bi-box-arrow-in-up-right"></i> باز شدن لینک‌ها در همین صفحه');
+            $('#toggleLinkTarget').html('<i class="bi bi-box-arrow-in-up-right"></i> در همین صفحه');
         }
         openInNewTab = !openInNewTab;
     }
