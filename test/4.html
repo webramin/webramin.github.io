@@ -1,0 +1,73 @@
+<!-- مودال برای مدیریت داده‌ها -->
+<div class="modal d-print-none fade" id="dataManagementModal" tabindex="-1" aria-labelledby="dataManagementModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="dataManagementModalLabel">مدیریت داده‌ها</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="data-management-section">
+                    <h6>داده‌های کاربر</h6>
+                    <textarea class="form-control" id="dataTextarea" rows="5" readonly></textarea>
+                    <div class="d-flex justify-content-end mt-2">
+                        <button class="btn btn-primary" id="editDataButton">ویرایش</button>
+                        <button class="btn btn-success mx-2" id="copyDataButton">کپی</button>
+                    </div>
+                </div>
+                <div class="data-management-section d-none">
+                    <h6>بارگذاری داده‌ها از فایل JSON</h6>
+                    <div class="mb-3">
+                        <input type="file" class="form-control" id="fileInput" accept=".json">
+                    </div>
+                    <div class="d-flex justify-content-end">
+                        <button class="btn btn-primary" id="updateDataButton">بروزرسانی داده‌ها</button>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">بستن</button>
+                <button type="button" class="btn btn-primary" id="switchButton">سویچ</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+// تابع برای نمایش داده‌های کاربر در textarea
+function showUserData() {
+    const userData = getPageDataFromStorage();
+    $dataTextarea.val(JSON.stringify(userData, null, 2));
+    $dataTextarea.prop('readonly', true);
+}
+
+// تابع برای ویرایش داده‌های کاربر در textarea
+function editUserData() {
+    $dataTextarea.prop('readonly', false);
+}
+
+// تابع برای کپی کردن داده‌های کاربر از textarea
+function copyUserData() {
+    $dataTextarea.select();
+    document.execCommand('copy');
+}
+
+// تابع برای بارگذاری داده‌ها از فایل JSON
+function updateDataFromFile() {
+    const file = $fileInput[0].files[0];
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            const userData = JSON.parse(e.target.result);
+            savePageData(userData);
+            loadDataInTable();
+            loadPagesInModal();
+        };
+        reader.readAsText(file);
+    }
+}
+
+// تابع برای نمایش/مخفی کردن بخش بارگذاری داده‌ها
+function toggleDataManagementSection() {
+    $dataManagementModal.find('.data-management-section').toggleClass('d-none');
+}
