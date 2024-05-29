@@ -38,141 +38,137 @@
 
 <body>
     <div class="container">
-        <form class="my-5 text-end d-print-none">
-            <div class="d-flex justify-content-end">
-                <div class="col-12 col-md-4">
-                    <input type="text" placeholder="جستوجو" class="form-control text-end" id="pageTable_filter">
-                </div>
+    <form class="my-5 text-end d-print-none">
+        <div class="d-flex justify-content-end">
+            <div class="col-12 col-md-4">
+                <input type="text" placeholder="جستوجو" class="form-control text-end" id="pageTable_filter">
             </div>
-        </form>
-<div class="d-flex d-print-none flex-row-reverse mb-3"><!--new--><button class="btn btn-pill btn-primary mx-2" id="toggleLinkTarget">
-            <i class="bi bi-box-arrow-up-right"></i>
-             باز شدن لینک‌ها در برگه جدید
-            </button>
-            </div>
-        <div class="d-flex d-print-none flex-row-reverse mb-3">
-            <a href="https://github.com/webramin/webramin.github.io/archive/refs/heads/min.zip" class="btn btn-pill btn-primary mx-2">دانلود</a>
-            <a href="https://github.com/webramin/webramin.github.io/new/min" class="btn btn-pill btn-primary mx-2">ایجاد فایل</a>
-            <a href="https://github.com/webramin/webramin.github.io/upload/min" class="btn btn-pill btn-primary mx-2">آپلود</a>
-            <a href="https://github.com/webramin/webramin.github.io/" class="btn btn-pill btn-primary mx-2">مشاهده صفحه اصلی</a>
         </div>
-        <div class="d-flex d-print-none flex-row-reverse mb-3">
-            <a href="#" class="btn btn-pill btn-primary mx-2" data-bs-toggle="modal" data-bs-target="#pagesModal">مدیریت آیتم‌ها</a>
-            <a href="#" class="btn btn-pill btn-primary mx-2" data-bs-toggle="modal" data-bs-target="#addPageModal">افزودن آیتم</a>    
-            <a href="#" class="btn btn-pill btn-primary mx-2" data-bs-toggle="modal" data-bs-target="#dataManagementModal">مدیریت داده‌ها</a>
-        </div>
-        <nav class="mb-3 d-print-none">
-            <ol class="breadcrumb breadcrumb-arrows">
-                <li class="breadcrumb-item"><a href="#">github</a></li>
-                <li class="breadcrumb-item"><a href="#">webramin</a></li>
-                <li class="breadcrumb-item active">webramin.github.io</li>
-            </ol>
-        </nav>
-        <div class="row">
-            <div class="col">
-                <table class="table text-center" id="pageTable">
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>عنوان صفحه</th>
-                            <th>عملکرد</th>
-                        </tr>
-                    </thead>
-                    <tbody>
+    </form>
+    <div class="d-flex d-print-none flex-row-reverse mb-3">
+        <a href="#" class="btn btn-pill btn-primary mx-2" data-bs-toggle="modal" data-bs-target="#dataManagementModal">مدیریت داده‌ها</a>
+        <a href="#" class="btn btn-pill btn-primary mx-2" data-bs-toggle="modal" data-bs-target="#pagesModal">مدیریت آیتم‌ها</a>
+        <a href="#" class="btn btn-pill btn-primary mx-2" data-bs-toggle="modal" data-bs-target="#addPageModal">افزودن آیتم</a>
+    </div>
+    <div class="d-flex d-print-none flex-row-reverse mb-3">
+        <a href="https://github.com/webramin/webramin.github.io/archive/refs/heads/min.zip" class="btn btn-pill btn-primary mx-2">دانلود</a>
+        <a href="https://github.com/webramin/webramin.github.io/new/min" class="btn btn-pill btn-primary mx-2">ایجاد فایل</a>
+        <a href="https://github.com/webramin/webramin.github.io/upload/min" class="btn btn-pill btn-primary mx-2">آپلود</a>
+        <a href="https://github.com/webramin/webramin.github.io/" class="btn btn-pill btn-primary mx-2">مشاهده صفحه اصلی</a>
+    </div>
+    <nav class="mb-3 d-print-none">
+        <ol class="breadcrumb breadcrumb-arrows">
+            <li class="breadcrumb-item"><a href="#">github</a></li>
+            <li class="breadcrumb-item"><a href="#">webramin</a></li>
+            <li class="breadcrumb-item active">webramin.github.io</li>
+        </ol>
+    </nav>
+    <div class="row">
+        <div class="col">
+            <table class="table text-center" id="pageTable">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>عنوان صفحه</th>
+                        <th>عملکرد</th>
+                    </tr>
+                </thead>
+                <tbody>
                 </tbody>
-                </table>
-            </div>
+            </table>
         </div>
     </div>
+</div>
 
-    <!-- مودال برای افزودن صفحه جدید -->
-    <div class="modal d-print-none fade" id="addPageModal" tabindex="-1" aria-labelledby="addPageModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="addPageModalLabel">افزودن صفحه جدید</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+<!-- مودال برای افزودن صفحه جدید -->
+<div class="modal d-print-none fade" id="addPageModal" tabindex="-1" aria-labelledby="addPageModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addPageModalLabel">افزودن صفحه جدید</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-3">
+                    <label for="title" class="form-label">عنوان صفحه</label>
+                    <input type="text" class="form-control" id="title" placeholder="صفحه">
                 </div>
-                <div class="modal-body">
-                    <div class="mb-3">
-                        <label for="title" class="form-label">عنوان صفحه</label>
-                        <input type="text" class="form-control" id="title" placeholder="صفحه">
-                    </div>
-                    <div class="mb-3">
-                        <label for="repoUrl" class="form-label">آدرس مخزن گیت‌هاب</label>
-                        <input type="text" class="form-control" id="repoUrl" placeholder="https://github.com/username/repository" value="https://github.com/webramin/webramin.github.io/">
-                    </div>
-                    <div class="mb-3">
-                        <label for="fileUrl" class="form-label">آدرس فایل</label>
-                        <input type="text" class="form-control" id="fileUrl" placeholder="/index.html" value="/...">
-                    </div>
-                    <div class="mb-3">
-                        <label for="previewUrl" class="form-label">آدرس مرورگر</label>
-                        <input type="text" class="form-control" id="previewUrl" placeholder="https://webramin.github.io" value="https://webramin.github.io">
-                    </div>
+                <div class="mb-3">
+                    <label for="repoUrl" class="form-label">آدرس مخزن گیت‌هاب</label>
+                    <input type="text" class="form-control" id="repoUrl" placeholder="https://github.com/username/repository" value="https://github.com/webramin/webramin.github.io/">
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">بستن</button>
-                    <button type="button" class="btn btn-primary" onclick="addPage()">افزودن</button>
+                <div class="mb-3">
+                    <label for="fileUrl" class="form-label">آدرس فایل</label>
+                    <input type="text" class="form-control" id="fileUrl" placeholder="/index.html" value="/...">
                 </div>
+                <div class="mb-3">
+                    <label for="previewUrl" class="form-label">آدرس مرورگر</label>
+                    <input type="text" class="form-control" id="previewUrl" placeholder="https://webramin.github.io" value="https://webramin.github.io">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">بستن</button>
+                <button type="button" class="btn btn-primary" onclick="addPage()">افزودن</button>
             </div>
         </div>
     </div>
+</div>
 
-    <!-- مودال برای مدیریت آیتم‌ها -->
-    <div class="modal d-print-none fade" id="pagesModal" tabindex="-1" aria-labelledby="pagesModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="pagesModalLabel">مدیریت آیتم‌ها</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <ul class="list-group" id="pagesList">
-                        <!-- آیتم‌ها در اینجا نمایش داده می‌شوند -->
-                    </ul>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">بستن</button>
-                </div>
+<!-- مودال برای مدیریت آیتم‌ها -->
+<div class="modal d-print-none fade" id="pagesModal" tabindex="-1" aria-labelledby="pagesModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="pagesModalLabel">مدیریت آیتم‌ها</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <ul class="list-group" id="pagesList">
+                    <!-- آیتم‌ها در اینجا نمایش داده می‌شوند -->
+                </ul>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">بستن</button>
             </div>
         </div>
     </div>
+</div>
 
-    <!-- مودال برای ویرایش آیتم -->
-    <div class="modal d-print-none fade" id="editPageModal" tabindex="-1" aria-labelledby="editPageModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="editPageModalLabel">ویرایش صفحه</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+<!-- مودال برای ویرایش آیتم -->
+<div class="modal d-print-none fade" id="editPageModal" tabindex="-1" aria-labelledby="editPageModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editPageModalLabel">ویرایش صفحه</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-3">
+                    <label for="editTitle" class="form-label">عنوان صفحه</label>
+                    <input type="text" class="form-control" id="editTitle" placeholder="صفحه">
                 </div>
-                <div class="modal-body">
-                    <div class="mb-3">
-                        <label for="editTitle" class="form-label">عنوان صفحه</label>
-                        <input type="text" class="form-control" id="editTitle" placeholder="صفحه">
-                    </div>
-                    <div class="mb-3">
-                        <label for="editRepoUrl" class="form-label">آدرس مخزن گیت‌هاب</label>
-                        <input type="text" class="form-control" id="editRepoUrl" placeholder="https://github.com/username/repository" value="https://github.com/webramin/webramin.github.io/">
-                    </div>
-                    <div class="mb-3">
-                        <label for="editFileUrl" class="form-label">آدرس فایل</label>
-                        <input type="text" class="form-control" id="editFileUrl" placeholder="/index.html" value="/...">
-                    </div>
-                    <div class="mb-3">
-                        <label for="editPreviewUrl" class="form-label">آدرس مرورگر</label>
-                        <input type="text" class="form-control" id="editPreviewUrl" placeholder="https://webramin.github.io" value="https://webramin.github.io">
-                    </div>
+                <div class="mb-3">
+                    <label for="editRepoUrl" class="form-label">آدرس مخزن گیت‌هاب</label>
+                    <input type="text" class="form-control" id="editRepoUrl" placeholder="https://github.com/username/repository" value="https://github.com/webramin/webramin.github.io/">
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">بستن</button>
-                    <button type="button" class="btn btn-primary" onclick="updatePage()">ذخیره</button>
+                <div class="mb-3">
+                    <label for="editFileUrl" class="form-label">آدرس فایل</label>
+                    <input type="text" class="form-control" id="editFileUrl" placeholder="/index.html" value="/...">
                 </div>
+                <div class="mb-3">
+                    <label for="editPreviewUrl" class="form-label">آدرس مرورگر</label>
+                    <input type="text" class="form-control" id="editPreviewUrl" placeholder="https://webramin.github.io" value="https://webramin.github.io">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">بستن</button>
+                <button type="button" class="btn btn-primary" onclick="updatePage()">ذخیره</button>
             </div>
         </div>
     </div>
-  <!-- مودال برای مدیریت داده‌ها -->
+</div>
+
+<!-- مودال برای مدیریت داده‌ها -->
 <div class="modal d-print-none fade" id="dataManagementModal" tabindex="-1" aria-labelledby="dataManagementModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -187,21 +183,24 @@
                     <div class="d-flex justify-content-end mt-2">
                         <button class="btn btn-primary" id="editDataButton">ویرایش</button>
                         <button class="btn btn-success mx-2" id="copyDataButton">کپی</button>
+                        <button class="btn btn-primary" id="updateDataButton textarea">بروزرسانی داده‌ها</button>
                     </div>
                 </div>
                 <div class="data-management-section d-none">
                     <h6>بارگذاری داده‌ها از فایل JSON</h6>
                     <div class="mb-3">
-                        <input type="file" class="form-control" id="fileInput" accept=".json">
-                    </div>
-                    <div class="d-flex justify-content-end">
-                        <button class="btn btn-primary" id="updateDataButton">بروزرسانی داده‌ها</button>
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="jsonUrl" placeholder="آدرس فایل JSON" value="https://example.com/data.json">
+                            <button class="btn btn-primary" id="updateDataButton url">بروزرسانی داده‌ها</button>
+                        </div>
                     </div>
                 </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">بستن</button>
                 <button type="button" class="btn btn-primary" id="switchButton">سویچ</button>
+                <button type="button" class="btn btn-primary" id="undoButton">برگشت به عملیات قبل</button>
+                <button type="button" class="btn btn-primary" id="redoButton">بازگشت به عملیات بعد</button>
             </div>
         </div>
     </div>
@@ -214,8 +213,8 @@ $(document).ready(function() {
     });
 
     // بارگذاری داده‌ها در جدول و مودال مدیریت آیتم‌ها
-    loadDataInTable();
-    loadPagesInModal();
+    loadDataInTable(getPageDataFromStorage());
+    loadPagesInModal(getPageDataFromStorage());
     
     // new 203 متغیر برای نگهداری وضعیت لینک‌ها
     let openInNewTab = false;
@@ -242,12 +241,21 @@ $(document).ready(function() {
     const $dataTextarea = $('#dataTextarea');
     const $editDataButton = $('#editDataButton');
     const $copyDataButton = $('#copyDataButton');
+    const $updateDataButtonTextarea = $('#updateDataButton.textarea');
+    const $updateDataButtonUrl = $('#updateDataButton.url');
+    const $jsonUrl = $('#jsonUrl');
+    const $undoButton = $('#undoButton');
+    const $redoButton = $('#redoButton');
+
+    let userDataHistory = []; // تاریخچه داده‌های کاربر
+    let currentDataIndex = -1; // شاخص داده‌های فعلی در تاریخچه
 
     // تابع برای نمایش داده‌های کاربر در textarea
     function showUserData() {
-        const userData = getPageDataFromStorage();
+        const userData = userDataHistory[currentDataIndex] || [];
         $dataTextarea.val(JSON.stringify(userData, null, 2));
         $dataTextarea.prop('readonly', true);
+        loadDataInTable(userData);
     }
 
     // تابع برای ویرایش داده‌های کاربر در textarea
@@ -261,42 +269,69 @@ $(document).ready(function() {
         document.execCommand('copy');
     }
 
+    // تابع برای بروزرسانی داده‌ها از textarea
+    function updateDataFromTextarea() {
+        const userData = JSON.parse($dataTextarea.val());
+        saveUserDataToHistory(userData);
+        loadDataInTable(userData);
+    }
+
+    // تابع برای بارگذاری داده‌ها از فایل JSON
+    function updateDataFromUrl() {
+        const jsonUrl = $jsonUrl.val();
+        if (jsonUrl) {
+            $.getJSON(jsonUrl, function(userData) {
+                saveUserDataToHistory(userData);
+                loadDataInTable(userData);
+            });
+        }
+    }
+
+    // تابع برای ذخیره داده‌های کاربر در تاریخچه
+    function saveUserDataToHistory(userData) {
+        userDataHistory.push(userData);
+        currentDataIndex = userDataHistory.length - 1;
+    }
+
+    // تابع برای برگشت به داده‌های قبلی
+    function undoUserData() {
+        if (currentDataIndex > 0) {
+            currentDataIndex--;
+            showUserData();
+        }
+    }
+
+    // تابع برای بازگشت به داده‌های بعدی
+    function redoUserData() {
+        if (currentDataIndex < userDataHistory.length - 1) {
+            currentDataIndex++;
+            showUserData();
+        }
+    }
+
     // رویداد کلیک بر روی دکمه ویرایش
     $editDataButton.click(editUserData);
 
     // رویداد کلیک بر روی دکمه کپی
     $copyDataButton.click(copyUserData);
 
-    // افزودن بخش بارگذاری داده‌ها از فایل JSON
-    const $switchButton = $('#switchButton');
-    const $fileInput = $('#fileInput');
-    const $updateDataButton = $('#updateDataButton');
+    // رویداد کلیک بر روی دکمه بروزرسانی داده‌ها (textarea)
+    $updateDataButtonTextarea.click(updateDataFromTextarea);
 
-    // تابع برای بارگذاری داده‌ها از فایل JSON
-    function updateDataFromFile() {
-        const file = $fileInput[0].files[0];
-        if (file) {
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                const userData = JSON.parse(e.target.result);
-                savePageData(userData);
-                loadDataInTable();
-                loadPagesInModal();
-            };
-            reader.readAsText(file);
-        }
-    }
+    // رویداد کلیک بر روی دکمه بروزرسانی داده‌ها (URL)
+    $updateDataButtonUrl.click(updateDataFromUrl);
 
-    // رویداد کلیک بر روی دکمه بروزرسانی داده‌ها
-    $updateDataButton.click(updateDataFromFile);
+    // رویداد کلیک بر روی دکمه برگشت به عملیات قبل
+    $undoButton.click(undoUserData);
 
-    // تابع برای نمایش/مخفی کردن بخش بارگذاری داده‌ها
-    function toggleDataManagementSection() {
-        $dataManagementModal.find('.data-management-section').toggleClass('d-none');
-    }
+    // رویداد کلیک بر روی دکمه بازگشت به عملیات بعد
+    $redoButton.click(redoUserData);
 
     // رویداد کلیک بر روی دکمه سویچ
-    $switchButton.click(toggleDataManagementSection);
+    $switchButton.click(function() {
+        $dataManagementModal.find('.data-management-section').toggleClass('d-none');
+        showUserData();
+    });
 
     // اجرای تابع برای نمایش داده‌های کاربر در textarea
     showUserData();
@@ -311,8 +346,8 @@ function addPage() {
     savePageData(pageData);
 
     // بروزرسانی جدول و مودال مدیریت آیتم‌ها
-    loadDataInTable();
-    loadPagesInModal();
+    loadDataInTable(getPageDataFromStorage());
+    loadPagesInModal(getPageDataFromStorage());
 
     // بستن مودال
     $modal.modal('hide');
@@ -342,8 +377,8 @@ function updatePage() {
     updatePageData(index, pageData);
 
     // بروزرسانی جدول و مودال مدیریت آیتم‌ها
-    loadDataInTable();
-    loadPagesInModal();
+    loadDataInTable(getPageDataFromStorage());
+    loadPagesInModal(getPageDataFromStorage());
 
     // بستن مودال ویرایش
     $modal.modal('hide');
@@ -355,27 +390,25 @@ function deletePage(index) {
     deletePageData(index);
 
     // بروزرسانی جدول و مودال مدیریت آیتم‌ها
-    loadDataInTable();
-    loadPagesInModal();
+    loadDataInTable(getPageDataFromStorage());
+    loadPagesInModal(getPageDataFromStorage());
 }
 
 // بارگذاری داده‌ها در جدول
-function loadDataInTable() {
+function loadDataInTable(userData) {
     const $table = $('#pageTable tbody');
     $table.empty();
 
-    const pages = getPageDataFromStorage();
-    pages.forEach((page, index) => {
+    userData.forEach((page, index) => {
         addRowToTable(page, index + 1);
     });
 }
 
 // بارگذاری آیتم‌ها در مودال مدیریت
-function loadPagesInModal() {
+function loadPagesInModal(pages) {
     const $pagesList = $('#pagesList');
     $pagesList.empty();
 
-    const pages = getPageDataFromStorage();
     pages.forEach((page, index) => {
         addItemToModal(page, index);
     });
@@ -500,8 +533,7 @@ function getPageDataFromEditModal() {
         fileUrl: $('#editFileUrl').val(),
         previewUrl: $('#editPreviewUrl').val()
     };
-}
-   </script>
+                  }   </script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="https://webramin.github.io/js/bootstrap.bundle.js"></script>
     <script src="https://webramin.github.io/js/color-modes.js"></script>
