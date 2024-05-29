@@ -179,11 +179,11 @@
             <div class="modal-body">
                 <div class="data-management-section">
                     <h6>داده‌های کاربر</h6>
-                    <textarea class="form-control" id="dataTextarea" rows="5" readonly></textarea>
+                    <textarea class="form-control" id="userDataTextarea" rows="5" readonly></textarea>
                     <div class="d-flex justify-content-end mt-2">
-                        <button class="btn btn-primary" id="editDataButton">ویرایش</button>
-                        <button class="btn btn-success mx-2" id="copyDataButton">کپی</button>
-                        <button class="btn btn-primary" id="updateDataButton textarea">بروزرسانی داده‌ها</button>
+                        <button class="btn btn-primary" id="editUserDataButton">ویرایش</button>
+                        <button class="btn btn-success mx-2" id="copyUserDataButton">کپی</button>
+                        <button class="btn btn-primary" id="updateUserDataButton">بروزرسانی داده‌ها</button>
                     </div>
                 </div>
                 <div class="data-management-section d-none">
@@ -191,22 +191,35 @@
                     <div class="mb-3">
                         <div class="input-group">
                             <input type="text" class="form-control" id="jsonUrl" placeholder="آدرس فایل JSON" value="https://example.com/data.json">
-                            <button class="btn btn-primary" id="updateDataButton url">بروزرسانی داده‌ها</button>
+                            <button class="btn btn-primary" id="loadDataFromJsonButton">بارگذاری داده‌ها</button>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">بستن</button>
-                <button type="button" class="btn btn-primary" id="switchButton">سویچ</button>
-                <button type="button" class="btn btn-primary" id="undoButton">برگشت به عملیات قبل</button>
-                <button type="button" class="btn btn-primary" id="redoButton">بازگشت به عملیات بعد</button>
+                <button type="button" class="btn btn-primary" id="toggleDataManagementSectionButton">سویچ</button>
+                <button type="button" class="btn btn-primary" id="undoUserDataChangesButton">برگشت به عملیات قبل</button>
+                <button type="button" class="btn btn-primary" id="redoUserDataChangesButton">بازگشت به عملیات بعد</button>
             </div>
         </div>
     </div>
 </div>
     <script type="text/javascript" charset="utf-8">
-$(document).ready(function() {
+
+        $(document).ready(function() {
+    // متغیرهای مورد نیاز
+    $editDataButton = $('#editUserDataButton');
+    $copyDataButton = $('#copyUserDataButton');
+    $updateDataButton = $('#updateUserDataButton');
+    $undoButton = $('#undoUserDataChangesButton');
+    $redoButton = $('#redoUserDataChangesButton');
+    $switchButton = $('#toggleDataManagementSectionButton');
+    $userDataTextarea = $('#userDataTextarea');
+    $dataManagementModal = $('#dataManagementModal');
+    $jsonUrl = $('#jsonUrl');
+    $loadDataFromJsonButton = $('#loadDataFromJsonButton');
+
     // رویداد کلیک بر روی فیلتر جدول
     $('#pageTable_filter').on('keyup', function() {
         filterTable();
@@ -244,8 +257,8 @@ $(document).ready(function() {
     // تابع برای نمایش داده‌های کاربر در textarea
     function showUserData() {
         const userData = userDataHistory[currentDataIndex] || [];
-        $dataTextarea.val(JSON.stringify(userData, null, 2));
-        $dataTextarea.prop('readonly', true);
+        $userDataTextarea.val(JSON.stringify(userData, null, 2));
+        $userDataTextarea.prop('readonly', true);
         if (!isDataFromUrl) {
             loadDataInTable(userData);
         }
@@ -253,18 +266,18 @@ $(document).ready(function() {
 
     // تابع برای ویرایش داده‌های کاربر در textarea
     function editUserData() {
-        $dataTextarea.prop('readonly', false);
+        $userDataTextarea.prop('readonly', false);
     }
 
     // تابع برای کپی کردن داده‌های کاربر از textarea
     function copyUserData() {
-        $dataTextarea.select();
+        $userDataTextarea.select();
         document.execCommand('copy');
     }
 
     // تابع برای بروزرسانی داده‌ها از textarea
-    function updateDataFromTextarea() {
-        const userData = JSON.parse($dataTextarea.val());
+    function updateUserData() {
+        const userData = JSON.parse($userDataTextarea.val());
         saveUserDataToHistory(userData);
         if (!isDataFromUrl) {
             loadDataInTable(userData);
@@ -272,7 +285,7 @@ $(document).ready(function() {
     }
 
     // تابع برای بارگذاری داده‌ها از فایل JSON
-    function updateDataFromUrl() {
+    function loadDataFromJson() {
         const jsonUrl = $jsonUrl.val();
         if (jsonUrl) {
             $.getJSON(jsonUrl, function(userData) {
@@ -290,7 +303,7 @@ $(document).ready(function() {
     }
 
     // تابع برای برگشت به داده‌های قبلی
-    function undoUserData() {
+    function undoUserDataChanges() {
         if (currentDataIndex > 0) {
             currentDataIndex--;
             showUserData();
@@ -298,7 +311,7 @@ $(document).ready(function() {
     }
 
     // تابع برای بازگشت به داده‌های بعدی
-    function redoUserData() {
+    function redoUserDataChanges() {
         if (currentDataIndex < userDataHistory.length - 1) {
             currentDataIndex++;
             showUserData();
@@ -311,17 +324,17 @@ $(document).ready(function() {
     // رویداد کلیک بر روی دکمه کپی
     $copyDataButton.click(copyUserData);
 
-    // رویداد کلیک بر روی دکمه بروزرسانی داده‌ها (textarea)
-    $updateDataButtonTextarea.click(updateDataFromTextarea);
+    // رویداد کلیک بر روی دکمه بروزرسانی داده‌ها
+    $updateDataButton.click(updateUserData);
 
-    // رویداد کلیک بر روی دکمه بروزرسانی داده‌ها (URL)
-    $updateDataButtonUrl.click(updateDataFromUrl);
+    // رویداد کلیک بر روی دکمه بارگذاری داده‌ها از JSON
+    $loadDataFromJsonButton.click(loadDataFromJson);
 
     // رویداد کلیک بر روی دکمه برگشت به عملیات قبل
-    $undoButton.click(undoUserData);
+    $undoButton.click(undoUserDataChanges);
 
     // رویداد کلیک بر روی دکمه بازگشت به عملیات بعد
-    $redoButton.click(redoUserData);
+    $redoButton.click(redoUserDataChanges);
 
     // رویداد کلیک بر روی دکمه سویچ
     $switchButton.click(function() {
@@ -530,7 +543,8 @@ function getPageDataFromEditModal() {
         fileUrl: $('#editFileUrl').val(),
         previewUrl: $('#editPreviewUrl').val()
     };
-}</script>
+}
+    </script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="https://webramin.github.io/js/bootstrap.bundle.js"></script>
     <script src="https://webramin.github.io/js/color-modes.js"></script>
