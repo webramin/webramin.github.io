@@ -216,7 +216,7 @@ $(document).ready(function() {
     loadDataInTable(getPageDataFromStorage());
     loadPagesInModal(getPageDataFromStorage());
     
-    // new 203 متغیر برای نگهداری وضعیت لینک‌ها
+    // متغیر برای نگهداری وضعیت لینک‌ها
     let openInNewTab = false;
 
     // تابع برای فعال/غیرفعال کردن target="_blank" در لینک‌ها
@@ -236,26 +236,19 @@ $(document).ready(function() {
     // اجرای تابع برای تنظیم اولیه لینک‌ها
     toggleLinkTarget();
 
-    // افزودن بخش مدیریت داده‌ها
-    const $dataManagementModal = $('#dataManagementModal');
-    const $dataTextarea = $('#dataTextarea');
-    const $editDataButton = $('#editDataButton');
-    const $copyDataButton = $('#copyDataButton');
-    const $updateDataButtonTextarea = $('#updateDataButton.textarea');
-    const $updateDataButtonUrl = $('#updateDataButton.url');
-    const $jsonUrl = $('#jsonUrl');
-    const $undoButton = $('#undoButton');
-    const $redoButton = $('#redoButton');
-
+    // متغیرهای مربوط به مدیریت داده‌ها
     let userDataHistory = []; // تاریخچه داده‌های کاربر
     let currentDataIndex = -1; // شاخص داده‌های فعلی در تاریخچه
+    let isDataFromUrl = false; // پرچم مشخص‌کننده منبع داده‌ها
 
     // تابع برای نمایش داده‌های کاربر در textarea
     function showUserData() {
         const userData = userDataHistory[currentDataIndex] || [];
         $dataTextarea.val(JSON.stringify(userData, null, 2));
         $dataTextarea.prop('readonly', true);
-        loadDataInTable(userData);
+        if (!isDataFromUrl) {
+            loadDataInTable(userData);
+        }
     }
 
     // تابع برای ویرایش داده‌های کاربر در textarea
@@ -273,7 +266,9 @@ $(document).ready(function() {
     function updateDataFromTextarea() {
         const userData = JSON.parse($dataTextarea.val());
         saveUserDataToHistory(userData);
-        loadDataInTable(userData);
+        if (!isDataFromUrl) {
+            loadDataInTable(userData);
+        }
     }
 
     // تابع برای بارگذاری داده‌ها از فایل JSON
@@ -283,6 +278,7 @@ $(document).ready(function() {
             $.getJSON(jsonUrl, function(userData) {
                 saveUserDataToHistory(userData);
                 loadDataInTable(userData);
+                isDataFromUrl = true;
             });
         }
     }
@@ -330,6 +326,7 @@ $(document).ready(function() {
     // رویداد کلیک بر روی دکمه سویچ
     $switchButton.click(function() {
         $dataManagementModal.find('.data-management-section').toggleClass('d-none');
+        isDataFromUrl = !isDataFromUrl;
         showUserData();
     });
 
@@ -533,7 +530,7 @@ function getPageDataFromEditModal() {
         fileUrl: $('#editFileUrl').val(),
         previewUrl: $('#editPreviewUrl').val()
     };
-                  }   </script>
+}</script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="https://webramin.github.io/js/bootstrap.bundle.js"></script>
     <script src="https://webramin.github.io/js/color-modes.js"></script>
