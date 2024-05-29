@@ -178,3 +178,26 @@ $(window).on('beforeunload', function() {
 function goBack() {
 	window.history.back();
 }
+
+
+// تبدیل اعداد انگلیسی به فارسی 
+
+(function() {
+  var persian = {
+    0: '۰', 1: '۱', 2: '۲', 3: '۳', 4: '۴', 5: '۵', 6: '۶', 7: '۷', 8: '۸', 9: '۹'
+  };
+
+  function replaceNumbers(node) {
+    if (node.nodeType === Node.TEXT_NODE) {
+      node.data = node.data.replace(/\d/g, (match) => persian[match]);
+    } else {
+      for (var i = 0; i < node.childNodes.length; i++) {
+        if (!node.childNodes[i].classList || !node.childNodes[i].classList.contains('elementor')) {
+          replaceNumbers(node.childNodes[i]);
+        }
+      }
+    }
+  }
+
+  replaceNumbers(document.body);
+})();
