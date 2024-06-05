@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>اسکرپر وب سایت</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.62.0/codemirror.min.css">
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.62.0/codemirror.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.62.0/mode/htmlmixed/htmlmixed.min.js"></script>
+</head>
+<body>
+  <div class="container my-5">
+    <h1 class="text-center mb-4">اسکرپر وب سایت</h1>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="form-group">
+          <label for="website-input">آدرس وب سایت را وارد کنید:</label>
+          <div class="input-group">
+            <input type="text" class="form-control" id="website-input" placeholder="https://example.com">
+            <button class="btn btn-primary" id="scrape-btn">
+              <i class="bi bi-search"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-6">
+            <h5>اطلاعات وب سایت</h5>
+            <h4 id="website-title"></h4>
+            <p id="website-description"></p>
+            <button class="btn btn-secondary btn-sm mt-2" id="copy-title-btn">
+              <i class="bi bi-clipboard"></i> کپی عنوان
+            </button>
+            <button class="btn btn-secondary btn-sm mt-2" id="copy-description-btn">
+              <i class="bi bi-clipboard"></i> کپی توضیحات
+            </button>
+          </div>
+          <div class="col-md-6">
+            <h5>آیکون وب سایت</h5>
+            <img src="" alt="آیکون وب سایت" width="50" id="website-icon" class="img-fluid">
+            <button class="btn btn-secondary btn-sm mt-2" id="copy-icon-btn">
+              <i class="bi bi-clipboard"></i> کپی آدرس آیکون
+            </button>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <h5>تصویر سایت</h5>
+            <img class="img-fluid" src="" id="website-img" alt="وب سایت" />
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <h5>کد HTML</h5>
+            <div class="form-group">
+              <select id="theme-select" class="form-control">
+                <option value="default">Default</option>
+                <option value="monokai">Monokai</option>
+                <option value="material">Material</option>
+              </select>
+            </div>
+            <div id="html-editor"></div>
+            <button class="btn btn-secondary btn-sm mt-2" id="copy-html-btn">
+              <i class="bi bi-clipboard"></i> کپی HTML
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    var iconCopied = false;
+    var editor;
+
+    $('#scrape-btn').click(function() {
+      var websiteUrl = $('#website-input').val();
+      $.ajax({
+        url: 'https://api.allorigins.win/get?url=' + encodeURIComponent(websiteUrl),
+        success: function(response) {
+          var parser = new DOMParser();
+          var doc = parser.parseFromString(response.contents, 'text/html');
+          var iconUrl = $('link[rel="icon"]', doc).attr('href');
+          var title = $('title', doc).text();
+          var description = $('meta[name="description"]', doc).attr('content');
+
+          $('#website-icon').attr('src', iconUrl);
+          $('#website-img').attr('src', 'https://urlscan.io/liveshot/?width=800&height=600&url=' + encodeURIComponent(websiteUrl));
+          $('#website-title').text(title);
+          $('#website-description').text(description);
+
+          editor.setValue(response.contents);
+        }
+      });
+    });
+
+    $('#copy-icon-btn').click(function() {
+      var iconUrl = $('#website-icon').attr('src');
+      navigator.clipboard.writeText(iconUrl);
+      $(this).find('i').addClass('text-success');
+      iconCopied = true;
+      setTimeout(function() {
+        $('#copy-icon-btn i').removeClass('text-success');
+        iconCopied = false;
+      }, 2000);
+    });
+
+    $('#copy-title-btn').click(function() {
+      var title = $('#website-title').text();
+      navigator.clipboard.writeText(title);
+      $(this).find('i').addClass('text-success');
+      setTimeout(function() {
+        $('#copy-title-btn i').removeClass('text-success');
+      }, 2000);
+    });
+
+    $('#copy-description-btn').click(function() {
+      var description = $('#website-description').text();
+      navigator.clipboard.writeText(description);
+      $(this).find('i').addClass('text-success');
+      setTimeout(function() {
+        $('#copy-description-btn i').removeClass('text-success');
+      }, 2000);
+    });
+
+    $('#copy-html-btn').click(function() {
+      var htmlCode = editor.getValue();
+      navigator.clipboard.writeText(htmlCode);
+      $(this).find('i').addClass('text-success');
+      setTimeout(function() {
+        $('#copy-html-btn i').removeClass('text-success');
+      }, 2000);
+    });
+
+    setInterval(function() {
+      if (iconCopied) {
+        $('#copy-icon-btn i').toggleClass('bi-clipboard bi-clipboard-check');
+      }
+    }, 1000);
+
+    editor = CodeMirror(document.getElementById("html-editor"), {
+      lineNumbers: true,
+      mode: "htmlmixed",
+      theme: "default",
+      lineWrapping: true,
+      foldGutter: true,
+      gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"]
+    });
+
+    var themeSelect = document.getElementById("theme-select");
+    themeSelect.addEventListener("change", function() {
+      var selectedTheme = this.value;
+      editor.setOption("theme", selectedTheme);
+    });
+  </script>
+</body>
+</html>
