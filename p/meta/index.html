@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>ژنراتور متا تگ</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css">
+	<style type="text/css" media="all">
+		.line-numbers {
+			width: 50px;
+			text-align: right;
+			padding-right: 10px;
+			border-right: 1px solid #ccc;
+			color: #999;
+		}
+
+		.code {
+			font-family: monospace;
+		}
+.nowrap {
+	 white-space: nowrap;
+}
+.pre-wrap {
+	white-space: pre-wrap;
+}
+
+	</style>
+</head>
+<body>
+	<div class="container my-5">
+		<!-- بخش اول نام-->
+		<h1 class="text-center">ژنراتور متا تگ</h1>
+		<!-- بخش دوم فیلد های ورودی-->
+		<form id="meta-form">
+			<div class="form-group">
+				<label for="title">عنوان:</label>
+				<input type="text" class="form-control" id="title" placeholder="عنوان صفحه را وارد کنید">
+			</div>
+			<div class="form-group">
+				<label for="description">توضیحات:</label>
+				<textarea class="form-control" id="description" rows="3" placeholder="توضیحات صفحه را وارد کنید"></textarea>
+			</div>
+			<div class="form-group">
+				<label for="keywords">کلیدواژه‌ها:</label>
+				<input type="text" class="form-control" id="keywords" placeholder="کلیدواژه‌ها را با کاما جدا کنید">
+			</div>
+			<div class="form-group">
+				<label for="author">نویسنده:</label>
+				<input type="text" class="form-control" id="author" placeholder="نام نویسنده را وارد کنید">
+			</div>
+			<div class="form-group">
+				<label for="url">URL:</label>
+				<input type="text" class="form-control" id="url" placeholder="URL صفحه را وارد کنید">
+			</div>
+			<div class="form-group">
+				<label for="image">URL تصویر:</label>
+				<input type="text" class="form-control" id="image" placeholder="URL تصویر را وارد کنید">
+			</div>
+			<div class="form-group">
+				<label for="url">آیکون:</label>
+				<input type="text" class="form-control" id="ico" placeholder=" آدرس آیکون را وارد کنید">
+			</div>
+			<div class="form-check">
+				<input type="checkbox" class="form-check-input" id="viewport-meta" value="">
+				<label class="form-check-label" for="viewport-meta">
+					شامل متا تگ‌های viewport و IE
+				</label>
+			</div>
+			<div class="form-check">
+				<input type="checkbox" class="form-check-input" id="icocheck" value="" />
+				<label class="form-check-label" for="icocheck">
+					آدرس آیکون
+				</label>
+			</div>
+			<button type="submit" class="btn btn-primary">ایجاد متا تگ‌ها</button>
+		</form>
+		<!-- بخش سوم دکمه های ویرایشی-->
+		<div class="d-flex align-items-center mb-3">
+			<button class="btn btn-secondary mt-2" onclick="copyToClipboard()">کپی به کلیپ‌بورد</button><button class="btn btn-outline-primary toggl-prewarp">
+  <i class="bi bi-text-wrap nowrap-icon"></i>
+  <i class="bi bi-text-wrap pre-wrap-icon"></i>
+  Toggle white-space
+</button>
+<div class="dropdown">
+				<button class="btn btn-outline-primary btn-sm dropdown-toggle" type="button" id="fontSizeDropdown" data-bs-toggle="dropdown">Font Size</button>
+				<ul class="dropdown-menu" aria-labelledby="fontSizeDropdown">
+					<li><a class="dropdown-item" href="#" data-size="fs-1">fs-1</a></li>
+					<li><a class="dropdown-item" href="#" data-size="fs-2">fs-2</a></li>
+					<li><a class="dropdown-item" href="#" data-size="fs-3">fs-3</a></li>
+					<li><a class="dropdown-item" href="#" data-size="fs-4">fs-4</a></li>
+					<li><a class="dropdown-item" href="#" data-size="fs-5">fs-5</a></li>
+					<li><a class="dropdown-item" href="#" data-size="fs-6">fs-6</a></li>
+				</ul>
+			</div>
+		</div>
+		<!-- بخش چهارم نمایش کد با شماره ردیف-->
+		<div class="d-flex mt-4">
+			      <div class="line-numbers" id="lineNumbers"></div>
+			<textarea class="form-control nowrap code" rows="14" readonly>
+			</textarea>
+		</div>
+	</div>
+
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script>
+		$(document).ready(function() {
+			$('#meta-form').submit(function(event) {
+				event.preventDefault();
+				var title = $('#title').val();
+				var description = $('#description').val();
+				var keywords = $('#keywords').val().split(',').map(function(keyword) {
+					return keyword.trim();
+				});
+				var author = $('#author').val();
+				var url = $('#url').val();
+				var image = $('#image').val();
+				var icon = $('#ico').val();
+				var includeViewportMeta = $('#viewport-meta').is(':checked');
+				var iconch = $('#icocheck').is(':checked');
+
+				var metaTags = `<meta name="title" content="${title}">\n` +
+				`<meta name="description" content="${description}">\n` +
+				`<meta name="keywords" content="${keywords.join(', ')}">
+
+` +
+				`<meta name="author" content="${author}">
+
+` +
+				(includeViewportMeta ? `<meta name="viewport" content="width=device-width, initial-scale=1.0">\n`: '') +
+				(includeViewportMeta ? `<meta http-equiv="X-UA-Compatible" content="IE=edge">\n`: '') +
+				`<meta property="og:title" content="${title}">\n` +
+				`<meta property="og:description" content="${description}">\n` +
+				`<meta property="og:type" content="website">\n` +
+				`<meta property="og:url" content="${url}">\n` +
+				`<meta property="og:image" content="${image}">\n` +
+				`<meta name="twitter:card" content="summary_large_image">\n` +
+				`<meta name="twitter:title" content="${title}">\n` +
+				`<meta name="twitter:description" content="${description}">\n` +
+				`<meta name="twitter:image" content="${image}">\n` +
+				(iconch ? `<link rel="icon" type="image/x-icon" href="${icon}">`: '');
+
+				$('.code').val(metaTags);
+			});
+
+			$('.dropdown-item').click(function() {
+				var fontSize = $(this).data('size');
+				$('.code').removeClass('fs-1 fs-2 fs-3 fs-4 fs-5 fs-6').addClass(fontSize);
+			});
+		});
+      function updateLineNumbers() {
+        var lines = $codeEditor.val().split('\n').length;
+        var lineNumbersHtml = '';
+        for (var i = 1; i <= lines; i++) {
+          lineNumbersHtml += '<div>' + i + '</div>';
+        }
+        $lineNumbers.html(lineNumbersHtml);
+      }
+
+
+		function copyToClipboard() {
+			var metaTags = $('.code').val();
+			navigator.clipboard.writeText(metaTags);
+		}
+$('.toggl-prewarp').click(function() {
+  $('.code').toggleClass('nowrap');
+  $('.code').toggleClass('pre-wrap');
+  $('.nowrap-icon').toggle();
+  $('.pre-wrap-icon').toggle();
+});
+	</script>
+</body>
+  </html>
