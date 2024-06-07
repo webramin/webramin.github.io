@@ -54,11 +54,9 @@ a.nav-link.active {
 
 #sips svg {
     display: block;
-    width: 100%;
-    height: 100%;
     position: relative;
     left: 50%;
-    top: 0;
+    bottom: 50%;
     transform: translateX(-50%);
 }
 
@@ -257,8 +255,6 @@ html[data-bs-theme=light] a.nav-link.p-0.text-body-secondary {
     text-decoration: revert;
 }
 
-
-
 @keyframes move-forever1 {
     0% {
         transform: translate(85px)
@@ -293,7 +289,8 @@ html[data-bs-theme=light] a.nav-link.p-0.text-body-secondary {
     position: absolute;
     bottom: calc(100% - 1px);
     pointer-events: none;
-    height: var(--web-space-7xl);
+    height: 6rem;
+    fill: var(--web-disabled-bg);
     width: 100%;
     z-index: 0
 }
