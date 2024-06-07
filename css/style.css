@@ -17,9 +17,10 @@ main {
 .ltr {
     direction: ltr;
 }
+
 #mainNav {
     transition: all .5s ;
-	box-shadow: 0px 0px 0px 0px var(--web-gray-900);
+    box-shadow: 0px 0px 0px 0px var(--web-gray-900);
 }
 
 .nav-blur {
@@ -29,7 +30,6 @@ main {
     transition: all .5s ;
     box-shadow: 0px 1px 5px 0px var(--web-gray-900) !important;
 }
-
 
 a.nav-link.active {
     color: #43b8ff !important;
@@ -48,7 +48,6 @@ a.nav-link.active {
     color: var(--web-body-color);
 }
 
-
 #sips {
     height: 60px;
 }
@@ -66,7 +65,7 @@ a.nav-link.active {
 #sips .divider-fill {
     fill: var(--web-disabled-color);
     transform-origin: bottom;
-    transform: rotateY(0deg);
+    transform: rotateY(360deg);
 }
 
 .toggle-bos {
@@ -76,7 +75,6 @@ a.nav-link.active {
     transition-duration: .5s;
     background: linear-gradient(45deg, #9896ff, #818181);
     padding: 10px 15px;
-
 }
 
 .toggle-bos.active {
@@ -87,11 +85,9 @@ a.nav-link.active {
 .text-shadow-sm {
     --color: #161616;
     text-shadow: 0 0 4px var(--color), 0 0 2px var(--color), 0 0 1px var(--color);
-
 }
 
-.text-shadow-md,
-.text-shadow {
+.text-shadow-md, .text-shadow {
     --color: #161616;
     text-shadow: 0 0 4px var(--color)
 }
@@ -99,13 +95,11 @@ a.nav-link.active {
 .text-shadow-lg {
     --color: #161616;
     text-shadow: 0 0 8px var(--color);
-
 }
 
 .text-shadow-xl {
     --color: #161616;
     text-shadow: 0 0 16px var(--color);
-
 }
 
 .nav-link i.bi {
@@ -128,10 +122,9 @@ html[data-bs-theme=dark] .d-dark-none {
     text-align: center;
 }
 
-.nav-link .bi{
+.nav-link .bi {
     padding: 0 5px;
 }
-
 
 #btnTop {
     display: block;
@@ -154,11 +147,10 @@ html[data-bs-theme=dark] .d-dark-none {
     opacity: 0.8;
 }
 
-#btnTop.active{
+#btnTop.active {
     bottom: 0;
     transition: all 0.4s;
 }
-
 
 .palet span {
     padding: 5px;
@@ -166,8 +158,17 @@ html[data-bs-theme=dark] .d-dark-none {
     border-radius: 6px;
 }
 
+html[data-bs-theme=dark] .nav-link {
+    transition: 0.5s;
+}
+
 html[data-bs-theme=dark] .nav-link:hover {
-    text-shadow: 0 0 2px #000, 0 0 5px #fff,0 0 15px #fff;
+    text-shadow: 0 0 1px #000, 0 0 0px #fff, 0px 0px 0px #fff;
+    transition: 0.5s;
+}
+
+html[data-bs-theme=dark] .nav-link.active:hover {
+    text-shadow: none;
 }
 
 .add-scroll {
@@ -180,62 +181,66 @@ html[data-bs-theme=dark] .nav-link:hover {
     opacity: 1;
     right: 0 !important;
     transition: all .4s;
-    }
+}
 
 .Preloader {
-	position: fixed;
-	/* display: flex; */
-	justify-content: center;
-	align-items: center;
-	width: 100vw;
-	height: 100vh;
-	backdrop-filter: blur(4px);
-	top: 0;
-	z-index: 9999;
-	transition: all 1s;
-	opacity: 1;	display: none;
+    position: fixed;
+    /* display: flex; */
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    backdrop-filter: blur(4px);
+    top: 0;
+    z-index: 9999;
+    transition: all 1s;
+    opacity: 1;
+    display: none;
 }
 
 .Preloader span {
-border-radius: 26px;
-display: block;
-width: 10px;
-height: 20px;
-background-color: transparent;
-margin: 0 5px;
-	animation: load 1.5s infinite ease;
-	transition-duration: .1s;
+    border-radius: 26px;
+    display: block;
+    width: 10px;
+    height: 20px;
+    background-color: transparent;
+    margin: 0 5px;
+    animation: load 1.5s infinite ease;
+    transition-duration: .1s;
 }
 
 .Preloader span:nth-child(2) {
-	animation-delay: 0.2s;
+    animation-delay: 0.2s;
 }
 
 .Preloader span:nth-child(3) {
-	animation-delay: 0.4s;
+    animation-delay: 0.4s;
 }
 
 .Preloader.hidden {
-	display: none;
-	opacity: 0;
+    display: none;
+    opacity: 0;
 }
 
 @keyframes load {
-	0%, 100% {
-		height: 50px;
-		background: #FFB700;
-		opacity: .5;
-	}
-	50% {
-		height: 100px;
-		background: #FFB700;
-		box-shadow: 0 0 10px #FFA300;
-		opacity: 1;
-	}
+    0%, 100% {
+        height: 50px;
+        background: #FFB700;
+        opacity: .5;
+    }
+
+    50% {
+        height: 100px;
+        background: #FFB700;
+        box-shadow: 0 0 10px #FFA300;
+        opacity: 1;
+    }
 }
+
 pre {
-box-shadow: 0 0 10px var(--web-gray-900);
+    box-shadow: 0 0 10px var(--web-gray-900);
 }
+
 .nt {
     color: var(--web-azure);
 }
@@ -246,4 +251,8 @@ box-shadow: 0 0 10px var(--web-gray-900);
 
 .s {
     color: var(--web-gray-300);
+}
+
+html[data-bs-theme=light] a.nav-link.p-0.text-body-secondary {
+    text-decoration: revert;
 }
