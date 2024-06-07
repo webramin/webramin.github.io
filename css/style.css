@@ -256,3 +256,65 @@ pre {
 html[data-bs-theme=light] a.nav-link.p-0.text-body-secondary {
     text-decoration: revert;
 }
+
+
+
+@keyframes move-forever1 {
+    0% {
+        transform: translate(85px)
+    }
+
+    to {
+        transform: translate(-90px)
+    }
+}
+
+@keyframes move-forever2 {
+    0% {
+        transform: translate(-90px)
+    }
+
+    to {
+        transform: translate(85px)
+    }
+}
+
+@keyframes move-forever3 {
+    0% {
+        transform: translate(-90px)
+    }
+
+    to {
+        transform: translate(85px)
+    }
+}
+
+.section-divider {
+    position: absolute;
+    bottom: calc(100% - 1px);
+    pointer-events: none;
+    height: var(--web-space-7xl);
+    width: 100%;
+    z-index: 0
+}
+
+.section-divider path {
+    fill: var(--web-bg-body)
+}
+
+.section-divider .wave-1 {
+    animation: move-forever1 30s linear infinite;
+    animation-delay: -2s
+}
+
+.section-divider .wave-2 {
+    animation: move-forever2 24s linear infinite;
+    opacity: .5;
+    animation-delay: -2s
+}
+
+.section-divider .wave-3 {
+    animation: move-forever3 18s linear infinite;
+    opacity: .3;
+    animation-delay: -2s
+}
