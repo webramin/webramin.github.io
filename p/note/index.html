@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>دفترچه یادداشت Tabler</title>
+    <link rel="stylesheet" href="https://webramin.github.io/css/web.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tabler-icons@1.35.0/iconfont/tabler-icons.min.css">
+    <link rel="stylesheet" href="style.css" type="text/css" media="all" />
+
+    <style type="text/css" media="all">
+        .note-card {
+            max-height: 500px;
+            overflow: hidden;
+            transition: height 1s ease-in-out;
+        }
+        .card.text-auto {
+            text-align: right;
+            direction: auto !important;
+        }
+        .note-card.expanded {
+            max-height: 100%;
+            transition: max-height 5s ease-in-out;
+        }
+svg {
+	margin: 0 !important;
+}
+    </style>
+</head>
+<body data-bs-theme="light">
+    <div class="container my-5">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group d-flex align-items-center">
+                                    <label for="group-select" class="w-50 me-3">انتخاب گروه:</label>
+                                    <select class="form-control" id="group-select">
+                                        <option id="he" value="" hidden=""></option>
+                                        opt+
+                                    </select>
+                                    <div class="btn-group ms-3">
+                                        <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                            <i class="ti ti-settings"></i>
+                                        </button>
+                                        <ul class="dropdown-menu">
+                                            <li><a class="dropdown-item" href="#" id="add-group"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-outline icon-tabler-plus"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M12 5l0 14" /><path d="M5 12l14 0" /></svg> افزودن گروه</a></li>
+                                            <li><a class="dropdown-item" href="#" id="edit-group"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-outline icon-tabler-pencil"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" /><path d="M13.5 6.5l4 4" /></svg> ویرایش گروه</a></li>
+                                            <li><a class="dropdown-item" href="#" id="delete-group"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-outline icon-tabler-trash"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M4 7l16 0" /><path d="M10 11l0 6" /><path d="M14 11l0 6" /><path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" /><path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" /></svg> حذف گروه</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="note-input">یادداشت:</label>
+                                    <textarea class="form-control" id="note-input" rows="10" placeholder="یادداشت خود را در قالب Markdown وارد کنید"></textarea>
+                                    <div class="text-center mt-3">
+                                        <button type="button" class="btn btn-primary" id="save-note">ذخیره یادداشت</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" id="search-input" placeholder="جستجوی یادداشت‌ها">
+                            <button class="btn btn-outline-secondary" type="button" id="search-btn">
+                                <i class="ti ti-search"></i>
+                            </button>
+                        </div>
+                        <div id="note-list"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- مدال برای افزودن گروه -->
+    <div class="modal fade" id="addGroupModal" tabindex="-1" aria-labelledby="addGroupModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addGroupModalLabel">افزودن گروه</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="بستن"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="text" class="form-control" id="addGroupInput" placeholder="نام گروه را وارد کنید">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">انصراف</button>
+                    <button type="button" class="btn btn-primary" id="saveAddGroupBtn">ذخیره</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- مدال برای ویرایش گروه -->
+    <div class="modal fade" id="editGroupModal" tabindex="-1" aria-labelledby="editGroupModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editGroupModalLabel">ویرایش گروه</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="بستن"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="text" class="form-control" id="editGroupInput" placeholder="نام جدید گروه را وارد کنید">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">انصراف</button>
+                    <button type="button" class="btn btn-primary" id="saveEditGroupBtn">ذخیره</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- مدال برای ویرایش یادداشت -->
+    <div class="modal fade" id="editNoteModal" tabindex="-1" aria-labelledby="editNoteModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editNoteModalLabel">ویرایش یادداشت</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="بستن"></button>
+                </div>
+                <div class="modal-body">
+                    <textarea class="form-control" rows="24" id="editNoteInput"></textarea>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">انصراف</button>
+                    <button type="button" class="btn btn-primary" id="saveEditNoteBtn">ذخیره تغییرات</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<!-- مودال برای حذف یادداشت -->
+<div class="modal fade" id="deleteNoteModal" tabindex="-1" aria-labelledby="deleteNoteModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="deleteNoteModalLabel">حذف یادداشت</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="بستن"></button>
+      </div>
+      <div class="modal-body">
+        <p>
+          آیا مطمئن هستید که می‌خواهید یادداشت "<span id="deleteNoteGroup"></span>: <span id="deleteNoteContent"></span>" را حذف کنید؟
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">انصراف</button>
+        <button type="button" class="btn btn-danger" id="confirmDeleteNoteBtn">بله، حذف کن</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/2.1.0/showdown.min.js"></script>
+<script type="text/javascript" charset="utf-8">
+	const groups = JSON.parse(localStorage.getItem('groups')) || []; // بازیابی گروه‌ها
+const notes = JSON.parse(localStorage.getItem('notes')) || []; // بازیابی یادداشت‌ها
+
+const editNoteModal = $('#editNoteModal');
+const editNoteInput = $('#editNoteInput');
+const saveEditNoteBtn = $('#saveEditNoteBtn');
+
+const renderGroupSelect = () => {
+    // رندر گزینه‌های انتخاب گروه
+    
+    $('#group-select').html('<option value="بدون شرح"> گروه پیش فرض</option>' + groups.sort().map(group => `<option value="${group}">${group}</option>`).join(''));
+};
+
+function showalert(message, type, timeout) {
+    // Set default timeout to 3000 milliseconds if not provided
+    timeout = timeout || 3000;
+
+    // Create the alert element
+    var alert = $('<div class="position-fixed bottom-0 end-0 p-3" style="z-index: 1000;">' +
+        '<div class="alert alert-' + type + ' bg-' + type + '-lt alert-dismissible fade show" role="alert">' +
+        '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>' +
+        '<strong>' + message + '</strong>' +
+        '</div> </div>');
+
+    // Add the alert to the page
+    $('body').append(alert);
+
+    // Close the alert after the specified timeout
+    setTimeout(function() {
+        alert.alert('close');
+    }, timeout);
+}
+const renderNoteList = () => {
+    // رندر لیست یادداشت‌ها
+    $('#note-list').html('');
+    notes.forEach(note => {
+        const converter = new showdown.Converter();
+        const html = note.isTable ? note.html: converter.makeHtml(note.content.replace(/"/g, '&quot;'));
+        const noteCard = $(`
+            <div class="card mb-3 note-card">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h5 class="card-title">${note.group}</h5>
+                        <div class="btn-group">
+                            <button class="btn btn-warning btn-smlo edit-note" data-group="${note.group}" data-content="${note.content.replace(/"/g, '&quot;')}">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon icon-file-pencil"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M14 3v4a1 1 0 0 0 1 1h4" /><path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z" /><path d="M10 18l5 -5a1.414 1.414 0 0 0 -2 -2l-5 5v2h2z" /></svg>
+                            </button>
+                            <button class="btn btn-danger btn-smlo delete-note" data-group="${note.group}" data-content="${note.content.replace(/"/g, '&quot;')}">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler-trash"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 7l16 0" /><path d="M10 11l0 6" /><path d="M14 11l0 6" /><path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" /><path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" /></svg>
+                            </button>
+                            <button class="btn btn-secondary btn-smlo copy-note" data-content="${note.content.replace(/"/g, '&quot;')}">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon icon-copy"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M7 7m0 2.667a2.667 2.667 0 0 1 2.667 -2.667h8.666a2.667 2.667 0 0 1 2.667 2.667v8.666a2.667 2.667 0 0 1 -2.667 2.667h-8.666a2.667 2.667 0 0 1 -2.667 -2.667z" /><path d="M4.012 16.737a2.005 2.005 0 0 1 -1.012 -1.737v-10c0 -1.1 .9 -2 2 -2h10c.75 0 1.158 .385 1.5 1" /></svg>
+                            </button>
+                            <button class="btn btn-primary btn-smlo expand-note">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon icon-viewport-tall"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 10v-7l3 3" /><path d="M9 6l3 -3" /><path d="M12 14v7l3 -3" /><path d="M9 18l3 3" /><path d="M18 3h1a2 2 0 0 1 2 2v14a2 2 0 0 1 -2 2h-1" /><path d="M6 3h-1a2 2 0 0 0 -2 2v14a2 2 0 0 0 2 2h1" /></svg>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-text text-auto">${html}</div>
+                </div>
+            </div>
+        `);
+// اضافه کردن رویداد کلیک به دکمه گسترش
+        noteCard.find('.expand-note').click(function() {
+            const noteCard = $(this).closest('.note-card');
+            noteCard.toggleClass('expanded');
+            $(this).toggleClass('active');
+        });
+
+        // اضافه کردن کلاس expandable اگر ارتفاع کارت بیشتر از 500 پیکسل باشد
+        if (noteCard.height() > 500) {
+            noteCard.addClass('expandable');
+        }
+        // اضافه کردن رویداند کلیک به دکمه کپی
+        noteCard.find('.copy-note').click(function() {
+            const content = $(this).data('content');
+            copyNoteContent(content);
+            $(this).removeClass('.btn-secondary');
+            $(this).addClass('btn-light active');
+            $(this).find('.icon-copy').replaceWith(`
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-outline icon-tabler-copy-check">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                    <path stroke="none" d="M0 0h24v24H0z" />
+                    <path d="M7 9.667a2.667 2.667 0 0 1 2.667 -2.667h8.666a2.667 2.667 0 0 1 2.667 2.667v8.666a2.667 2.667 0 0 1 -2.667 2.667h-8.666a2.667 2.667 0 0 1 -2.667 -2.667z" />
+                    <path d="M4.012 16.737a2 2 0 0 1 -1.012 -1.737v-10c0 -1.1 .9 -2 2 -2h10c.75 0 1.158 .385 1.5 1" />
+                    <path d="M11 14l2 2l4 -4" />
+                </svg>
+            `);
+            $(this).addClass('text-success');
+        });
+
+        const copyNoteContent = (content) => {
+    // کپی محتوای یادداشت به کلیپ‌بورد
+    const tempInput = $('<textarea>').val(content).appendTo('body').select();
+    document.execCommand('copy');
+    tempInput.remove();
+    showalert('محتوای یادداشت به کلیپ‌بورد کپی شد.','success');
+   };
+
+// اضافه کردن رویداند کلیک به دکمه حذف
+noteCard.find('.delete-note').click(function() {
+    const group = $(this).data('group');
+    const content = $(this).data('content');
+    $('#deleteNoteGroup').text(group);
+    $('#deleteNoteContent').text(content);
+    $('#deleteNoteModal').modal('show');
+});
+
+// مودال برای حذف یادداشت
+$('#confirmDeleteNoteBtn').click(function() {
+    const group = $('#deleteNoteGroup').text();
+    const content = $('#deleteNoteContent').text();
+    deleteNote(group, content);
+    $('#deleteNoteModal').modal('hide');
+});
+const deleteNote = (group, content) => {
+    // حذف یادداشت
+    const noteIndex = notes.findIndex(note => note.group === group && note.content === content);
+    if (noteIndex !== -1) {
+        notes.splice(noteIndex, 1);
+        localStorage.setItem('notes', JSON.stringify(notes));
+        renderNoteList();
+    }
+};
+
+        // اضافه کردن رویداد کلیک به دکمه ویرایش
+        noteCard.find('.edit-note').click(() => editNote(note.group, note.content));
+
+        $('#note-list').append(noteCard);
+    });
+};
+    
+    const saveNote = () => {
+    // ذخیره یادداشت جدید
+    const group = $('#group-select').val();
+    const content = $('#note-input').val();
+    if (group && content) {
+        const existingNote = notes.find(note => note.group === group && note.content === content);
+        if (existingNote) {
+            alert('Note already exists!');
+            return;
+        }
+        const converter = new showdown.Converter();
+        const html = converter.makeHtml(content);
+        const isTable = html.includes('<table>');
+        const note = {
+            group,
+            content,
+            html,
+            isTable
+        };
+        notes.push(note);
+        localStorage.setItem('notes', JSON.stringify(notes));
+        if (!groups.includes(group)) {
+            groups.push(group);
+            groups.sort();
+            localStorage.setItem('groups', JSON.stringify(groups));
+            renderGroupSelect();
+        }
+        $('#note-input').val('');
+        renderNoteList();
+    }
+};
+
+const editNote = (group, content) => {
+    // ویرایش یادداشت
+    const noteIndex = notes.findIndex(note => note.group === group && note.content === content);
+    if (noteIndex !== -1) {
+        const note = notes[noteIndex];
+        editNoteModal.modal('show');
+        editNoteInput.val(note.content);
+        saveEditNoteBtn.off('click').click(() => {
+            const newContent = editNoteInput.val();
+            if (newContent) {
+                note.content = newContent;
+                note.html = note.isTable ? note.html: new showdown.Converter().makeHtml(newContent.replace(/"/g, '&quot;'));
+                localStorage.setItem('notes', JSON.stringify(notes));
+                renderNoteList();
+                editNoteModal.modal('hide');
+            }
+        });
+    }
+};
+
+const searchNotes = () => {
+    // جستجوی یادداشت‌ها
+    const searchTerm = $('#search-input').val().toLowerCase();
+    const filteredNotes = notes.filter(note => note.group.toLowerCase().includes(searchTerm) || note.content.toLowerCase().includes(searchTerm));
+    $('#note-list').html('');
+    filteredNotes.forEach(note => {
+        const converter = new showdown.Converter();
+        const html = note.isTable ? note.html: converter.makeHtml(note.content.replace(/"/g, '&quot;'));
+        const noteCard = $(`
+            <div class="card mb-3 note-card">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h5 class="card-title">${note.group}</h5>
+                        <div class="btn-group">
+                            <button class="btn btn-warning btn-smlo edit-note" data-group="${note.group}" data-content="${note.content.replace(/"/g, '&quot;')}">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon icon-file-pencil"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M14 3v4a1 1 0 0 0 1 1h4" /><path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z" /><path d="M10 18l5 -5a1.414 1.414 0 0 0 -2 -2l-5 5v2h2z" /></svg>
+                            </button>
+                            <button class="btn btn-danger btn-smlo delete-note" data-group="${note.group}" data-content="${note.content.replace(/"/g, '&quot;')}">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler-trash"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 7l16 0" /><path d="M10 11l0 6" /><path d="M14 11l0 6" /><path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" /><path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" /></svg>
+                            </button>
+                            <button class="btn btn-secondary btn-smlo copy-note" data-content="${note.content.replace(/"/g, '&quot;')}">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon icon-copy"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M7 7m0 2.667a2.667 2.667 0 0 1 2.667 -2.667h8.666a2.667 2.667 0 0 1 2.667 2.667v8.666a2.667 2.667 0 0 1 -2.667 2.667h-8.666a2.667 2.667 0 0 1 -2.667 -2.667z" /><path d="M4.012 16.737a2.005 2.005 0 0 1 -1.012 -1.737v-10c0 -1.1 .9 -2 2 -2h10c.75 0 1.158 .385 1.5 1" /></svg>
+                            </button>
+                            <button class="btn btn-primary btn-smlo expand-note">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon icon-viewport-tall"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 10v-7l3 3" /><path d="M9 6l3 -3" /><path d="M12 14v7l3 -3" /><path d="M9 18l3 3" /><path d="M18 3h1a2 2 0 0 1 2 2v14a2 2 0 0 1 -2 2h-1" /><path d="M6 3h-1a2 2 0 0 0 -2 2v14a2 2 0 0 0 2 2h1" /></svg>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-text text-auto">${html}</div>
+                </div>
+            </div>
+        `);
+// اضافه کردن رویداد کلیک به دکمه گسترش
+        noteCard.find('.expand-note').click(function() {
+            const noteCard = $(this).closest('.note-card');
+            noteCard.toggleClass('expanded');
+            $(this).toggleClass('active');
+        });
+
+        // اضافه کردن کلاس expandable اگر ارتفاع کارت بیشتر از 500 پیکسل باشد
+        if (noteCard.height() > 500) {
+            noteCard.addClass('expandable');
+        }
+        // اضافه کردن رویداند کلیک به دکمه کپی
+        noteCard.find('.copy-note').click(function() {
+            const content = $(this).data('content');
+            copyNoteContent(content);
+            $(this).removeClass('.btn-secondary');
+            $(this).addClass('btn-light active');
+            $(this).find('.icon-copy').replaceWith(`
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-outline icon-tabler-copy-check">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                    <path stroke="none" d="M0 0h24v24H0z" />
+                    <path d="M7 9.667a2.667 2.667 0 0 1 2.667 -2.667h8.666a2.667 2.667 0 0 1 2.667 2.667v8.666a2.667 2.667 0 0 1 -2.667 2.667h-8.666a2.667 2.667 0 0 1 -2.667 -2.667z" />
+                    <path d="M4.012 16.737a2 2 0 0 1 -1.012 -1.737v-10c0 -1.1 .9 -2 2 -2h10c.75 0 1.158 .385 1.5 1" />
+                    <path d="M11 14l2 2l4 -4" />
+                </svg>
+            `);
+            $(this).addClass('text-success');
+        });
+
+        const copyNoteContent = (content) => {
+    // کپی محتوای یادداشت به کلیپ‌بورد
+    const tempInput = $('<textarea>').val(content).appendTo('body').select();
+    document.execCommand('copy');
+    tempInput.remove();
+    showalert('محتوای یادداشت به کلیپ‌بورد کپی شد.','success');
+   };
+
+// اضافه کردن رویداند کلیک به دکمه حذف
+noteCard.find('.delete-note').click(function() {
+    const group = $(this).data('group');
+    const content = $(this).data('content');
+    $('#deleteNoteGroup').text(group);
+    $('#deleteNoteContent').text(content);
+    $('#deleteNoteModal').modal('show');
+});
+
+// مودال برای حذف یادداشت
+$('#confirmDeleteNoteBtn').click(function() {
+    const group = $('#deleteNoteGroup').text();
+    const content = $('#deleteNoteContent').text();
+    deleteNote(group, content);
+    $('#deleteNoteModal').modal('hide');
+});
+const deleteNote = (group, content) => {
+    // حذف یادداشت
+    const noteIndex = notes.findIndex(note => note.group === group && note.content === content);
+    if (noteIndex !== -1) {
+        notes.splice(noteIndex, 1);
+        localStorage.setItem('notes', JSON.stringify(notes));
+        renderNoteList();
+    }
+};
+
+        // اضافه کردن رویداد کلیک به دکمه ویرایش
+        noteCard.find('.edit-note').click(() => editNote(note.group, note.content));
+
+        $('#note-list').append(noteCard);
+    });
+};
+
+const handleGroupActions = (action) => {
+    // مدیریت عملیات گروه (افزودن، ویرایش، حذف)
+    const selectedGroup = $('#group-select').val();
+    if (selectedGroup) {
+        switch (action) {
+            case 'add':
+                $('#addGroupModal').modal('show');
+                $('#addGroupInput').val('');
+                break;
+            case 'edit':
+                $('#editGroupModal').modal('show');
+                $('#editGroupInput').val(selectedGroup);
+                break;
+            case 'delete':
+                $('#deleteGroupName').text(selectedGroup);
+                $('#deleteGroupModal').modal('show');
+                break;
+        }
+    }
+};
+
+const addGroup = () => {
+    // افزودن گروه جدید
+    const groupName = $('#addGroupInput').val();
+    if (groupName && !groups.includes(groupName)) {
+        groups.push(groupName);
+        groups.sort();
+        localStorage.setItem('groups', JSON.stringify(groups));
+        renderGroupSelect();
+        window.dispatchEvent(new Event('storage'));
+        $('#addGroupModal').modal('hide');
+    } else {
+        alert('Group already exists!');
+    }
+};
+
+const editGroup = () => {
+    // ویرایش گروه
+    const selectedGroup = $('#group-select').val();
+    const newGroupName = $('#editGroupInput').val();
+    if (selectedGroup && newGroupName) {
+        const index = groups.indexOf(selectedGroup);
+        if (index !== -1) {
+            groups[index] = newGroupName;
+            localStorage.setItem('groups', JSON.stringify(groups));
+            $('#group-select').val(newGroupName);
+            notes.forEach(note => {
+                if (note.group === selectedGroup) {
+                    note.group = newGroupName;
+                }
+            });
+            localStorage.setItem('notes', JSON.stringify(notes));
+            renderNoteList();
+            renderGroupSelect();
+            window.dispatchEvent(new Event('storage'));
+            $('#editGroupModal').modal('hide');
+        }
+    }
+};
+
+const deleteGroup = () => {
+    // حذف گروه
+    const selectedGroup = $('#deleteGroupName').text();
+    const index = groups.indexOf(selectedGroup);
+    if (index !== -1) {
+        groups.splice(index, 1);
+        localStorage.setItem('groups', JSON.stringify(groups));
+        $('#group-select').val('');
+        notes = notes.filter(note => note.group !== selectedGroup);
+        localStorage.setItem('notes', JSON.stringify(notes));
+        renderNoteList();
+        renderGroupSelect();
+        window.dispatchEvent(new Event('storage'));
+        $('#deleteGroupModal').modal('hide');
+       
+    }
+};
+
+
+
+
+
+$('#add-group').click(() => handleGroupActions('add')); // مدیریت عملیات افزودن گروه
+$('#edit-group').click(() => handleGroupActions('edit')); // مدیریت عملیات ویرایش گروه
+$('#delete-group').click(() => {
+   // const selectedGroup = $('#group-select').val();
+    let selectedGroup = $('#group-select').val();
+    if (selectedGroup) {
+        const index = groups.indexOf(selectedGroup);
+        if (index !== -1) {
+            groups.splice(index, 1);
+            localStorage.setItem('groups', JSON.stringify(groups));
+            $('#group-select').val('');
+            notes = notes.filter(note => note.group !== selectedGroup);
+            localStorage.setItem('notes', JSON.stringify(notes));
+            renderNoteList();
+            renderGroupSelect();
+            window.dispatchEvent(new Event('storage'));
+             $('#group-select option[value="' + selectedGroup + '"]').remove();
+        }
+    }
+});
+$('#saveAddGroupBtn').click(addGroup); // ذخیره گروه جدید
+$('#saveEditGroupBtn').click(editGroup); // ذخیره گروه ویرایش شده
+$('#confirmDeleteGroupBtn').click(deleteGroup); // تأیید حذف گروه
+
+$('#save-note').click(saveNote); // ذخیره یادداشت جدید
+$('#search-btn').click(searchNotes); // جستجوی یادداشت‌ها
+
+window.addEventListener('storage', () => {
+    // به روزرسانی رابط کاربری در صورت تغییر در ذخیره‌سازی
+    renderGroupSelect();
+    renderNoteList();
+});
+
+renderGroupSelect(); // رندر اولیه گزینه‌های انتخاب گروه
+renderNoteList(); // رندر اولیه لیست یادداشت‌ها
+</script>
+		
+			</body>
+		</html>
