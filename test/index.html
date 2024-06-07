@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <title>دایره‌های سفید در پس زمینه تاریک</title>
     <style>
         body {
             background-color: #333; /* پس زمینه تاریک */
@@ -11,30 +12,31 @@
             height: 20px;
             border-radius: 50%;
             background-color: #fff; /* دایره سفید */
-            animation: moveUp 3s linear infinite;
-        }
-        @keyframes moveUp {
-            0% {
-                transform: translateY(0);
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(-100px);
-                opacity: 0;
-            }
         }
     </style>
 </head>
 <body>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script>
-        let body = document.body;
-        for (let i = 0; i < 100; i++) {
-            let circle = document.createElement("div");
-            circle.className = "circle";
-            circle.style.top = Math.random() * window.innerHeight + "px";
-            circle.style.left = Math.random() * window.innerWidth + "px";
-            body.appendChild(circle);
-        }
+        $(document).ready(function() {
+            for (let i = 0; i < 100; i++) {
+                let circle = $("<div>").addClass("circle");
+                circle.css({
+                    "top": Math.random() * window.innerHeight + "px",
+                    "left": Math.random() * window.innerWidth + "px"
+                });
+                $("body").append(circle);
+            }
+
+            $(".circle").each(function() {
+                $(this).animate({
+                    "top": "-100px",
+                    "opacity": 0
+                }, 3000, function() {
+                    $(this).remove();
+                });
+            });
+        });
     </script>
 </body>
 </html>
