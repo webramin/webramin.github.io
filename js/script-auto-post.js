@@ -89,3 +89,22 @@ $('.tag-btn').click(function() {
 });
 
 loadPosts(currentPage);
+
+ const navPostUl = $("#nav-post-ul");
+
+      // دریافت پنج پست آخر
+      const lastFivePosts = datapost.slice(0, 5);
+
+      // ایجاد آیتم‌های لیست
+      lastFivePosts.forEach(post => {
+        const listItem = $("<li>").addClass("nav-item mb-2");
+        const link = $("<a>")
+          .addClass("nav-link p-0 text-body-secondary")
+          .attr("href", post.link)
+          .attr("target", "_blank")
+          .text(post.title);
+
+        listItem.append(link);
+        navPostUl.prepend(listItem);
+      });
+    });
