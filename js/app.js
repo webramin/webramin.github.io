@@ -178,33 +178,18 @@ $(window).on('beforeunload', function() {
 });
 
 
-// ---------
+function goBack() {
+  window.history.back();
+}
 
-// function displayPostsFromJSON() {
-  // فرض می کنیم که داده های JSON در متغیر "postData" ذخیره شده است
-
-  // پیدا کردن المان با آی دی "naw-post-ul"
-//  const $navPostUl = $("#naw-post-ul");
-
-  // ساخت محتوای HTML برای نمایش 5 پست اول
-//  let postHtml = "";
-//  $.each(datapost.slice(0, 5), function(index, post) {
- //   postHtml += `
-//      <li class="nav-item mb-2">
- //       <a href="${post.link}" target="_blank" class="nav-link p-0 text-body-secondary">${post.title}</a>
- //     </li>
-//    `;
-//  });
-
-  // قرار دادن محتوای HTML در المان با آی دی "naw-post-ul"
-//  $navPostUl.html(`
-//    <ul class="nav flex-column text-end pe-2" id="naw-post-ul">
- //     ${postHtml}
- //   </ul>
-//  `);
-// }
-
-
-    function goBack() {
-      window.history.back();
+function setActiveThemeButton(theme) {
+  const themeButtons = $('.theme-switcher-button');
+  
+  themeButtons.each(function() {
+    if ($(this).attr('data-bs-theme-value') === theme) {
+      $(this).addClass('active');
+    } else {
+      $(this).removeClass('active');
     }
+  });
+}
