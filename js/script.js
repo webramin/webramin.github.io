@@ -191,13 +191,23 @@ function goBack() {
     if (node.nodeType === Node.TEXT_NODE) {
       node.data = node.data.replace(/\d/g, (match) => persian[match]);
     } else {
-      for (var i = 0; i < node.childNodes.length; i++) {
-        if (!node.childNodes[i].classList || !node.childNodes[i].classList.contains('elementor')) {
+      if (node.classList && node.classList.contains('ir')) {
+        for (var i = 0; i < node.childNodes.length; i++) {
           replaceNumbers(node.childNodes[i]);
         }
       }
     }
   }
 
-  replaceNumbers(document.body);
+  var irElements = document.querySelectorAll('.n-ir');
+  for (var i = 0; i < irElements.length; i++) {
+    replaceNumbers(irElements[i]);
+  }
 })();
+
+
+$(document).on('click', function(event) {
+            if (!$(event.target).closest('.navbar').length) {
+                $('.navbar-collapse').collapse('hide');
+            }
+        });
