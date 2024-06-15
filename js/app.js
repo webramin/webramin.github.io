@@ -1,5 +1,7 @@
+// بارگذاری پک
 AOS.init();
 
+// فزمت تایم
 function formatTime(date) {
   let hours = date.getHours();
   let minutes = date.getMinutes();
@@ -8,18 +10,14 @@ function formatTime(date) {
   seconds = seconds < 10 ? '0' + seconds : seconds;
   return hours + ':' + minutes + ':' + seconds;
 }
-
+// نمایش زمان ورود به صحفه 
 window.onload = function() {
   const entryTime = new Date();
   const formattedTime = formatTime(entryTime);
   console.log('زمان ورود کاربر: ' + formattedTime);
 };
 
-$(".palet").each(function(){
-  var colorCode = $(this).text();
-  $(this).parent().css("background-color", colorCode);
-});
-
+// تغیر تم نوار موبایل
 $(document).ready(function() {
   function updateThemeColor() {
     var themeMode = $('html').attr('data-bs-theme');
@@ -39,6 +37,7 @@ $(document).ready(function() {
   $(document.documentElement).on('data-bs-theme-change', updateThemeColor);
 });
 
+// بلور کردن ناوبار پس از اسکرول به پایین
 window.addEventListener('DOMContentLoaded', event => {
   var navblur = function () {
     const navbarCollapsible = document.body.querySelector('#mainNav');
@@ -62,6 +61,7 @@ window.addEventListener('DOMContentLoaded', event => {
   }
 });
 
+// تابع اشکار سازی دکمه اسکرول به بالا
 $(window).scroll(function () { 
   $('.add-scroll').each(function(){
     var pos = $(this).offset().top;
@@ -72,6 +72,7 @@ $(window).scroll(function () {
   });
 });
 
+// تابع اسکرول به بالای صحفه
 $(window).on('scroll', function() {
   var scrollTop = $(this).scrollTop();
 
@@ -91,11 +92,13 @@ $('#btnTop').click(function (e) {
   })
 });
 
+// تابع اضافه کردن نام سایت
 var addText = "WEBRAMIN | ";
 var pegeTitle = $('title').text();
 var newTitle = addText + pegeTitle;
 $('title').text(newTitle);
 
+// تابع تاریخ شمسی
 function showdate() {
   week = new Array("یکشنبه", "دوشنبه", "سه‌شنبه", "چهارشنبه", "پنج‌شنبه", "جمعه", "شنبه");
   months = new Array("فروردین", "اردیبهشت", "خرداد", "تیر", "مرداد", "شهریور", "مهر", "آبان", "آذر", "دی", "بهمن", "اسفند");
@@ -126,6 +129,7 @@ function showdate() {
 }
 document.getElementById('persianDate').innerText = showdate();
 
+// تابع تاریخ میلادی
 function showGregorianDate() {
   const weekDays = ["یکشنبه",
     "دوشنبه",
@@ -155,6 +159,7 @@ function showGregorianDate() {
 }
 document.getElementById('gregorianDate').innerText = showGregorianDate();
 
+// تابع ساعت
 function updateClock() {
   const now = new Date();
   let hours = now.getHours();
@@ -168,6 +173,7 @@ function updateClock() {
 }
 updateClock();
 
+// تابه لودر
 $(window).on('load', function() {
   $(".Preloader").addClass("hidden");
 });
@@ -177,19 +183,7 @@ $(window).on('beforeunload', function() {
   $(".Preloader").addClass("hidden");
 });
 
-
+// تابع بازگشت
 function goBack() {
   window.history.back();
-}
-
-function setActiveThemeButton(theme) {
-    document.querySelectorAll('[data-bs-theme-value]')
-        .forEach(element => {
-            element.classList.remove('active')
-            element.setAttribute('aria-pressed', 'false')
-        })
-
-    const btnTheme = document.querySelector('.theme-switcher-button[data-bs-theme-value="${theme}"]');
-    btnTheme.classList.add('active')
-    btnTheme.setAttribute('aria-pressed', 'true')
 }
