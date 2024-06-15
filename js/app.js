@@ -189,7 +189,7 @@ function setActiveThemeButton(theme) {
             element.setAttribute('aria-pressed', 'false')
         })
 
-    const btnToActive = document.querySelector(`[data-bs-theme-value="${theme}"]`)
-    btnToActive.classList.add('active')
-    btnToActive.setAttribute('aria-pressed', 'true')
+    const btnTheme = document.querySelector('.theme-switcher-button[data-bs-theme-value="${theme}"]');
+    btnTheme.classList.add('active')
+    btnTheme.setAttribute('aria-pressed', 'true')
 }
