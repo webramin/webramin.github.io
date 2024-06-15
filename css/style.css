@@ -251,10 +251,6 @@ pre {
     color: var(--web-gray-300);
 }
 
-html[data-bs-theme=light] a.nav-link.p-0.text-body-secondary {
-    text-decoration: revert;
-}
-
 @keyframes move-forever1 {
     0% {
         transform: translate(85px)
@@ -316,23 +312,26 @@ html[data-bs-theme=light] a.nav-link.p-0.text-body-secondary {
     animation-delay: -2s
 }
 
-[data-bs-theme="light"] .theme-switcherlight{
+[data-bs-theme="light"] .theme-switcher-light{
     color: var(--web-btn-active-color);
     background-color: var(--web-btn-active-bg);
-    border-color: var(--web-btn-active-border-color);
     box-shadow: var(--web-btn-active-shadow);
 }
 
 [data-bs-theme="dark"] .theme-switcher-dark{
     color: var(--web-btn-active-color);
     background-color: var(--web-btn-active-bg);
-    border-color: var(--web-btn-active-border-color);
     box-shadow: var(--web-btn-active-shadow);
 }
 
 [data-bs-theme="auto"] .theme-switcher-auto{
     color: var(--web-btn-active-color);
     background-color: var(--web-btn-active-bg);
-    border-color: var(--web-btn-active-border-color);
     box-shadow: var(--web-btn-active-shadow);
 }
+
+
+/* html[data-bs-theme=light] a.nav-link.p-0.text-body-secondary ,html[data-bs-theme=auto] a.nav-link.p-0.text-body-secondary {
+    text-decoration: revert;
+}
+ */
