@@ -330,29 +330,24 @@ pre {
     box-shadow: var(--web-btn-active-shadow);
 }
 
-
-/* html[data-bs-theme=light] a.nav-link.p-0.text-body-secondary ,html[data-bs-theme=auto] a.nav-link.p-0.text-body-secondary {
-    text-decoration: revert;
-}
- */
-
-
 .logo.logo-gray {
     background-image: url(https://webramin.storage.iran.liara.space/logo.svg);
     height: 32px;
     width: 120px;
     background-size: cover;
-    
+    filter: brightness(2);
+    transition-duration: .4s;
 }
 
 .logo-webramin {
-    ;background-image: url(https://webramin.storage.iran.liara.space/webramin.svg);
+    background-image: url(https://webramin.storage.iran.liara.space/webramin.svg);
     width: 120px;
     height: 32px;
     background-size: cover;
+    filter: contrast(0.5);
 }
 
 [data-bs-theme="dark"] .logo-webramin ,
 [data-bs-theme="dark"] .logo.logo-gray {
-    filter: invert(1);
+    filter: brightness(6);
 }
