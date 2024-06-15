@@ -335,3 +335,24 @@ pre {
     text-decoration: revert;
 }
  */
+
+
+.logo.logo-gray {
+    background-image: url(https://webramin.storage.iran.liara.space/logo.svg);
+    height: 32px;
+    width: 120px;
+    background-size: cover;
+    
+}
+
+.logo-webramin {
+    ;background-image: url(https://webramin.storage.iran.liara.space/webramin.svg);
+    width: 120px;
+    height: 32px;
+    background-size: cover;
+}
+
+[data-bs-theme="dark"] .logo-webramin ,
+[data-bs-theme="dark"] .logo.logo-gray {
+    filter: invert(1);
+}
