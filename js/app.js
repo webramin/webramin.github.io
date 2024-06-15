@@ -183,13 +183,13 @@ function goBack() {
 }
 
 function setActiveThemeButton(theme) {
-  const themeButtons = $('.theme-switcher-button');
-  
-  themeButtons.each(function() {
-    if ($(this).attr('data-bs-theme-value') === theme) {
-      $(this).addClass('active');
-    } else {
-      $(this).removeClass('active');
-    }
-  });
+    document.querySelectorAll('[data-bs-theme-value]')
+        .forEach(element => {
+            element.classList.remove('active')
+            element.setAttribute('aria-pressed', 'false')
+        })
+
+    const btnToActive = document.querySelector(`[data-bs-theme-value="${theme}"]`)
+    btnToActive.classList.add('active')
+    btnToActive.setAttribute('aria-pressed', 'true')
 }
