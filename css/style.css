@@ -315,3 +315,24 @@ html[data-bs-theme=light] a.nav-link.p-0.text-body-secondary {
     opacity: .3;
     animation-delay: -2s
 }
+
+[data-bs-theme="light"] .theme-switcherlight{
+    color: var(--web-btn-active-color);
+    background-color: var(--web-btn-active-bg);
+    border-color: var(--web-btn-active-border-color);
+    box-shadow: var(--web-btn-active-shadow);
+}
+
+[data-bs-theme="dark"] .theme-switcher-dark{
+    color: var(--web-btn-active-color);
+    background-color: var(--web-btn-active-bg);
+    border-color: var(--web-btn-active-border-color);
+    box-shadow: var(--web-btn-active-shadow);
+}
+
+[data-bs-theme="auto"] .theme-switcher-auto{
+    color: var(--web-btn-active-color);
+    background-color: var(--web-btn-active-bg);
+    border-color: var(--web-btn-active-border-color);
+    box-shadow: var(--web-btn-active-shadow);
+}
