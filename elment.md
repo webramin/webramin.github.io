@@ -212,6 +212,13 @@
 #### footer
 
 ```html
+<div id="sips" class="mt-2 d-print-none">
+    <svg class="section-divider" xmlns="http://www.w3.org/2000/svg" viewBox="0 24 150 28" preserveAspectRatio="none" style="fill: var(--web-primary-bg-subtle);">
+        <path class="wave-1" d="M-110 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z"></path>
+        <path class="wave-2" d="M-110 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z"></path>
+        <path class="wave-3" d="M-110 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z"></path>
+    </svg>
+</div>
 <footer class="footer rtl text-end d-print-none" style="background: var(--web-primary-bg-subtle);">
     <div class="container">
         <div class="border-bottom border-secondary py-6 rtl">
