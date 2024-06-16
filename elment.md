@@ -377,3 +377,30 @@
     </div>
 </footer>
 ```
+
+---
+
+#### body (empty)
+
+```html
+<main>
+<div class="page" dir="rtl">
+   <div class="px-2 page-wrapper d-print-none">
+       <div class="container-xl">
+            <div class="page-header">
+                <div class="row align-items-center">
+                    <div class="col aos-init aos-animate" data-aos="fade-up">
+                        <h1 class="page-title">(title)</h1>
+                        <div class="page-pretitle">...</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="page-body">
+            <div class="container-lg">
+            </div>
+        </div>
+    </div>
+</div>
+</main>
+```
