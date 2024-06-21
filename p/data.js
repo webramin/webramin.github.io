@@ -1,23 +1,23 @@
 const datapost = [
-// {
-//    id: 1,
-//    title: "پروژه پنجاه",
-//    description: "در این پروژه چندین صفحه با زبان های مختلف برنامه فراند اند نوشته شده و پروژه ها شامل ابزارهای ویرایش متن و ماشین حساب مولد و ... هستند",
-//    image: "link img",
-//    link: "https://webramin.github.io/p/project-fifty/",
-//    tags: "Html,css, JavaScript,bootstrap, jQuery,json ",
-//    date: "1403/02/29"
-//  },
-//  {
-//    id: 2,
-//    title: " آموزش css",
-//    description: "آموزش کامل  تگ های css به صورت فشرده و خلاصه.",
-//    image: "https://example.com/image2.jpg",
-//    link: "https://webramin.github.io/p/css-training/",
-//    tags: "css, text,demo",
-//    date: "1403/02/20"
-//  },
- 
+ {
+   id: 1,
+    title: "پروژه پنجاه",
+    description: "در این پروژه چندین صفحه با زبان های مختلف برنامه فراند اند نوشته شده و پروژه ها شامل ابزارهای ویرایش متن و ماشین حساب مولد و ... هستند",
+   image: "link img",
+    link: "https://webramin.github.io/p/project-fifty/",
+    tags: "Html,css, JavaScript,bootstrap, jQuery,json ",
+    date: "1403/02/29"
+  },
+  {
+    id: 2,
+   title: " آموزش css",
+    description: "آموزش کامل  تگ های css به صورت فشرده و خلاصه.",
+  image: "https://example.com/image2.jpg",
+    link: "https://webramin.github.io/p/css-training/",
+    tags: "css, text,demo",
+    date: "1403/02/20"
+ },
+
   {
     id: 3,
     title: "responsive web",
