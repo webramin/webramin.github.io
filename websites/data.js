@@ -27,13 +27,12 @@ const datapost = [
   },
   {
     "id": 4,
-    "title": "suno",
-    "description": "",
-    "image": "",
+    "title": "Suno",
+    "description": "سونو پلتفرمی است که در آن کاربران می‌توانند درباره هر چیزی آهنگ بسازند.  این یک ثبت نام رایگان برای کاربران برای دسترسی به ویژگی های آن ارائه می دهد",
+    "image": "https://suno.com/favicon.ico",
     "link": "https://suno.com/",
-    "tags": "AI, aduo, vocal, music",
+    "tags": "AI, audio, vocal, music",
     "date": "1403/04/02"
-  }
-
+}
   
 ]
