@@ -5,7 +5,8 @@ const datapost = [
     description: "آخرین پیشرفت‌های هوش مصنوعی و یادگیری ماشینی را در آزمایشگاه‌های Perplexity کشف کنید. از پردازش زبان طبیعی تا بینایی کامپیوتری، تیم ما مرزهای امکان‌پذیر را گسترش می‌دهد",
     image: "https://example.com/image1.jpg",
     link: "https://labs.perplexity.ai/",
-    tags: "ai, text-ai, GPT-4, site"
+    tags: "ai, text-ai, GPT-4, site",
+    "date": "1403/02/01"
   },
   {
     "id": 2,
@@ -13,7 +14,8 @@ const datapost = [
     "description": "ونی یک پلتفرم است که مجموعه ای از ابزارهای هوش مصنوعی را برای کمک به انجام وظایف مختلف مانند نوشتن مقالات جذاب، تولید برنامه های تناسب اندام، ترجمه زبان ها و موارد دیگر ارائه می دهد. این پلتفرم یک مرکز یکپارچه برای ابزارهای هوش مصنوعی فراهم می کند که مدیریت و استفاده از قابلیت های هوش مصنوعی را آسان تر می سازد.",
     "image": "",
     "link": "https://www.vondy.com/",
-    "tags": "AI, Productivity, Writing, Translation, Fitness"
+    "tags": "AI, Productivity, Writing, Translation, Fitness",
+    "date": "1403/02/05"
   },
   
 {
