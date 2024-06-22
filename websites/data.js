@@ -24,7 +24,16 @@ const datapost = [
     "link": "https://chat.lmsys.org/",
     "tags": "AI, Cloud 3, text-ai",
     "date": "1403/02/30"
+  },
+  {
+    "id": 4,
+    "title": "suno",
+    "description": "",
+    "image": "",
+    "link": "https://suno.com/",
+    "tags": "AI, aduo, vocal, music",
+    "date": "1403/04/02"
   }
- 
+
   
 ]
