@@ -136,6 +136,10 @@
             required: 2
         },
             {
+                name: "افسر نگهبانی و جلو آن",
+                required: 1
+            },
+            {
                 name: "جلو آسایشگاه",
                 required: 1
             },
@@ -234,9 +238,14 @@
                     <td>${s.isFixed ? s.fixedArea: '-'}</td>
                     <td>
                     <div class="btn-group" dir="ltr">
-                    <button class="btn btn-sm btn-warning edit-soldier" data-index="${i}">ویرایش</button>
-                    <button class="btn btn-sm btn-danger delete-soldier" data-index="${i}">حذف</button>
-                    </div>
+                    <button class="btn btn-sm btn-warning edit-soldier" data-index="${i}" title="ویرایش">
+    <i class="ti ti-edit"></i>
+</button>
+
+<button class="btn btn-sm btn-danger delete-soldier" data-index="${i}" title="حذف">
+    <i class="ti ti-trash"></i>
+</button>
+</div>
                     </td>
                     </tr>
                     `);
