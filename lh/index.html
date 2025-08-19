@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لوحه نظافت پادگان</title>
+    <!-- Tabler CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/@tabler/core@latest/dist/css/tabler.min.css" rel="stylesheet">
+    <!-- Tabler Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css" rel="stylesheet">
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Jalaali JS -->
+    <script src="https://cdn.jsdelivr.net/npm/jalaali-js/dist/jalaali.min.js"></script>
+    <style>
+        body {
+            direction: rtl;
+            text-align: right;
+        }
+        k {
+            display: inline;
+        }
+@media print {
+            .no-print {
+                display: none !important;
+            }
+        }
+    </style>
+</head>
+<body class="container py-4">
+    <h1 class="mb-4">لوحه نظافت پادگان</h1>
+
+    <!-- فرم -->
+    <div class="card mb-4 d-print-none">
+        <div class="card-header">
+            افزودن/ویرایش سرباز
+        </div>
+        <div class="card-body">
+            <form id="soldier-form" class="row g-3">
+                <input type="hidden" id="edit-index">
+                <div class="col-md-6">
+                    <label class="form-label">نام و نام خانوادگی</label>
+                    <input type="text" id="fullName" class="form-control" required>
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label">سال اعزام (شمسی)</label>
+                    <select id="year" class="form-select" required>
+                        <option value="">انتخاب سال...</option>
+                        <option value="1403">۱۴۰۳</option>
+                        <option value="1404">۱۴۰۴</option>
+                        <option value="1405">۱۴۰۵</option>
+                        <option value="1406">۱۴۰۶</option>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label">ماه اعزام</label>
+                    <select id="month" class="form-select" required>
+                        <option value="">انتخاب ماه...</option>
+                        <option value="1">فروردین</option>
+                        <option value="2">اردیبهشت</option>
+                        <option value="3">خرداد</option>
+                        <option value="4">تیر</option>
+                        <option value="5">مرداد</option>
+                        <option value="6">شهریور</option>
+                        <option value="7">مهر</option>
+                        <option value="8">آبان</option>
+                        <option value="9">آذر</option>
+                        <option value="10">دی</option>
+                        <option value="11">بهمن</option>
+                        <option value="12">اسفند</option>
+                    </select>
+                </div>
+                <div class="col-md-4">
+                    <label class="d-inline form-label">ثابت در یک محل؟</label>
+                    <input class="d-inline" type="checkbox" id="isFixed">
+                </div>
+                <div class="col-md-6" id="fixed-area-container" style="display:none;">
+                    <label class="form-label">محل ثابت</label>
+                    <select id="fixedArea" class="form-select"></select>
+                </div>
+                <div class="col-12">
+                    <button type="submit" class="btn btn-primary">ذخیره</button>
+                    <button type="reset" class="btn btn-secondary">انصراف</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- جدول سربازها -->
+    <div class="card mb-4 d-print-none">
+        <div class="card-header">
+            لیست سربازها
+        </div>
+        <div class="card-body">
+            <table class="table" id="soldiers-table">
+                <thead>
+                    <tr>
+                        <th>نام و نام خانوادگی</th>
+                        <th>ماه خدمت</th>
+                        <th>محل ثابت</th>
+                        <th>عملیات</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- دکمه تولید لوحه -->
+    <button id="generate-board" class="btn btn-success mb-4 d-print-none">تولید لوحه</button>
+
+    <!-- لوحه -->
+    <div id="board" class="card d-print-block" style="display:none;">
+        <div class="card-header">
+            لوحه نظافت
+        </div>
+        <div class="card-body">
+            <table class="table" id="board-table">
+                <thead>
+                    <tr>
+                        <th>محل</th>
+                        <th>سربازان</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- پرینت -->
+    <button onclick="window.print()" class="btn btn-primary no-print">پرینت</button>
+
+    <script>
+        const areas = [{
+            name: "آسایشگاه وظیفه",
+            required: 2
+        },
+            {
+                name: "جلو آسایشگاه",
+                required: 1
+            },
+            {
+                name: "راهرو بغل",
+                required: 2
+            },
+            {
+                name: "حمام",
+                required: 1
+            },
+            {
+                name: "سرویس بهداشتی",
+                required: 1
+            },
+            {
+                name: "محوطه آسفالت",
+                required: 2
+            },
+            {
+                name: "سلف",
+                required: 1
+            },
+            {
+                name: "باغچه ها",
+                required: 1
+            },
+            {
+                name: "سطل زباله",
+                required: 1
+            },
+            {
+                name: "روبه روی اسلحه خانه و کانکس ها",
+                required: 1
+            },
+            {
+                name: "سالن های اداری",
+                required: 1
+            },
+            {
+                name: "پشت آسایشگاه و آشپز خانه",
+                required: 1
+            },
+            {
+                name: "دشت بانی",
+                required: 1
+            },
+            {
+                name: "پارکینگ ها",
+                required: 1
+            }];
+
+        let soldiers = JSON.parse(localStorage.getItem('soldiers')) || [];
+        let rotationIndex = 0; // برای چرخش سربازها
+
+        function saveSoldiers() {
+            localStorage.setItem('soldiers', JSON.stringify(soldiers));
+        }
+
+        function getCurrentPersianDate() {
+            const gDate = new Date();
+            const jDate = jalaali.toJalaali(gDate);
+            return {
+                year: jDate.jy,
+                month: jDate.jm
+            };
+        }
+
+        function calculateServiceMonths(startYear, startMonth, currentYear, currentMonth) {
+            let months = (currentYear - startYear) * 12 + (currentMonth - startMonth) + 1;
+            return months > 0 ? months: 1;
+        }
+
+        function populateFixedAreas() {
+            const $fixedArea = $('#fixedArea');
+            $fixedArea.empty();
+            areas.forEach(area => {
+                $fixedArea.append(`<option value="${area.name}">${area.name}</option>`);
+            });
+        }
+
+        function renderSoldiers() {
+            const $tbody = $('#soldiers-table tbody');
+            $tbody.empty();
+            const {
+                year: cy,
+                month: cm
+            } = getCurrentPersianDate();
+
+            soldiers.forEach((s, i) => {
+                const months = calculateServiceMonths(s.year, s.month, cy, cm);
+                $tbody.append(`
+                    <tr>
+                    <td>${s.fullName}</td>
+                    <td>${months}</td>
+                    <td>${s.isFixed ? s.fixedArea: '-'}</td>
+                    <td>
+                    <div class="btn-group">
+                    <button class="btn btn-sm btn-warning edit-soldier" data-index="${i}">ویرایش</button>
+                    <button class="btn btn-sm btn-danger delete-soldier" data-index="${i}">حذف</button>
+                    </div>
+                    </td>
+                    </tr>
+                    `);
+            });
+        }
+
+        function resetForm() {
+            $('#soldier-form')[0].reset();
+            $('#edit-index').val('');
+            $('#fixed-area-container').hide();
+        }
+
+        $('#soldier-form').on('submit', function(e) {
+            e.preventDefault();
+            const index = $('#edit-index').val();
+            const soldier = {
+                fullName: $('#fullName').val(),
+                year: parseInt($('#year').val()),
+                month: parseInt($('#month').val()),
+                isFixed: $('#isFixed').is(':checked'),
+                fixedArea: $('#isFixed').is(':checked') ? $('#fixedArea').val(): null
+            };
+
+            if (index !== '') {
+                soldiers[parseInt(index)] = soldier;
+            } else {
+                soldiers.push(soldier);
+            }
+            saveSoldiers();
+            renderSoldiers();
+            resetForm();
+        });
+
+        $(document).on('click', '.edit-soldier', function() {
+            const s = soldiers[$(this).data('index')];
+            $('#edit-index').val($(this).data('index'));
+            $('#fullName').val(s.fullName);
+            $('#year').val(s.year);
+            $('#month').val(s.month);
+            $('#isFixed').prop('checked', s.isFixed);
+            if (s.isFixed) {
+                $('#fixed-area-container').show();
+                populateFixedAreas();
+                $('#fixedArea').val(s.fixedArea);
+            } else {
+                $('#fixed-area-container').hide();
+            }
+        });
+
+        $(document).on('click', '.delete-soldier', function() {
+            soldiers.splice($(this).data('index'), 1);
+            saveSoldiers();
+            renderSoldiers();
+        });
+
+        $('#isFixed').on('change', function() {
+            if ($(this).is(':checked')) {
+                $('#fixed-area-container').show();
+                populateFixedAreas();
+            } else {
+                $('#fixed-area-container').hide();
+            }
+        });
+
+        $('#generate-board').on('click', function() {
+            const assignments = [];
+            const areaMap = JSON.parse(JSON.stringify(areas));
+
+            // سربازهای ثابت
+            soldiers.filter(s => s.isFixed).forEach(s => {
+                const area = areaMap.find(a => a.name === s.fixedArea);
+                if (area) area.required--;
+                assignments.push({
+                    soldier: s, area: s.fixedArea
+                });
+            });
+
+            // سربازهای آزاد با چرخش
+            let others = soldiers.filter(s => !s.isFixed);
+            const {
+                year: cy, month: cm
+            } = getCurrentPersianDate();
+            others.sort((a, b) =>
+                calculateServiceMonths(b.year, b.month, cy, cm) -
+                calculateServiceMonths(a.year, a.month, cy, cm)
+            );
+
+            let idx = rotationIndex;
+            others.forEach(s => {
+                let freeArea = areaMap.find((a, i) => (i + idx) % areaMap.length && a.required > 0);
+                if (freeArea) {
+                    assignments.push({
+                        soldier: s, area: freeArea.name
+                    });
+                    freeArea.required--;
+                    idx++;
+                }
+            });
+
+            rotationIndex++; // هر بار کلیک تغییر کنه
+
+            // نمایش لوحه
+            const $tbody = $('#board-table tbody');
+            $tbody.empty();
+            areas.forEach(a => {
+                const names = assignments.filter(x => x.area === a.name)
+                .map(x => x.soldier.fullName)
+                .join('، ');
+                $tbody.append(`<tr><td>${a.name}</td><td>${names || '-'}</td></tr>`);
+            });
+
+            $('#board').show();
+        });
+
+        $(document).ready(() => renderSoldiers());
+    </script>
+</body>
+</html>
