@@ -9,28 +9,53 @@
   <link href="https://cdn.jsdelivr.net/npm/@tabler/core@latest/dist/css/tabler.rtl.min.css" rel="stylesheet">
   <!-- Tabler Icons -->
   <link href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css" rel="stylesheet">
+  <!-- IranSans (اختیاری) -->
+  <link href="https://cdn.fontcdn.ir/Font/Persian/IranSans/IranSans.css" rel="stylesheet">
+
   <!-- jQuery -->
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <!-- Jalaali JS -->
   <script src="https://cdn.jsdelivr.net/npm/jalaali-js/dist/jalaali.min.js"></script>
 
   <style>
-    body{
-      direction: rtl;
-      text-align: right;
-      font-family: IranSans, sans-serif;
-    }
-    @media print { .no-print{ display:none !important; } }
+    body{ direction: rtl; text-align: right; font-family: IranSans, sans-serif; }
+    @media print { .d-print-none{ display:none !important; } .d-print-block{ display:block !important; } }
+    .table td, .table th { vertical-align: middle; }
   </style>
 </head>
 <body class="container py-4">
-  <h1 class="mb-4">لوحه نظافت پادگان</h1>
+  <h1 class="mb-2">لوحه نظافت پادگان</h1>
+  <div class="text-muted mb-4" id="today-label"></div>
 
+  <!-- پیام‌ها -->
+  <div id="messages" class="mb-3 d-print-none"></div>
+<!-- دکمه جستجو -->
+<button class="btn btn-info mb-3 d-print-none" data-bs-toggle="modal" data-bs-target="#searchModal">
+  <i class="ti ti-search me-2"></i> جستجو سرباز
+</button>
+
+<!-- مودال جستجو -->
+<div class="modal fade" id="searchModal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">جستجو سرباز</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <input type="text" id="searchName" class="form-control mb-3" placeholder="نام سرباز را وارد کنید...">
+        <button id="doSearch" class="btn btn-primary">جستجو</button>
+        <hr>
+        <div id="searchResult"></div>
+      </div>
+    </div>
+  </div>
+</div>
   <!-- فرم -->
   <div class="card mb-4 d-print-none">
     <div class="card-header">افزودن/ویرایش سرباز</div>
     <div class="card-body">
-      <form id="soldier-form" class="row g-3">
+      <form id="soldier-form" class="row g-3" novalidate>
         <input type="hidden" id="edit-index">
         <div class="col-md-6">
           <label class="form-label">نام و نام خانوادگی</label>
@@ -40,10 +65,8 @@
           <label class="form-label">سال اعزام (شمسی)</label>
           <select id="year" class="form-select" required>
             <option value="">انتخاب سال...</option>
-            <option value="1403">۱۴۰۳</option>
-            <option value="1404">۱۴۰۴</option>
-            <option value="1405">۱۴۰۵</option>
-            <option value="1406">۱۴۰۶</option>
+            <option value="1403">۱۴۰۳</option><option value="1404">۱۴۰۴</option>
+            <option value="1405">۱۴۰۵</option><option value="1406">۱۴۰۶</option>
           </select>
         </div>
         <div class="col-md-3">
@@ -94,12 +117,18 @@
     </div>
   </div>
 
-  <!-- دکمه تولید لوحه -->
-  <button id="generate-board" class="btn btn-success mb-4 d-print-none">تولید لوحه</button>
+  <!-- دکمه‌ها -->
+  <div class="d-flex gap-2 mb-4 d-print-none">
+    <button id="generate-board" class="btn btn-success">تولید لوحه</button>
+   <!-- <button id="clear-data" class="btn btn-outline-danger">پاک‌سازی داده‌ها</button> -->
+   </div>
 
   <!-- لوحه -->
   <div id="board" class="card d-print-block" style="display:none;">
-    <div class="card-header">لوحه نظافت</div>
+    <div class="card-header d-flex justify-content-between">
+      <span>لوحه نظافت</span>
+      <span class="text-muted">نوبت چرخش: <b id="rotation-label">۱</b></span>
+    </div>
     <div class="card-body">
       <table class="table" id="board-table">
         <thead>
@@ -114,10 +143,10 @@
   </div>
 
   <!-- پرینت -->
-  <button onclick="window.print()" class="btn btn-primary no-print">
+  <button onclick="window.print()" class="btn btn-primary d-print-none mt-3">
     <i class="ti ti-printer me-2"></i>پرینت
   </button>
-
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
   <script>
     // --- تنظیمات محل‌ها ---
     const areas = [
@@ -132,22 +161,30 @@
       { name: "باغچه ها", required: 1 },
       { name: "سطل زباله", required: 1 },
       { name: "روبه روی اسلحه خانه و کانکس ها", required: 1 },
-      { name: "سالن های اداری", required: 1 },
-      { name: "پشت آسایشگاه و آشپز خانه", required: 1 },
-      { name: "دشت بانی", required: 1 },
-      { name: "پارکینگ ها", required: 1 }
+      { name: "سالن های اداری", required: 2 },
+      { name: "پشت آسایشگاه و آشپز خانه", required: 2 },
+      { name: "دشت بانی", required: 4 },
+      { name: "پارکینگ ها", required: 2 }
     ];
 
-    let soldiers = JSON.parse(localStorage.getItem('soldiers')) || [];
-    let rotationIndex = 0; // نقطه شروع چرخش
+    const KEYS = {
+      soldiers: 'soldiers',
+      rotationIndex: 'rotationIndex',
+      lastGenDate: 'lastGenDate'
+    };
 
-    function saveSoldiers(){ localStorage.setItem('soldiers', JSON.stringify(soldiers)); }
+    let soldiers = JSON.parse(localStorage.getItem(KEYS.soldiers) || '[]');
+    let rotationIndex = parseInt(localStorage.getItem(KEYS.rotationIndex) || '0', 10);
+
+    function saveSoldiers(){ localStorage.setItem(KEYS.soldiers, JSON.stringify(soldiers)); }
+    function saveRotation(){ localStorage.setItem(KEYS.rotationIndex, String(rotationIndex)); }
 
     function getCurrentPersianDate(){
-      const gDate = new Date();
-      const jDate = jalaali.toJalaali(gDate);
-      return { year: jDate.jy, month: jDate.jm };
+      const j = jalaali.toJalaali(new Date()); // {jy, jm, jd}
+      return { year: j.jy, month: j.jm, day: j.jd };
     }
+
+    function formatJDate(j){ return `${j.year}/${j.month}/${j.day}`; }
 
     function calculateServiceMonths(startYear, startMonth, currentYear, currentMonth){
       let months = (currentYear - startYear) * 12 + (currentMonth - startMonth) + 1;
@@ -173,7 +210,7 @@
             <td>${months}</td>
             <td>${s.isFixed ? s.fixedArea : '-'}</td>
             <td>
-              <div class="btn-group" >
+              <div class="btn-group">
                 <button class="btn btn-sm btn-warning edit-soldier" data-index="${i}" title="ویرایش">
                   <i class="ti ti-edit"></i>
                 </button>
@@ -193,9 +230,30 @@
       $('#fixed-area-container').hide();
     }
 
+    function showMessages(msgs){
+      const $m = $('#messages');
+      if(!msgs || !msgs.length){ $m.empty(); return; }
+      const lis = msgs.map(x => `<li>${x}</li>`).join('');
+      $m.html(`
+        <div class="alert alert-warning" role="alert">
+          <div class="d-flex">
+            <div><i class="ti ti-alert-triangle me-2"></i></div>
+            <div>
+              <strong>هشدار ظرفیت:</strong>
+              <ul class="mb-0">${lis}</ul>
+            </div>
+          </div>
+        </div>
+      `);
+    }
+
     // --- رویدادها ---
     $('#soldier-form').on('submit', function(e){
       e.preventDefault();
+
+      // اعتبارسنجی دستی چون preventDefault کرده‌ایم
+      if(!this.checkValidity()){ this.reportValidity(); return; }
+
       const index = $('#edit-index').val();
       const soldier = {
         fullName: $('#fullName').val().trim(),
@@ -215,6 +273,11 @@
       saveSoldiers();
       renderSoldiers();
       resetForm();
+    });
+
+    // Reset: حتماً محل ثابت پنهان شود
+    $('#soldier-form').on('reset', function(){
+      setTimeout(resetForm, 0);
     });
 
     $(document).on('click', '.edit-soldier', function(){
@@ -248,27 +311,46 @@
       }
     });
 
-    // --- تولید لوحه با چرخش صحیح ---
+    // --- تولید لوحه با چرخش پایدار روزانه ---
     $('#generate-board').on('click', function(){
+      const msgs = [];
+      const today = getCurrentPersianDate();
+      $('#today-label').text(`امروز: ${formatJDate(today)}`);
+
+      // اگر تاریخ امروز با آخرین تولید فرق دارد، چرخش را یک گام جلو ببریم
+      const todayKey = `${today.year}-${today.month}-${today.day}`;
+      const lastKey = localStorage.getItem(KEYS.lastGenDate);
+      if (lastKey !== todayKey){
+        rotationIndex = (rotationIndex + 1) % areas.length;
+        saveRotation();
+        localStorage.setItem(KEYS.lastGenDate, todayKey);
+      }
+
       const assignments = [];
-      // کپی عمیق از لیست محل‌ها (برای ظرفیت‌های موقتی این دور)
       const areaMap = JSON.parse(JSON.stringify(areas));
+      const fixedCounts = {};
 
       // 1) اعمال سربازهای ثابت
       soldiers.filter(s => s.isFixed).forEach(s => {
         const area = areaMap.find(a => a.name === s.fixedArea);
         if (area){
-          // همه‌ی ثابت‌ها را اضافه کن (ممکن است بیش از ظرفیت باشند)
           assignments.push({ soldier: s, area: area.name });
-          area.required -= 1; // ظرفیت مصرف شد (ممکن است منفی شود)
+          area.required -= 1; // ممکن است منفی شود
+          fixedCounts[area.name] = (fixedCounts[area.name] || 0) + 1;
         }
       });
 
-      // بعد از اعمال ثابت‌ها، ظرفیت را حداقل صفر کن تا نفر آزاد اضافه نشود
+      // هشدار ظرفیت ثابت‌ها
+      Object.entries(fixedCounts).forEach(([name, count])=>{
+        const cap = areas.find(a=>a.name===name).required;
+        if (count > cap) msgs.push(`برای «${name}» تعداد ثابت‌ها (${count}) از ظرفیت (${cap}) بیشتر است.`);
+      });
+
+      // بعد از اعمال ثابت‌ها، ظرفیت را حداقل صفر کن
       areaMap.forEach(a => { if (a.required < 0) a.required = 0; });
 
-      // 2) سربازهای آزاد به ترتیبِ سابقه خدمت (بیشتر -> زودتر)
-      const { year: cy, month: cm } = getCurrentPersianDate();
+      // 2) سربازهای آزاد به ترتیب سابقه خدمت (بیشتر ← زودتر)
+      const { year: cy, month: cm } = today;
       const others = soldiers
         .filter(s => !s.isFixed)
         .sort((a, b) =>
@@ -276,30 +358,20 @@
           calculateServiceMonths(a.year, a.month, cy, cm)
         );
 
-      // 3) چرخش محل‌ها بر اساس rotationIndex
+      // 3) چرخش محل‌ها بر اساس rotationIndex (پایدار روزانه)
       let rotated = [...areaMap];
       rotated = rotated.slice(rotationIndex).concat(rotated.slice(0, rotationIndex));
 
-      // 4) تخصیص گردشی: تا وقتی ظرفیت یک محل > 0 است، همان محل را پر کن
-      let ai = 0; // ایندکس محل در آرایه‌ی چرخان
+      // 4) تخصیص گردشی
+      let ai = 0;
       others.forEach(s => {
-        // پرش از محل‌هایی که ظرفیت ندارند
         while (ai < rotated.length && rotated[ai].required <= 0) ai++;
-
         if (ai < rotated.length){
           assignments.push({ soldier: s, area: rotated[ai].name });
           rotated[ai].required -= 1;
-
-          // اگر هنوز ظرفیت همین محل باقی‌ست، ai را نگه دار؛
-          // فقط وقتی به صفر رسید برو سراغ محل بعدی
           if (rotated[ai].required <= 0) ai++;
         }
-        // اگر ai به انتها رسید، یعنی ظرفیت همه‌ی محل‌های این دور پر شده
-        // و نفرات باقی‌مانده تخصیص نمی‌گیرند (طبیعی است).
       });
-
-      // افزایش چرخش برای دور بعد
-      rotationIndex = (rotationIndex + 1) % areas.length;
 
       // 5) نمایش لوحه
       const $tbody = $('#board-table tbody');
@@ -312,10 +384,89 @@
         $tbody.append(`<tr><td>${a.name}</td><td>${names || '-'}</td></tr>`);
       });
 
+      // برچسب چرخش و پیام‌ها
+      $('#rotation-label').text(rotationIndex + 1);
+      showMessages(msgs);
       $('#board').show();
     });
 
-    $(document).ready(() => renderSoldiers());
+    // پاک‌سازی سریع
+    $('#clear-data').on('click', function(){
+      if(!confirm('همهٔ داده‌ها (سربازها/چرخش) پاک شود؟')) return;
+      localStorage.removeItem(KEYS.soldiers);
+      localStorage.removeItem(KEYS.rotationIndex);
+      localStorage.removeItem(KEYS.lastGenDate);
+      soldiers = [];
+      rotationIndex = 0;
+      renderSoldiers();
+      showMessages([]);
+      $('#board').hide();
+    });
+
+// ----------------------------
+// لیست ماه‌های فارسی
+// ----------------------------
+const persianMonths = [
+  "فروردین", "اردیبهشت", "خرداد", "تیر", "مرداد", "شهریور",
+  "مهر", "آبان", "آذر", "دی", "بهمن", "اسفند"
+];
+
+// ----------------------------
+// جستجوی لحظه‌ای سرباز
+// ----------------------------
+$('#searchName').on('input', function () {
+  const keyword = $(this).val().trim();
+  const resultBox = $('#searchResult');
+  resultBox.empty(); // پاک کردن نتیجه قبلی
+
+  if (!keyword) return; // اگه ورودی خالی بود، چیزی نشون نده
+
+  // فیلتر کردن سربازها بر اساس نام
+  const results = soldiers.filter(s => s.fullName.includes(keyword));
+
+  if (results.length === 0) {
+    resultBox.html('<div class="text-danger">موردی یافت نشد.</div>');
+    return;
+  }
+
+  // ساخت لیست نتایج
+  const ul = $('<ul class="list-group"></ul>');
+  results.forEach(soldier => {
+    const li = $(`<li class="list-group-item list-group-item-action">${soldier.fullName}</li>`);
+
+    // کلیک روی هر اسم → نمایش جزئیات
+    li.on('click', function () {
+      const { year: cy, month: cm } = getCurrentPersianDate();
+      const months = calculateServiceMonths(soldier.year, soldier.month, cy, cm);
+      const monthName = persianMonths[soldier.month - 1];
+
+      resultBox.html(`
+        <ul class="list-group">
+          <li class="list-group-item"><b>نام:</b> ${soldier.fullName}</li>
+          <li class="list-group-item"><b>اعزام:</b> ${monthName} ماه سال ${soldier.year}</li>
+          <li class="list-group-item"><b>پایه خدمت:</b> ${months}</li>
+          <li class="list-group-item"><b>محل ثابت:</b> ${soldier.isFixed ? soldier.fixedArea : '-'}</li>
+        </ul>
+        <button id="backToResults" class="btn btn-secondary mt-3">بازگشت</button>
+      `);
+
+      // دکمه بازگشت به لیست نتایج
+      $('#backToResults').on('click', function () {
+        $('#searchName').trigger('input'); // دوباره جستجو رو اجرا می‌کنه
+      });
+    });
+
+    ul.append(li);
+  });
+
+  resultBox.append(ul);
+});
+    // آماده‌سازی اولیه
+    $(document).ready(() => {
+      const today = getCurrentPersianDate();
+      $('#today-label').text(`امروز: ${formatJDate(today)}`);
+      renderSoldiers();
+    });
   </script>
 </body>
 </html>
