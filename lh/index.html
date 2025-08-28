@@ -1,472 +1,981 @@
 <!DOCTYPE html>
 <html lang="fa">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>لوحه نظافت پادگان</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>لوحه نظافت پادگان</title>
 
-  <!-- Tabler CSS (RTL) -->
-  <link href="https://cdn.jsdelivr.net/npm/@tabler/core@latest/dist/css/tabler.rtl.min.css" rel="stylesheet">
-  <!-- Tabler Icons -->
-  <link href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css" rel="stylesheet">
-  <!-- IranSans (اختیاری) -->
-  <link href="https://cdn.fontcdn.ir/Font/Persian/IranSans/IranSans.css" rel="stylesheet">
+    <!-- Tabler CSS (RTL) -->
+    <link href="https://cdn.jsdelivr.net/npm/@tabler/core@latest/dist/css/tabler.rtl.min.css" rel="stylesheet">
+    <!-- Tabler Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css" rel="stylesheet">
+    <!-- IranSans (اختیاری) -->
+    <link href="https://cdn.fontcdn.ir/Font/Persian/IranSans/IranSans.css" rel="stylesheet">
 
-  <!-- jQuery -->
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <!-- Jalaali JS -->
-  <script src="https://cdn.jsdelivr.net/npm/jalaali-js/dist/jalaali.min.js"></script>
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Jalaali JS -->
+    <script src="https://cdn.jsdelivr.net/npm/jalaali-js/dist/jalaali.min.js"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
-  <style>
-    body{ direction: rtl; text-align: right; font-family: IranSans, sans-serif; }
-    @media print { .d-print-none{ display:none !important; } .d-print-block{ display:block !important; } }
-    .table td, .table th { vertical-align: middle; }
-  </style>
+    <style>
+        body {
+            direction: rtl;
+            text-align: right;
+            font-family: IranSans, sans-serif;
+        }
+@media print {
+            .d-print-none {
+                display: none !important;
+            }
+            .d-print-block {
+                display: block !important;
+            }
+
+            .card {
+                border: 1px solid #000;
+            }
+        }
+        .table td, .table th {
+            vertical-align: middle;
+        }
+
+        /* دکمه شناور */
+        .theme-switcher {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            z-index: 9999;
+            direction: rtl;
+        }
+        .theme-btn {
+            background: var(--tblr-primary, #4c6ef5);
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            padding: 10px 12px;
+            cursor: pointer;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+            transition: 0.2s;
+        }
+        .theme-btn:hover {
+            opacity: 0.9;
+        }
+
+        /* منوی کشویی */
+        .theme-menu {
+            display: none;
+            background: var(--tblr-bg-surface, #fff);
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            margin-top: 8px;
+            min-width: 120px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+        .theme-item {
+            padding: 8px 12px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            font-size: 14px;
+        }
+        .theme-item i {
+            margin-left: 6px;
+        }
+        .theme-item:hover {
+            background: var(--tblr-primary-lt, #f0f3ff);
+        }
+        .theme-item.active {
+            background: var(--tblr-primary, #4c6ef5);
+            color: #fff;
+        }
+
+        /* دکمه‌های اصلی */
+        .main-buttons {
+            display: flex;
+            gap: 15px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+
+        .generate-btn, .rotate-btn {
+            border-radius: 12px;
+            font-weight: bold;
+            padding: 12px 24px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .generate-btn:hover, .rotate-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+        }
+
+        /* آیکون چرخش با انیمیشن */
+        .rotate-icon {
+            transition: transform 0.5s ease;
+        }
+
+        .rotating .rotate-icon {
+            animation: spin 1.5s linear infinite;
+        }
+
+@keyframes spin {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* بهبود ظاهر جدول */
+        .table-responsive {
+            overflow-x: auto;
+        }
+
+        /* هایلایت سطرهای جدول */
+        .table-hover tbody tr:hover {
+            background-color: rgba(76, 110, 245, 0.05);
+        }
+
+        /* استایل برای وضعیت‌های مختلف */
+        .status-badge {
+            padding: 5px 10px;
+            border-radius: 50px;
+            font-size: 0.85rem;
+        }
+
+        /* ظاهر کارت‌ها */
+        .card {
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            margin-bottom: 20px;
+            border: 1px solid rgba(0,0,0,0.1);
+        }
+
+        .card-header {
+            background-color: rgba(76, 110, 245, 0.1);
+            font-weight: bold;
+        }
+
+        /* پیام‌ها */
+        .alert-message {
+            padding: 12px 16px;
+            border-radius: 8px;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .alert-message.info {
+            background-color: #e8f4ff;
+            color: #0066cc;
+            border-left: 4px solid #0066cc;
+        }
+
+        .alert-message.warning {
+            background-color: #fff8e6;
+            color: #cc8800;
+            border-left: 4px solid #cc8800;
+        }
+
+        .alert-message.error {
+            background-color: #ffe6e6;
+            color: #cc0000;
+            border-left: 4px solid #cc0000;
+        }
+        body {
+            width: 100%;
+        }
+    </style>
 </head>
-<body class="container py-4">
-  <h1 class="mb-2">لوحه نظافت پادگان</h1>
-  <div class="text-muted mb-4" id="today-label"></div>
+<body class="container mx-2 py-4">
+    <h1 class="m-2 d-print-none">لوحه نظافت پادگان</h1>
+    <div class="text-muted m-4 " id="today-label"></div>
 
-  <!-- پیام‌ها -->
-  <div id="messages" class="mb-3 d-print-none"></div>
-<!-- دکمه جستجو -->
-<button class="btn btn-info mb-3 d-print-none" data-bs-toggle="modal" data-bs-target="#searchModal">
-  <i class="ti ti-search me-2"></i> جستجو سرباز
-</button>
+    <!-- پیام‌ها -->
+    <div id="messages" class="mb-3 d-print-none"></div>
 
-<!-- مودال جستجو -->
-<div class="modal fade" id="searchModal" tabindex="-1">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">جستجو سرباز</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-      </div>
-      <div class="modal-body">
-        <input type="text" id="searchName" class="form-control mb-3" placeholder="نام سرباز را وارد کنید...">
-        <button id="doSearch" class="btn btn-primary">جستجو</button>
-        <hr>
-        <div id="searchResult"></div>
-      </div>
-    </div>
-  </div>
-</div>
-  <!-- فرم -->
-  <div class="card mb-4 d-print-none">
-    <div class="card-header">افزودن/ویرایش سرباز</div>
-    <div class="card-body">
-      <form id="soldier-form" class="row g-3" novalidate>
-        <input type="hidden" id="edit-index">
-        <div class="col-md-6">
-          <label class="form-label">نام و نام خانوادگی</label>
-          <input type="text" id="fullName" class="form-control" required>
-        </div>
-        <div class="col-md-3">
-          <label class="form-label">سال اعزام (شمسی)</label>
-          <select id="year" class="form-select" required>
-            <option value="">انتخاب سال...</option>
-            <option value="1403">۱۴۰۳</option><option value="1404">۱۴۰۴</option>
-            <option value="1405">۱۴۰۵</option><option value="1406">۱۴۰۶</option>
-          </select>
-        </div>
-        <div class="col-md-3">
-          <label class="form-label">ماه اعزام</label>
-          <select id="month" class="form-select" required>
-            <option value="">انتخاب ماه...</option>
-            <option value="1">فروردین</option><option value="2">اردیبهشت</option>
-            <option value="3">خرداد</option><option value="4">تیر</option>
-            <option value="5">مرداد</option><option value="6">شهریور</option>
-            <option value="7">مهر</option><option value="8">آبان</option>
-            <option value="9">آذر</option><option value="10">دی</option>
-            <option value="11">بهمن</option><option value="12">اسفند</option>
-          </select>
-        </div>
-
-        <div class="col-md-4">
-          <label class="d-inline form-label">ثابت در یک محل؟</label>
-          <input class="d-inline" type="checkbox" id="isFixed">
-        </div>
-        <div class="col-md-6" id="fixed-area-container" style="display:none;">
-          <label class="form-label">محل ثابت</label>
-          <select id="fixedArea" class="form-select"></select>
-        </div>
-
-        <div class="col-12">
-          <button type="submit" class="btn btn-primary">ذخیره</button>
-          <button type="reset" class="btn btn-secondary">انصراف</button>
-        </div>
-      </form>
-    </div>
-  </div>
-
-  <!-- جدول سربازها -->
-  <div class="card mb-4 d-print-none">
-    <div class="card-header">لیست سربازها</div>
-    <div class="card-body">
-      <table class="table" id="soldiers-table">
-        <thead>
-          <tr>
-            <th>نام و نام خانوادگی</th>
-            <th>ماه خدمت</th>
-            <th>محل ثابت</th>
-            <th>عملیات</th>
-          </tr>
-        </thead>
-        <tbody></tbody>
-      </table>
-    </div>
-  </div>
-
-  <!-- دکمه‌ها -->
-  <div class="d-flex gap-2 mb-4 d-print-none">
-    <button id="generate-board" class="btn btn-success">تولید لوحه</button>
-   <!-- <button id="clear-data" class="btn btn-outline-danger">پاک‌سازی داده‌ها</button> -->
-   </div>
-
-  <!-- لوحه -->
-  <div id="board" class="card d-print-block" style="display:none;">
-    <div class="card-header d-flex justify-content-between">
-      <span>لوحه نظافت</span>
-      <span class="text-muted">نوبت چرخش: <b id="rotation-label">۱</b></span>
-    </div>
-    <div class="card-body">
-      <table class="table" id="board-table">
-        <thead>
-          <tr>
-            <th>محل</th>
-            <th>سربازان</th>
-          </tr>
-        </thead>
-        <tbody></tbody>
-      </table>
-    </div>
-  </div>
-
-  <!-- پرینت -->
-  <button onclick="window.print()" class="btn btn-primary d-print-none mt-3">
-    <i class="ti ti-printer me-2"></i>پرینت
-  </button>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-  <script>
-    // --- تنظیمات محل‌ها ---
-    const areas = [
-      { name: "آسایشگاه وظیفه", required: 2 },
-      { name: "افسر نگهبانی و جلو آن", required: 2 },
-      { name: "جلو آسایشگاه", required: 1 },
-      { name: "راهرو بغل", required: 2 },
-      { name: "حمام", required: 1 },
-      { name: "سرویس بهداشتی", required: 1 },
-      { name: "محوطه آسفالت", required: 2 },
-      { name: "سلف", required: 1 },
-      { name: "باغچه ها", required: 1 },
-      { name: "سطل زباله", required: 1 },
-      { name: "روبه روی اسلحه خانه و کانکس ها", required: 1 },
-      { name: "سالن های اداری", required: 2 },
-      { name: "پشت آسایشگاه و آشپز خانه", required: 2 },
-      { name: "دشت بانی", required: 1 },
-      { name: "پارکینگ ها", required: 1 }
-    ];
-
-    const KEYS = {
-      soldiers: 'soldiers',
-      rotationIndex: 'rotationIndex',
-      lastGenDate: 'lastGenDate'
-    };
-
-    let soldiers = JSON.parse(localStorage.getItem(KEYS.soldiers) || '[]');
-    let rotationIndex = parseInt(localStorage.getItem(KEYS.rotationIndex) || '0', 10);
-
-    function saveSoldiers(){ localStorage.setItem(KEYS.soldiers, JSON.stringify(soldiers)); }
-    function saveRotation(){ localStorage.setItem(KEYS.rotationIndex, String(rotationIndex)); }
-
-    function getCurrentPersianDate(){
-      const j = jalaali.toJalaali(new Date()); // {jy, jm, jd}
-      return { year: j.jy, month: j.jm, day: j.jd };
-    }
-
-    function formatJDate(j){ return `${j.year}/${j.month}/${j.day}`; }
-
-    function calculateServiceMonths(startYear, startMonth, currentYear, currentMonth){
-      let months = (currentYear - startYear) * 12 + (currentMonth - startMonth) + 1;
-      return months > 0 ? months : 1;
-    }
-
-    function populateFixedAreas(){
-      const $fixedArea = $('#fixedArea');
-      $fixedArea.empty();
-      areas.forEach(area => $fixedArea.append(`<option value="${area.name}">${area.name}</option>`));
-    }
-
-    function renderSoldiers(){
-      const $tbody = $('#soldiers-table tbody');
-      $tbody.empty();
-      const { year: cy, month: cm } = getCurrentPersianDate();
-
-      soldiers.forEach((s, i) => {
-        const months = calculateServiceMonths(s.year, s.month, cy, cm);
-        $tbody.append(`
-          <tr>
-            <td>${s.fullName}</td>
-            <td>${months}</td>
-            <td>${s.isFixed ? s.fixedArea : '-'}</td>
-            <td>
-              <div class="btn-group">
-                <button class="btn btn-sm btn-warning edit-soldier" data-index="${i}" title="ویرایش">
-                  <i class="ti ti-edit"></i>
-                </button>
-                <button class="btn btn-sm btn-danger delete-soldier" data-index="${i}" title="حذف">
-                  <i class="ti ti-trash"></i>
-                </button>
-              </div>
-            </td>
-          </tr>
-        `);
-      });
-    }
-
-    function resetForm(){
-      $('#soldier-form')[0].reset();
-      $('#edit-index').val('');
-      $('#fixed-area-container').hide();
-    }
-
-    function showMessages(msgs){
-      const $m = $('#messages');
-      if(!msgs || !msgs.length){ $m.empty(); return; }
-      const lis = msgs.map(x => `<li>${x}</li>`).join('');
-      $m.html(`
-        <div class="alert alert-warning" role="alert">
-          <div class="d-flex">
-            <div><i class="ti ti-alert-triangle me-2"></i></div>
-            <div>
-              <strong>هشدار ظرفیت:</strong>
-              <ul class="mb-0">${lis}</ul>
+    <!-- دکمه تغییر تم شناور -->
+    <div id="themeSwitcher" class="d-print-none theme-switcher">
+        <button id="themeBtn" class="theme-btn">
+            <i class="ti ti-sun"></i>
+        </button>
+        <div id="themeMenu" class="theme-menu">
+            <div class="theme-item" data-theme="light">
+                <i class="ti ti-sun"></i> روشن
             </div>
-          </div>
+            <div class="theme-item" data-theme="dark">
+                <i class="ti ti-moon"></i> تاریک
+            </div>
+            <div class="theme-item" data-theme="system">
+                <i class="ti ti-device-laptop"></i> سیستمی
+            </div>
         </div>
-      `);
-    }
+    </div>
 
-    // --- رویدادها ---
-    $('#soldier-form').on('submit', function(e){
-      e.preventDefault();
+    <!-- دکمه جستجو -->
+    <button class="btn btn-info mb-3 d-print-none" data-bs-toggle="modal" data-bs-target="#searchModal">
+        <i class="ti ti-search me-2"></i> جستجو سرباز
+    </button>
 
-      // اعتبارسنجی دستی چون preventDefault کرده‌ایم
-      if(!this.checkValidity()){ this.reportValidity(); return; }
+    <!-- مودال جستجو -->
+    <div class="modal fade" id="searchModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">جستجو سرباز</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="text" id="searchName" class="form-control mb-3" placeholder="نام سرباز را وارد کنید...">
+                    <button id="doSearch" class="btn btn-primary">جستجو</button>
+                    <hr>
+                    <div id="searchResult"></div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-      const index = $('#edit-index').val();
-      const soldier = {
-        fullName: $('#fullName').val().trim(),
-        year: parseInt($('#year').val()),
-        month: parseInt($('#month').val()),
-        isFixed: $('#isFixed').is(':checked'),
-        fixedArea: $('#isFixed').is(':checked') ? $('#fixedArea').val() : null
-      };
+    <!-- فرم -->
+    <div class="card mb-4 d-print-none">
+        <div class="card-header">
+            افزودن/ویرایش سرباز
+        </div>
+        <div class="card-body">
+            <form id="soldier-form" class="row g-3" novalidate>
+                <input type="hidden" id="edit-index" value="-1">
+                <div class="col-md-6">
+                    <label class="form-label">نام و نام خانوادگی</label>
+                    <input type="text" id="fullName" class="form-control" required>
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label">سال اعزام (شمسی)</label>
+                    <select id="year" class="form-select" required>
+                        <option value="">انتخاب سال...</option>
+                        <option value="1403">۱۴۰۳</option><option value="1404">۱۴۰۴</option>
+                        <option value="1405">۱۴۰۵</option><option value="1406">۱۴۰۶</option>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label">ماه اعزام</label>
+                    <select id="month" class="form-select" required>
+                        <option value="">انتخاب ماه...</option>
+                        <option value="1">فروردین</option><option value="2">اردیبهشت</option>
+                        <option value="3">خرداد</option><option value="4">تیر</option>
+                        <option value="5">مرداد</option><option value="6">شهریور</option>
+                        <option value="7">مهر</option><option value="8">آبان</option>
+                        <option value="9">آذر</option><option value="10">دی</option>
+                        <option value="11">بهمن</option><option value="12">اسفند</option>
+                    </select>
+                </div>
 
-      if (!soldier.fullName) return;
+                <div class="col-md-4">
+                    <label class="d-inline form-label">ثابت در یک محل؟</label>
+                    <input class="d-inline" type="checkbox" id="isFixed">
+                </div>
+                <div class="col-md-6" id="fixed-area-container" style="display:none;">
+                    <label class="form-label">محل ثابت</label>
+                    <select id="fixedArea" class="form-select"></select>
+                </div>
 
-      if (index !== ''){
-        soldiers[parseInt(index)] = soldier;
-      } else {
-        soldiers.push(soldier);
-      }
-      saveSoldiers();
-      renderSoldiers();
-      resetForm();
-    });
+                <div class="col-12">
+                    <button type="submit" class="btn btn-primary">ذخیره</button>
+                    <button type="reset" class="btn btn-secondary" id="cancel-edit">انصراف</button>
+                </div>
+            </form>
+        </div>
+    </div>
 
-    // Reset: حتماً محل ثابت پنهان شود
-    $('#soldier-form').on('reset', function(){
-      setTimeout(resetForm, 0);
-    });
+    <!-- جدول سربازها -->
+    <div class="card mb-4 d-print-none">
+        <div class="card-header">
+            لیست سربازها
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <div class="mb-3 d-flex align-items-center gap-3">
+    <label class="form-label">مرتب‌سازی بر اساس:</label>
+    <select id="sort-type" class="form-select w-auto">
+        <option value="name-asc">نام (الفبایی صعودی)</option>
+        <option value="service-desc">پایه خدمت (از بیشترین)</option>
+    </select>
+    <button id="apply-sort" class="btn btn-primary">اعمال</button>
+</div>
+                <table class="table table-hover" id="soldiers-table">
+                    <thead>
+                        <tr>
+                            <th>نام و نام خانوادگی</th>
+                            <th>ماه خدمت</th>
+                            <th>محل ثابت</th>
+                            <th>عملیات</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 
-    $(document).on('click', '.edit-soldier', function(){
-      const s = soldiers[$(this).data('index')];
-      $('#edit-index').val($(this).data('index'));
-      $('#fullName').val(s.fullName);
-      $('#year').val(s.year);
-      $('#month').val(s.month);
-      $('#isFixed').prop('checked', s.isFixed);
-      if (s.isFixed){
-        $('#fixed-area-container').show();
-        populateFixedAreas();
-        $('#fixedArea').val(s.fixedArea);
-      } else {
-        $('#fixed-area-container').hide();
-      }
-    });
+    <!-- دکمه‌ها -->
+    <div class="main-buttons d-print-none">
+        <!-- دکمه تولید لوحه -->
+        <button id="generate-board" class="btn btn-lg btn-success generate-btn">
+            <i class="ti ti-layout-board-split me-2"></i>
+            <span class="btn-text">تولید لوحه</span>
+        </button>
 
-    $(document).on('click', '.delete-soldier', function(){
-      soldiers.splice($(this).data('index'), 1);
-      saveSoldiers();
-      renderSoldiers();
-    });
+        <!-- دکمه چرخش لوحه -->
+        <button id="rotate-board" class="btn btn-lg btn-primary rotate-btn" style="display:none;">
+            <i class="ti ti-rotate-clockwise-2 me-2 rotate-icon"></i>
+            <span class="btn-text">چرخش لوحه</span>
+        </button>
+    </div>
+    <!-- لوحه -->
+    <div id="board" class="card d-print-block" style="display:none;">
+        <div class="card-header d-flex justify-content-between">
+            <span>لوحه نظافت</span>
+            <!-- پرینت -->
+            <button onclick="window.print()" class="btn btn-primary d-print-none mt-3">
+                <i class="ti ti-printer me-2"></i>پرینت
+            </button>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="board-table">
+                    <thead>
+                        <tr>
+                            <th width="30%">محل</th>
+                            <th>سربازان</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+// --- تنظیمات محل‌ها ---
+const areas = [{
+    name: "آسایشگاه وظیفه",
+    required: 2
+},
+    {
+        name: "افسر نگهبانی و جلو آن",
+        required: 1
+    },
+    {
+        name: "جلو آسایشگاه",
+        required: 1
+    },
+    {
+        name: "راهرو بغل",
+        required: 2
+    },
+    {
+        name: "حمام",
+        required: 1
+    },
+    {
+        name: "سرویس بهداشتی",
+        required: 1
+    },
+    {
+        name: "محوطه آسافالت",
+        required: 2
+    },
+    {
+        name: "سلف",
+        required: 1
+    },
+    {
+        name: "باغچه ها",
+        required: 1
+    },
+    {
+        name: "سطل زباله",
+        required: 1
+    },
+    {
+        name: "روبه روی اسلحه خانه و کانکس ها",
+        required: 1
+    },
+    {
+        name: "سالن های اداری",
+        required: 2
+    },
+    {
+        name: "پشت آسایشگاه و آشپز خانه",
+        required: 2
+    },
+    {
+        name: "دشت بانی",
+        required: 4
+    },
+    {
+        name: "پارکینگ ها",
+        required: 2
+    }];
 
-    $('#isFixed').on('change', function(){
-      if ($(this).is(':checked')){
-        $('#fixed-area-container').show();
-        populateFixedAreas();
-      } else {
-        $('#fixed-area-container').hide();
-      }
-    });
+const KEYS = {
+    soldiers: 'soldiers',
+    rotationIndex: 'rotationIndex',
+    lastAssignments: 'lastAssignments'
+};
 
-    // --- تولید لوحه با چرخش پایدار روزانه ---
-    $('#generate-board').on('click', function(){
-      const msgs = [];
-      const today = getCurrentPersianDate();
-      $('#today-label').text(`امروز: ${formatJDate(today)}`);
-
-      // اگر تاریخ امروز با آخرین تولید فرق دارد، چرخش را یک گام جلو ببریم
-      const todayKey = `${today.year}-${today.month}-${today.day}`;
-      const lastKey = localStorage.getItem(KEYS.lastGenDate);
-      if (lastKey !== todayKey){
-        rotationIndex = (rotationIndex + 1) % areas.length;
-        saveRotation();
-        localStorage.setItem(KEYS.lastGenDate, todayKey);
-      }
-
-      const assignments = [];
-      const areaMap = JSON.parse(JSON.stringify(areas));
-      const fixedCounts = {};
-
-      // 1) اعمال سربازهای ثابت
-      soldiers.filter(s => s.isFixed).forEach(s => {
-        const area = areaMap.find(a => a.name === s.fixedArea);
-        if (area){
-          assignments.push({ soldier: s, area: area.name });
-          area.required -= 1; // ممکن است منفی شود
-          fixedCounts[area.name] = (fixedCounts[area.name] || 0) + 1;
-        }
-      });
-
-      // هشدار ظرفیت ثابت‌ها
-      Object.entries(fixedCounts).forEach(([name, count])=>{
-        const cap = areas.find(a=>a.name===name).required;
-        if (count > cap) msgs.push(`برای «${name}» تعداد ثابت‌ها (${count}) از ظرفیت (${cap}) بیشتر است.`);
-      });
-
-      // بعد از اعمال ثابت‌ها، ظرفیت را حداقل صفر کن
-      areaMap.forEach(a => { if (a.required < 0) a.required = 0; });
-
-      // 2) سربازهای آزاد به ترتیب سابقه خدمت (بیشتر ← زودتر)
-      const { year: cy, month: cm } = today;
-      const others = soldiers
-        .filter(s => !s.isFixed)
-        .sort((a, b) =>
-          calculateServiceMonths(b.year, b.month, cy, cm) -
-          calculateServiceMonths(a.year, a.month, cy, cm)
-        );
-
-      // 3) چرخش محل‌ها بر اساس rotationIndex (پایدار روزانه)
-      let rotated = [...areaMap];
-      rotated = rotated.slice(rotationIndex).concat(rotated.slice(0, rotationIndex));
-
-      // 4) تخصیص گردشی
-      let ai = 0;
-      others.forEach(s => {
-        while (ai < rotated.length && rotated[ai].required <= 0) ai++;
-        if (ai < rotated.length){
-          assignments.push({ soldier: s, area: rotated[ai].name });
-          rotated[ai].required -= 1;
-          if (rotated[ai].required <= 0) ai++;
-        }
-      });
-
-      // 5) نمایش لوحه
-      const $tbody = $('#board-table tbody');
-      $tbody.empty();
-      areas.forEach(a => {
-        const names = assignments
-          .filter(x => x.area === a.name)
-          .map(x => x.soldier.fullName)
-          .join('، ');
-        $tbody.append(`<tr><td>${a.name}</td><td>${names || '-'}</td></tr>`);
-      });
-
-      // برچسب چرخش و پیام‌ها
-      $('#rotation-label').text(rotationIndex + 1);
-      showMessages(msgs);
-      $('#board').show();
-    });
-
-    // پاک‌سازی سریع
-    $('#clear-data').on('click', function(){
-      if(!confirm('همهٔ داده‌ها (سربازها/چرخش) پاک شود؟')) return;
-      localStorage.removeItem(KEYS.soldiers);
-      localStorage.removeItem(KEYS.rotationIndex);
-      localStorage.removeItem(KEYS.lastGenDate);
-      soldiers = [];
-      rotationIndex = 0;
-      renderSoldiers();
-      showMessages([]);
-      $('#board').hide();
-    });
-
-// ----------------------------
-// لیست ماه‌های فارسی
-// ----------------------------
-const persianMonths = [
-  "فروردین", "اردیبهشت", "خرداد", "تیر", "مرداد", "شهریور",
-  "مهر", "آبان", "آذر", "دی", "بهمن", "اسفند"
+// لیست سربازان اولیه (از soldiers.js استخراج و تطبیق‌شده)
+const initialSoldiers = [
+    { fullName: 'احمدی نسب', year: 1403, month: 1, isFixed: false, fixedArea: '' },
+    { fullName: 'اصلانی', year: 1403, month: 1, isFixed: false, fixedArea: '' },
+    { fullName: 'ایرانی', year: 1403, month: 1, isFixed: false, fixedArea: '' },
+    { fullName: 'ایمانی نیا', year: 1403, month: 1, isFixed: false, fixedArea: '' },
+    { fullName: 'بلوچ', year: 1403, month: 1, isFixed: false, fixedArea: '' },
+    { fullName: 'پاینده', year: 1403, month: 1, isFixed: false, fixedArea: '' },
+    { fullName: 'پورشمسی', year: 1403, month: 1, isFixed: false, fixedArea: '' },
+    { fullName: 'دلگشا', year: 1403, month: 1, isFixed: false, fixedArea: '' },
+    { fullName: 'دوستی', year: 1403, month: 1, isFixed: false, fixedArea: '' },
+    { fullName: 'رودباری', year: 1403, month: 1, isFixed: false, fixedArea: '' },
+    { fullName: 'شهیدی', year: 1403, month: 1, isFixed: false, fixedArea: '' },
+    { fullName: 'غفاری', year: 1403, month: 1, isFixed: false, fixedArea: '' },
+    { fullName: 'غفوری', year: 1403, month: 1, isFixed: false, fixedArea: '' },
+    { fullName: 'فتح آبادی', year: 1403, month: 1, isFixed: false, fixedArea: '' },
+    { fullName: 'قشلاقی', year: 1403, month: 1, isFixed: false, fixedArea: '' },
+    { fullName: 'کازری', year: 1403, month: 1, isFixed: false, fixedArea: '' },
+    { fullName: 'کلوانی', year: 1403, month: 1, isFixed: false, fixedArea: '' },
+    { fullName: 'کمالی فرد', year: 1403, month: 1, isFixed: false, fixedArea: '' },
+    { fullName: 'گلی', year: 1403, month: 1, isFixed: false, fixedArea: '' },
+    { fullName: 'مشهدی', year: 1403, month: 1, isFixed: false, fixedArea: '' },
+    { fullName: 'مهدی زاده', year: 1403, month: 1, isFixed: false, fixedArea: '' },
+    { fullName: 'نوروزی', year: 1403, month: 1, isFixed: false, fixedArea: '' }
 ];
 
-// ----------------------------
-// جستجوی لحظه‌ای سرباز
-// ----------------------------
-$('#searchName').on('input', function () {
-  const keyword = $(this).val().trim();
-  const resultBox = $('#searchResult');
-  resultBox.empty(); // پاک کردن نتیجه قبلی
+let soldiers = JSON.parse(localStorage.getItem(KEYS.soldiers) || '[]');
 
-  if (!keyword) return; // اگه ورودی خالی بود، چیزی نشون نده
+// اگر لیست خالی باشه، لیست اولیه رو لود کن (ترکیب با soldiers.js)
+if (soldiers.length === 0) {
+    soldiers = initialSoldiers;
+    localStorage.setItem(KEYS.soldiers, JSON.stringify(soldiers));
+}
 
-  // فیلتر کردن سربازها بر اساس نام
-  const results = soldiers.filter(s => s.fullName.includes(keyword));
+let rotationIndex = parseInt(localStorage.getItem(KEYS.rotationIndex) || '0', 10);
+let lastAssignments = JSON.parse(localStorage.getItem(KEYS.lastAssignments) || '[]');
 
-  if (results.length === 0) {
-    resultBox.html('<div class="text-danger">موردی یافت نشد.</div>');
-    return;
-  }
+function saveSoldiers() {
+    localStorage.setItem(KEYS.soldiers, JSON.stringify(soldiers));
+}
+function saveRotation() {
+    localStorage.setItem(KEYS.rotationIndex, String(rotationIndex));
+}
+function saveAssignments() {
+    localStorage.setItem(KEYS.lastAssignments, JSON.stringify(lastAssignments));
+}
 
-  // ساخت لیست نتایج
-  const ul = $('<ul class="list-group"></ul>');
-  results.forEach(soldier => {
-    const li = $(`<li class="list-group-item list-group-item-action">${soldier.fullName}</li>`);
+function getCurrentPersianDate() {
+    const j = jalaali.toJalaali(new Date());
+    return {
+        year: j.jy,
+        month: j.jm,
+        day: j.jd
+    };
+}
 
-    // کلیک روی هر اسم → نمایش جزئیات
-    li.on('click', function () {
-      const { year: cy, month: cm } = getCurrentPersianDate();
-      const months = calculateServiceMonths(soldier.year, soldier.month, cy, cm);
-      const monthName = persianMonths[soldier.month - 1];
+function formatJDate(j) {
+    const persianMonths = ["فروردین",
+        "اردیبهشت",
+        "خرداد",
+        "تیر",
+        "مرداد",
+        "شهریور",
+        "مهر",
+        "آبان",
+        "آذر",
+        "دی",
+        "بهمن",
+        "اسفند"];
+    return `${j.day} ${persianMonths[j.month-1]} ${j.year}`;
+}
 
-      resultBox.html(`
-        <ul class="list-group">
-          <li class="list-group-item"><b>نام:</b> ${soldier.fullName}</li>
-          <li class="list-group-item"><b>اعزام:</b> ${monthName} ماه سال ${soldier.year}</li>
-          <li class="list-group-item"><b>پایه خدمت:</b> ${months}</li>
-          <li class="list-group-item"><b>محل ثابت:</b> ${soldier.isFixed ? soldier.fixedArea : '-'}</li>
-        </ul>
-        <button id="backToResults" class="btn btn-secondary mt-3">بازگشت</button>
-      `);
+function calculateServiceMonths(startYear, startMonth, currentYear, currentMonth) {
+    let months = (currentYear - startYear) * 12 + (currentMonth - startMonth) + 1;
+    return months > 0 ? months: 1;
+}
 
-      // دکمه بازگشت به لیست نتایج
-      $('#backToResults').on('click', function () {
-        $('#searchName').trigger('input'); // دوباره جستجو رو اجرا می‌کنه
-      });
+// نمایش پیام
+function showMessage(message, type = 'info') {
+    const messagesDiv = document.getElementById('messages');
+    messagesDiv.innerHTML = `
+    <div class="alert-message ${type}">
+    <i class="ti ti-${type === 'error' ? 'alert-circle': type === 'warning' ? 'alert-triangle': 'info-circle'}"></i>
+    ${message}
+    </div>
+    `;
+
+    // حذف خودکار پیام پس از 5 ثانیه
+    setTimeout(() => {
+        messagesDiv.innerHTML = '';
+    }, 5000);
+}
+
+// پر کردن محل‌های ثابت
+function populateFixedAreas() {
+    const fixedAreaSelect = document.getElementById('fixedArea');
+    fixedAreaSelect.innerHTML = '';
+
+    areas.forEach(area => {
+        const option = document.createElement('option');
+        option.value = area.name;
+        option.textContent = area.name;
+        fixedAreaSelect.appendChild(option);
+    });
+}
+
+// مدیریت وضعیت ثابت/غیرثابت
+function toggleFixedArea() {
+    const isFixed = document.getElementById('isFixed').checked;
+    const fixedAreaContainer = document.getElementById('fixed-area-container');
+
+    if (isFixed) {
+        fixedAreaContainer.style.display = 'block';
+    } else {
+        fixedAreaContainer.style.display = 'none';
+    }
+}
+
+// رندر جدول سربازان (بروزرسانی‌شده برای مرتب‌سازی)
+function renderSoldiers(sortType = 'name-asc') {  // پارامتر جدید برای نوع مرتب‌سازی
+    const $tbody = $('#soldiers-table tbody');
+    $tbody.empty();
+    const { year: cy, month: cm } = getCurrentPersianDate();
+
+    if (soldiers.length === 0) {
+        $tbody.append(`
+            <tr>
+            <td colspan="4" class="text-center text-muted py-4">
+            <i class="ti ti-users-off me-2"></i>
+            هیچ سربازی ثبت نشده است
+            </td>
+            </tr>
+        `);
+        return;
+    }
+
+    // محاسبه ماه خدمت برای هر سرباز
+    let sortedSoldiers = soldiers.map(s => ({
+        ...s,
+        serviceMonths: calculateServiceMonths(s.year, s.month, cy, cm)
+    }));
+
+    // اعمال مرتب‌سازی
+    if (sortType === 'service-desc') {
+        sortedSoldiers.sort((a, b) => b.serviceMonths - a.serviceMonths);  // descending پایه خدمت
+    } else if (sortType === 'name-asc') {
+        sortedSoldiers.sort((a, b) => a.fullName.localeCompare(b.fullName, 'fa'));  // الفبایی فارسی
+    }
+
+    // رندر سطرها
+    sortedSoldiers.forEach((s) => {  // i بر اساس لیست اصلی soldiers (برای edit/delete)
+        const originalIndex = soldiers.findIndex(orig => orig.fullName === s.fullName);  // پیدا کردن ایندکس اصلی برای عملیات
+        $tbody.append(`
+            <tr>
+            <td>${s.fullName}</td>
+            <td><span class="status-badge bg-blue-lt">${s.serviceMonths} ماه</span></td>
+            <td>${s.isFixed ? `<span class="status-badge bg-green-lt">${s.fixedArea}</span>` : '-'}</td>
+            <td>
+            <button class="btn btn-sm btn-warning edit-soldier" data-index="${originalIndex}"><i class="ti ti-edit"></i></button>
+            <button class="btn btn-sm btn-danger delete-soldier" data-index="${originalIndex}"><i class="ti ti-trash"></i></button>
+            </td>
+            </tr>
+        `);
+    });
+}
+
+// تولید / چرخش رندوم لوحه
+function generateBoardRandom() {
+    const msgs = [];
+    const assignments = [];
+    const areaMap = JSON.parse(JSON.stringify(areas));
+    const fixedCounts = {};
+    const areasWithFixed = new Set();
+    const today = getCurrentPersianDate();
+
+    $('#today-label').text(`امروز: ${formatJDate(today)}`);
+    $('#rotation-label').text(rotationIndex + 1);
+
+    // 1) سربازهای ثابت
+    soldiers.filter(s => s.isFixed).forEach(s => {
+        const area = areaMap.find(a => a.name === s.fixedArea);
+        if (area) {
+            assignments.push({
+                soldier: s, area: area.name
+            });
+            area.required -= 1;
+            fixedCounts[area.name] = (fixedCounts[area.name] || 0) + 1;
+            areasWithFixed.add(area.name);
+        }
     });
 
-    ul.append(li);
-  });
+    // 2) ظرفیت منفی → صفر
+    areaMap.forEach(a => {
+        if (a.required < 0) a.required = 0;
+    });
 
-  resultBox.append(ul);
+    // 3) سربازهای آزاد
+    const {
+        year: cy, month: cm
+    } = today;
+    const freeSoldiers = soldiers.filter(s => !s.isFixed)
+    .sort((a, b)=> calculateServiceMonths(b.year, b.month, cy, cm) - calculateServiceMonths(a.year, a.month, cy, cm));
+
+    // 4) لیست محل‌های آزاد (ظرفیت > 0 و ثابت نیست)
+    let freeAreas = [];
+    areaMap.forEach(a => {
+        if (!areasWithFixed.has(a.name) && a.required > 0) {
+            for (let i = 0; i < a.required; i++) freeAreas.push(a.name);
+        }
+    });
+
+    // 5) رندوم کردن محل‌ها
+    freeAreas = shuffleArray(freeAreas);
+
+    // 6) اختصاص سرباز آزاد به محل رندوم
+    freeSoldiers.forEach((s, i)=> {
+        if (i < freeAreas.length) {
+            assignments.push({
+                soldier: s, area: freeAreas[i]
+            });
+        } else {
+            // ظرفیت پر شد، هشدار بده
+            msgs.push(`سرباز "${s.fullName}" جایی برای تخصیص ندارد.`);
+        }
+    });
+
+    lastAssignments = assignments;
+    saveAssignments();
+
+    // 7) نمایش لوحه
+    const $tbody = $('#board-table tbody');
+    $tbody.empty();
+
+    areas.forEach(a=> {
+        const names = assignments.filter(x=>x.area === a.name).map(x=>x.soldier.fullName).join('، ');
+        $tbody.append(`<tr><td>${a.name}</td><td>${names || '-'}</td></tr>`);
+    });
+
+    $('#board').show();
+
+    if (msgs.length > 0) {
+        showMessage(msgs.join('<br>'), 'warning');
+    } else {
+        showMessage('لوحه با موفقیت تولید شد', 'info');
+    }
+
+    // نمایش دکمه چرخش
+    $('#rotate-board').show();
+}
+
+// تابع کمکی برای رندوم کردن آرایه
+function shuffleArray(array) {
+    for (let i = array.length-1; i > 0; i--) {
+        const j = Math.floor(Math.random()*(i+1));
+        [array[i],
+            array[j]] = [array[j],
+            array[i]];
+    }
+    return array;
+}
+
+// مدیریت فرم سرباز
+function handleSoldierFormSubmit(e) {
+    e.preventDefault();
+
+    const fullName = document.getElementById('fullName').value.trim();
+    const year = document.getElementById('year').value;
+    const month = document.getElementById('month').value;
+    const isFixed = document.getElementById('isFixed').checked;
+    const fixedArea = isFixed ? document.getElementById('fixedArea').value: '';
+    const editIndex = parseInt(document.getElementById('edit-index').value);
+
+    if (!fullName || !year || !month) {
+        showMessage('لطفاً تمام فیلدهای ضروری را پر کنید', 'error');
+        return;
+    }
+
+    const soldierData = {
+        fullName,
+        year: parseInt(year),
+        month: parseInt(month),
+        isFixed,
+        fixedArea
+    };
+
+    if (editIndex >= 0) {
+        // ویرایش سرباز موجود
+        soldiers[editIndex] = soldierData;
+        showMessage('سرباز با موفقیت ویرایش شد', 'info');
+    } else {
+        // افزودن سرباز جدید
+        soldiers.push(soldierData);
+        showMessage('سرباز با موفقیت افزوده شد', 'info');
+    }
+
+    saveSoldiers();
+    renderSoldiers();
+
+    // ریست کردن فرم
+    document.getElementById('soldier-form').reset();
+    document.getElementById('edit-index').value = '-1';
+    document.getElementById('fixed-area-container').style.display = 'none';
+}
+
+// ویرایش سرباز
+function editSoldier(index) {
+    const soldier = soldiers[index];
+
+    document.getElementById('fullName').value = soldier.fullName;
+    document.getElementById('year').value = soldier.year;
+    document.getElementById('month').value = soldier.month;
+    document.getElementById('isFixed').checked = soldier.isFixed;
+
+    if (soldier.isFixed) {
+        document.getElementById('fixedArea').value = soldier.fixedArea;
+        document.getElementById('fixed-area-container').style.display = 'block';
+    } else {
+        document.getElementById('fixed-area-container').style.display = 'none';
+    }
+
+    document.getElementById('edit-index').value = index;
+
+    // اسکرول به بالای فرم
+    document.getElementById('soldier-form').scrollIntoView({
+        behavior: 'smooth'
+    });
+}
+
+// حذف سرباز
+function deleteSoldier(index) {
+    if (confirm('آیا از حذف این سرباز اطمینان دارید؟')) {
+        soldiers.splice(index, 1);
+        saveSoldiers();
+        renderSoldiers();
+        showMessage('سرباز با موفقیت حذف شد', 'info');
+    }
+}
+
+
+// جستجوی سرباز
+function searchSoldier() {
+    const keyword = document.getElementById('searchName').value.trim();
+    const resultBox = document.getElementById('searchResult');
+
+    resultBox.innerHTML = '';
+
+    if (!keyword) {
+        resultBox.innerHTML = '<div class="text-danger">لطفاً نامی برای جستجو وارد کنید.</div>';
+        return;
+    }
+
+    const results = soldiers.filter(s => s.fullName.includes(keyword));
+
+    if (results.length === 0) {
+        resultBox.innerHTML = '<div class="text-danger">موردی یافت نشد.</div>';
+        return;
+    }
+
+    const ul = document.createElement('ul');
+    ul.className = 'list-group';
+
+    results.forEach(soldier => {
+        const li = document.createElement('li');
+        li.className = 'list-group-item list-group-item-action';
+        li.textContent = soldier.fullName;
+
+        li.addEventListener('click', function() {
+            const {
+                year: cy, month: cm
+            } = getCurrentPersianDate();
+            const months = calculateServiceMonths(soldier.year, soldier.month, cy, cm);
+            const persianMonths = ["فروردین", "اردیبهشت", "خرداد", "تیر", "مرداد", "شهریور", "مهر", "آبان", "آذر", "دی", "بهمن", "اسفند"];
+            const monthName = persianMonths[soldier.month-1];
+            const found = lastAssignments.find(a => a.soldier.fullName === soldier.fullName);
+            const currentArea = found ? found.area: 'هنوز تعیین نشده';
+
+            resultBox.innerHTML = `
+            <ul class="list-group">
+            <li class="list-group-item"><b>نام:</b> ${soldier.fullName}</li>
+            <li class="list-group-item"><b>اعزام:</b> ${monthName} ${soldier.year}</li>
+            <li class="list-group-item"><b>پایه خدمت:</b> ${months} ماه</li>
+            <li class="list-group-item"><b>محل ثابت:</b> ${soldier.isFixed ? soldier.fixedArea: '-'}</li>
+            <li class="list-group-item"><b>محل نظافت فعلی:</b> ${currentArea}</li>
+            </ul>
+            <button id="backToResults" class="btn btn-secondary mt-3">بازگشت</button>
+            `;
+
+            document.getElementById('backToResults').addEventListener('click', function() {
+                searchSoldier();
+            });
+        });
+
+        ul.appendChild(li);
+    });
+
+    resultBox.appendChild(ul);
+}
+
+// مدیریت تغییر تم
+function setupThemeSwitcher() {
+    const btn = document.getElementById("themeBtn");
+    const menu = document.getElementById("themeMenu");
+    const items = document.querySelectorAll(".theme-item");
+    const icon = btn.querySelector("i");
+
+    // اعمال تم
+    function applyTheme(theme) {
+        let actual = theme;
+        if (theme === "system") {
+            const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+            actual = prefersDark ? "dark": "light";
+        }
+        document.documentElement.setAttribute("data-bs-theme", actual);
+
+        // تغییر آیکون
+        if (theme === "light") {
+            icon.className = "ti ti-sun";
+        } else if (theme === "dark") {
+            icon.className = "ti ti-moon";
+        } else {
+            icon.className = "ti ti-device-laptop";
+        }
+
+        // هایلایت منو
+        items.forEach(el=> {
+            el.classList.toggle("active", el.dataset.theme === theme);
+        });
+
+        localStorage.setItem("theme", theme);
+    }
+
+    // باز/بسته کردن منو
+    btn.addEventListener("click", ()=> {
+        menu.style.display = (menu.style.display === "block" ? "none": "block");
+    });
+
+    // انتخاب آیتم
+    items.forEach(el=> {
+        el.addEventListener("click", ()=> {
+            applyTheme(el.dataset.theme);
+            menu.style.display = "none";
+        });
+    });
+
+    // بارگذاری اولیه
+    const saved = localStorage.getItem("theme") || "system";
+    applyTheme(saved);
+
+    // تغییر تم سیستم
+    window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", ()=> {
+        if (localStorage.getItem("theme") === "system") {
+            applyTheme("system");
+        }
+    });
+}
+
+// آماده‌سازی اولیه
+$(document).ready(() => {
+    // تنظیم تاریخ امروز
+    const today = getCurrentPersianDate();
+    document.getElementById('today-label').textContent = `امروز: ${formatJDate(today)}`;
+
+    // پر کردن محل‌های ثابت
+    populateFixedAreas();
+
+    // رندر لیست سربازان (با مرتب‌سازی پیش‌فرض)
+    renderSoldiers();  // حالا با مرتب‌سازی اولیه (name-asc)
+
+    // نمایش لوحه قبلی اگر وجود دارد
+    if (lastAssignments.length > 0) {
+        $('#board').show();
+        $('#rotate-board').show();
+
+        const $tbody = $('#board-table tbody');
+        $tbody.empty();
+
+        areas.forEach(a=> {
+            const names = lastAssignments.filter(x=>x.area === a.name).map(x=>x.soldier.fullName).join('، ');
+            $tbody.append(`<tr><td>${a.name}</td><td>${names || '-'}</td></tr>`);
+        });
+    }
+
+    // تنظیم مدیریت تم
+    setupThemeSwitcher();
+
+    // رویدادها
+    document.getElementById('isFixed').addEventListener('change', toggleFixedArea);
+    document.getElementById('soldier-form').addEventListener('submit', handleSoldierFormSubmit);
+    document.getElementById('cancel-edit').addEventListener('click', function() {
+        document.getElementById('edit-index').value = '-1';
+    });
+
+    document.getElementById('generate-board').addEventListener('click', function() {
+        if (soldiers.length === 0) {
+            showMessage('هیچ سربازی برای تولید لوحه وجود ندارد', 'error');
+            return;
+        }
+
+        const $btn = $(this);
+        $btn.prop('disabled', true).html('<i class="ti ti-loader me-2"></i> در حال تولید...');
+
+        setTimeout(() => {
+            generateBoardRandom();
+            rotationIndex++;
+            saveRotation();
+            $btn.prop('disabled', false).html('<i class="ti ti-layout-board-split me-2"></i> تولید لوحه');
+        }, 800);
+    });
+
+    document.getElementById('rotate-board').addEventListener('click',
+        function() {
+            const $btn = $(this);
+            $btn.addClass('rotating').prop('disabled', true).html('<i class="ti ti-loader me-2 rotate-icon"></i> در حال چرخش...');
+
+            setTimeout(() => {
+                generateBoardRandom();
+                rotationIndex++;
+                saveRotation();
+                $btn.removeClass('rotating').prop('disabled', false).html('<i class="ti ti-rotate-clockwise-2 me-2"></i> چرخش لوحه');
+            }, 1000);
+        });
+
+    document.getElementById('doSearch').addEventListener('click',
+        searchSoldier);
+
+    // رویداد جدید برای اعمال مرتب‌سازی
+    document.getElementById('apply-sort').addEventListener('click', function() {
+        const sortType = document.getElementById('sort-type').value;
+        renderSoldiers(sortType);
+        showMessage('لیست مرتب‌سازی شد', 'info');
+    });
+
+    // مدیریت رویدادهای داینامیک
+    $(document).on('click',
+        '.edit-soldier',
+        function() {
+            const index = $(this).data('index');
+            editSoldier(index);
+        });
+
+    $(document).on('click',
+        '.delete-soldier',
+        function() {
+            const index = $(this).data('index');
+            deleteSoldier(index);
+        });
 });
-    // آماده‌سازی اولیه
-    $(document).ready(() => {
-      const today = getCurrentPersianDate();
-      $('#today-label').text(`امروز: ${formatJDate(today)}`);
-      renderSoldiers();
-    });
-  </script>
+</script>
 </body>
 </html>
